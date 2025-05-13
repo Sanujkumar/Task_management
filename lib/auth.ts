@@ -106,27 +106,52 @@ export const authOptions = {
         if (!existingUser) {
           return false;
         }
+        user.id = existingUser.id;  
+        user.name = existingUser.name;
       }
-
-      return true; 
+       
+      return true;   
     },
 
-    async jwt({ token, user }: any) {
-      if (user) {
-        token.id = user.id;
-        token.name = user.name; 
-        token.image = user.image; 
-      }
-      console.log("user", user);
-      console.log("Token", token);  
-      return token;
-    },
+    // async jwt({ token, user }: any) {
+    //   console.log("user1", user);
+    //   if (user) {
+    //     console.log("user inside",user);
+    //     token.id = user.id;
+    //     token.name = user.name; 
+    //     token.image = user.image; 
+    //   }
+    //   console.log("user", user);
+    //   console.log("Token", token);  
+    //   return token;  
+    // },
+
+  async jwt({ token, user, account }:any) {
+  console.log("JWT callback - user:", user);
+  console.log("JWT callback - token BEFORE:", token);
+  console.log("JWT callback - account:", account);
+
+  // Only run this logic during initial sign in
+  if (account && token?.email) {
+    const existingUser = await prisma.user.findUnique({
+      where: { email: token.email },
+    });
+
+    if (existingUser) {
+      token.id = existingUser.id;
+      token.name = existingUser.name;
+    }
+  }  
+
+  console.log("JWT callback - token AFTER:", token);
+  return token;
+},
 
     async session({ session, token }: any) {
       if (session.user && token?.id) {
         session.user.id = token.id;
         session.user.name = token.name; 
-        session.user.image = token.image; 
+        session.user.image = token.picture;  
       }
       console.log("session", session);
       return session;

@@ -22,7 +22,7 @@ export default function Home() {
     try {
       const res = await axios.get("http://localhost:3000/api/task", {
         withCredentials: true,
-      });
+      });  
       setData(res.data.tasks || res.data); 
     } catch (err) {
       console.error("Error fetching tasks:", err);

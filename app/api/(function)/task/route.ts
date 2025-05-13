@@ -16,17 +16,15 @@ export const POST = (async (req: NextRequest) => {
     }, {status:400});
   }
  
-  
-  const userId = Number(token.id);
-  console.log("userId",userId);  
 
   try {
 
     const body = await req.json();
     const { title, description, date, priority, status , assigneeId} = body;
-
+    const userId = Number(token.id);
+    console.log("userId",userId);   
     const task = await prisma.task.create({
-      data: {
+      data: {      
         title,
         description,
         date,
@@ -45,7 +43,7 @@ export const POST = (async (req: NextRequest) => {
         },
       });
     }
-
+  
     return NextResponse.json({ message: "Task created", task });
   } catch (err) {
     console.error(err);
