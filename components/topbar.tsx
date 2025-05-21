@@ -36,16 +36,16 @@ function Component() {
             <span className="sr-only">Task management</span>
           </Link>
 
-          <div className="grid gap-2 py-6 px-4">
-            <Link href="/" className="flex w-full items-center py-2 text-lg font-semibold" prefetch={false}>
+          <div className=" grid gap-2 py-6 px-4">
+            <Link href="/" className="text-bold underline-offset-4 hover:underline " prefetch={false}>
               Home
             </Link>
 
             {status === "unauthenticated" && (<>
-              <Link href="/auth/register" className="flex w-full items-center py-2 text-lg font-semibold" prefetch={false}>
+              <Link href="/auth/register" className="flex text-bold underline-offset-4 hover:underline" prefetch={false}>
                 Signup
               </Link>
-              <Link href="/auth/login" className="flex w-full items-center py-2 text-lg font-semibold" prefetch={false}>
+              <Link href="/auth/login" className="text-bold underline-offset-4 hover:underline" prefetch={false}>
                 Login
               </Link>
             </>
@@ -54,38 +54,41 @@ function Component() {
             {status === "authenticated" && (
               <>
               <Button
-                variant="outline"
+                variant="link"
                 size="sm"
-                className="w-18"
+                className="w-18 pr-8"
                 onClick={() => signOut()}
               >signOut</Button>
 
-               <Link href="/pages/profile" className="flex w-full items-center py-2 text-lg font-semibold" prefetch={false}>
+               <Link href="/pages/profile" className="text-bold underline-offset-4 hover:underline" prefetch={false}>
               Profile
             </Link>
               </>
             )}
 
-            <div>
+            <div className=" ">
               <TaskSection/>
             </div>
             
   
-            <div>
+            <div className="mt-2">
               <Dark />
             </div>
+            <div className="mt-2">
             <Link
               href="/pages/notification">
-               <IoIosNotifications />
+               <IoIosNotifications size={36} />
             </Link>
+            </div>
           </div>    
         </SheetContent>
       </Sheet>
+
       <Link href="#" className="mr-6 hidden lg:flex" prefetch={false}>
         <MountainIcon className="h-6 w-6" />
         <span className="sr-only">Acme Inc</span>
       </Link>
-      <nav className="ml-auto hidden lg:flex gap-6">
+      <nav className="ml-auto hidden lg:flex gap-6 items-center">
         <Link
           href="/"
           className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50"
@@ -130,7 +133,7 @@ function Component() {
         </div>
         <Link
           href="/pages/notification">
-          noti <IoIosNotifications />
+           <IoIosNotifications size={36} />
         </Link>
       </nav>
     </header>

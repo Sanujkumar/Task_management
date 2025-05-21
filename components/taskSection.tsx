@@ -6,6 +6,8 @@ import { RiArrowDownSLine } from "react-icons/ri";
 import { Button } from './ui/button';
 import { useRouter } from 'next/navigation';
 import { RiArrowUpSLine } from "react-icons/ri";
+
+
 export default function UserDropdown() {
   const [open, setOpen] = useState(false);
   const router = useRouter();
@@ -18,7 +20,8 @@ export default function UserDropdown() {
       <Button
         onClick={() => setOpen(!open)}
         size="sm"
-        variant="outline"
+        variant="link"
+        className="w-20 pr-8"  
       >
         YourTask
         {open ? (
