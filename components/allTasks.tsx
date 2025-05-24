@@ -3,6 +3,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardTitle } from "./ui/card";
+import { Button } from "./ui/button";
+import { useRouter } from "next/navigation";
 
 interface TaskType {
   id: number;
@@ -19,7 +21,8 @@ export default function Home() {
   const [datas, setData] = useState<TaskType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const TaskData = async () => {
+
+  const AllTasShowkData = async () => {
     try {
       const res = await axios.get("http://localhost:3000/api/task", {
         withCredentials: true,
@@ -33,14 +36,33 @@ export default function Home() {
   };
 
   useEffect(() => {
-    TaskData();
+    AllTasShowkData();
   }, []);
+
+  const router = useRouter();
+  const Update = (taskId:Number) => {
+    router.push(`http://localhost:3000/pages/updateTask/${taskId}`);  
+  }
+
+  const DeleteTask = async (taskId: number) => {
+    try {
+      const res = await axios.post("http://localhost:3000/api/task/delete", { id: taskId }, {
+        withCredentials: true,
+      });  
+      if (res.status === 200) {
+        alert("Deleted successfully");
+        AllTasShowkData();
+      }
+    } catch (error) {
+      console.error("Error deleting task:", error);
+    }
+  };
 
   if (loading) return <div>Loading tasks...</div>;
 
   return (
     <div>
-      <div className="">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {datas.map((task) => (
           <div
             key={task.id}
@@ -62,7 +84,22 @@ export default function Home() {
                 >
                   Status: {task.status ? "Completed" : "Pending"}
                 </p>
-
+                <div className="flex gap-2 pt-2">
+                  <div>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => Update(task.id)}
+                    >update</Button>
+                  </div>
+                  <div>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => DeleteTask(task.id)}
+                    >Delete</Button>
+                  </div>
+                </div>
               </CardContent>
             </Card>
           </div>

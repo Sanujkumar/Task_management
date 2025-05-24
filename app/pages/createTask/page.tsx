@@ -1,8 +1,15 @@
-
+"use client"
 import CreateTask from "@/components/TaskCreateForm";
+import axios from "axios";
 
-export default function CreateTaskPage(){
-    return(
-        <CreateTask/>  
+export default function CreateTaskPage() {
+
+    const handleCreate = async (taskData: any) => {
+        await axios.post("http://localhost:3000/api/task", taskData, { withCredentials: true });
+    };
+
+    return (
+
+        <CreateTask topTitle="CreateTask" buttonName="Create" onSubmit={handleCreate} />
     )
-}
+}    

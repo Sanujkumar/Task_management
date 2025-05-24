@@ -7,7 +7,7 @@ import axios from "axios";
 import { useRouter } from 'next/navigation';
 
 
-export default function TaskCreate() {
+export default function TaskCreate({topTitle,buttonName,onSubmit,task}:any) {
     const titleRef = useRef<HTMLInputElement>(null);
     const descriptionRef = useRef<HTMLInputElement>(null);
     const dateRef = useRef<HTMLInputElement>(null);
@@ -25,13 +25,20 @@ export default function TaskCreate() {
             priority: priorityRef.current?.value || "",
             status: StatusRef.current?.checked || false,
         }
-        const res = await axios.post("http://localhost:3000/api/task", taskData, {
-            withCredentials: true
-        });
+        // const res = await axios.post("http://localhost:3000/api/task", taskData, {
+        //     withCredentials: true
+        // });
 
 
-        if (res.status === 201) {
+        // if (res.status === 201) {
+        //     router.push("/pages/allTasks");
+        // }
+
+        try {
+            await onSubmit(taskData); // 🔁 Call prop function
             router.push("/pages/allTasks");
+        } catch (error) {
+            console.error("Submit failed:", error);
         }
     }
 
@@ -40,7 +47,8 @@ export default function TaskCreate() {
             <div className=" w-3/4 h-120  flex justify-center items-center">
                 <div className=" bg-amber-200 text-center rounded-4xl h-full w-3/4 p-4">
                     <div>
-                        <p className="text-3xl"><span className="text-yellow-600">Task</span><span className="text-yellow-500">Create</span></p>
+                        {/* <p className="text-3xl"><span className="text-yellow-600">Task</span><span className="text-yellow-500">Create</span></p> */}
+                        <p>{topTitle}</p>
                     </div>
                     <div className="">
                         <div className="pr-2 pl-2">
@@ -70,7 +78,7 @@ export default function TaskCreate() {
                                 variant="destructive"
                                 className=""
                                 onClick={handleSubmit}
-                            >Create</Button>
+                            >{buttonName}</Button>
                         </div>
                     </div>
                 </div>
