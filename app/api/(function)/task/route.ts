@@ -27,7 +27,7 @@ export const POST = (async (req: NextRequest) => {
       data: {      
         title,
         description,
-        date,
+        date: new Date(date),
         priority,
         status,
         userId,
@@ -44,13 +44,13 @@ export const POST = (async (req: NextRequest) => {
       });
     }
   
-    return NextResponse.json({ message: "Task created", task });
+    return NextResponse.json({ message: "Task created", task }, {status: 201});
   } catch (err) {
     console.error(err);
     return NextResponse.json({ error: "Failed to create task" }, { status: 500 });
   }
 });   
- 
+   
 
 export async function GET(req: NextRequest) {
   const token = await getToken({ req, secret });
@@ -104,7 +104,7 @@ export async function GET(req: NextRequest) {
         data: {
           title,
           description,
-          date, 
+          date: new Date(date),   
           priority,
           status,
         },
