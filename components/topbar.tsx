@@ -7,6 +7,8 @@ import Dark from "@/components/ui/dark";
 import { IoIosNotifications } from "react-icons/io";
 import { SessionProvider, signIn, signOut, useSession } from "next-auth/react";
 import TaskSection from "./taskSection";  
+import { MdTask } from "react-icons/md";
+
 export default function Topbar() {
 
 
@@ -32,7 +34,7 @@ function Component() {
         <SheetContent side="left">
 
           <Link href="/" className="mr-6  p-4 lg:flex" prefetch={false}>
-            <MountainIcon className="h-6 w-6" />
+           <MdTask size={30}/>
             <span className="sr-only">Task management</span>
           </Link>
 
@@ -85,7 +87,7 @@ function Component() {
       </Sheet>
 
       <Link href="#" className="mr-6 hidden lg:flex" prefetch={false}>
-        <MountainIcon className="h-6 w-6" />
+        <MdTask size={40}/>
         <span className="sr-only">Acme Inc</span>
       </Link>
       <nav className="ml-auto hidden lg:flex gap-6 items-center">
