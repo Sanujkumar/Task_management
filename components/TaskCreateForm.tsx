@@ -2,12 +2,13 @@
 import { Label } from "@/components/ui/label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import axios from "axios";
 import { useRouter } from 'next/navigation';
-
+import { useSession } from "next-auth/react";
 
 export default function TaskCreate({topTitle,buttonName,onSubmit,task}:any) {
+    const {data: session,status} = useSession();  
     const titleRef = useRef<HTMLInputElement>(null);
     const descriptionRef = useRef<HTMLInputElement>(null);
     const dateRef = useRef<HTMLInputElement>(null);
@@ -15,6 +16,13 @@ export default function TaskCreate({topTitle,buttonName,onSubmit,task}:any) {
     const StatusRef = useRef<HTMLInputElement>(null);
 
     const router = useRouter();
+
+    useEffect(() => {
+        if(status === "unauthenticated"){
+            alert("you are not logged in!");
+            router.push("/auth/login");  
+        }
+    });  
 
     const handleSubmit = async () => {
 

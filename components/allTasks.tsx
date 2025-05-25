@@ -5,7 +5,9 @@ import { useEffect, useState } from "react";
 import { Card, CardContent, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
-
+import { useSession } from "next-auth/react";
+import { Session } from "inspector/promises";
+import AllTasksSkelaton from "@/skeltons/alltaskSkelaton";
 interface TaskType {
   id: number;
   title: string;
@@ -20,7 +22,14 @@ interface TaskType {
 export default function Home() {
   const [datas, setData] = useState<TaskType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const {data: session,status} = useSession();  
 
+  useEffect(() =>{
+    if(status==="unauthenticated"){
+      alert("your are not login");
+      router.push("/auth/login");  
+    }
+  },[]);  
 
   const AllTasShowkData = async () => {
     try {
@@ -58,7 +67,11 @@ export default function Home() {
     }
   };
 
-  if (loading) return <div>Loading tasks...</div>;
+  if (loading){
+    return(
+    <AllTasksSkelaton/>
+    )
+  }  
 
   return (
     <div>

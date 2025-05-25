@@ -2,11 +2,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Topbar from "@/components/topbar";  
-import  ThemeProvider  from "@/components/ui/theme-provider"
-import { SessionProvider } from "next-auth/react";
+import Topbar from "@/components/topbar";
+import ClientProviders from "@/components/clientProviders";
 
-  
+
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -29,29 +29,22 @@ export default function RootLayout({
 }>) {
   return (
     <html
-     lang="en"
-     className="light"
-     style={{colorScheme: "light"}}
-     suppressHydrationWarning
-     >
+      lang="en"
+      className="light"
+      style={{ colorScheme: "light" }}
+      suppressHydrationWarning
+    >
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        
-        <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-        
-       
-          <Topbar/>
+
+        <ClientProviders>
+        <Topbar />
         {children}
-        
-        </ThemeProvider>
-        
+        </ClientProviders>
+
+
       </body>
     </html>
-  );  
+  );
 }

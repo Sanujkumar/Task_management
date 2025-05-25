@@ -2,10 +2,22 @@
 
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";  
 
 export default function Notification() {
+
+  const {data:session,status} = useSession();
+  const router = useRouter();  
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() =>{
+    if(status==="unauthenticated"){
+      alert("your are not login");
+      router.push("/auth/login");
+    }
+  },[]);    
 
   const notificationData = async () => {
     try {
