@@ -40,10 +40,10 @@ export default function Signup({
                 password,
                 phone,    
                 name
-            })
+            });  
 
             if (res.status == 201) {
-                router.push("/login");
+                router.push("http://localhost:3000/auth/login");
             } else {
                 alert("Signup failed. Please try again.");
             }

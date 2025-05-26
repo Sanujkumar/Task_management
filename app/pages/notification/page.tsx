@@ -4,7 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";  
-
+import NotificationSkeleton from "@/skeltons/notificationSkeleton";  
 export default function Notification() {
 
   const {data:session,status} = useSession();
@@ -37,7 +37,7 @@ export default function Notification() {
     notificationData();
   }, []);
 
-  if (loading) return <div>Loading notifications...</div>;
+  if (loading) return <div><NotificationSkeleton/></div>;
 
   return (
     <div className="bg-gray-100 min-h-screen p-4">

@@ -4,6 +4,7 @@ import { SessionProvider, useSession } from "next-auth/react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import ProfileSkeleton from "@/skeltons/ProfileSkeleton";
 export default function Profile() {
     return (
         <SessionProvider>
@@ -14,9 +15,9 @@ export default function Profile() {
 
 function ProfileFunction() {
     const { data: session, status } = useSession();
-
+    const router = useRouter();
     if (status === "loading") {
-        return <div>Loading...</div>;
+        return <div><ProfileSkeleton/></div>;
     }
 
     if (!session) {
@@ -28,7 +29,7 @@ function ProfileFunction() {
     const firstLetter = name.charAt(0).toUpperCase();
     console.log(user?.image);
 
-    const router = useRouter();
+  
     const ShowALlTasks = () => {
         router.push("/pages/allTasks");    
     }

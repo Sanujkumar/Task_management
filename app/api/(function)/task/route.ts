@@ -93,8 +93,6 @@ export async function GET(req: NextRequest) {
     const body = await req.json();
     const { id, title, description, date, priority, status } = body;
   
-  
-  
     try {
       const updated = await prisma.task.updateMany({
         where: {

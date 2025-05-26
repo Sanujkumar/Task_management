@@ -79,7 +79,7 @@ export default function Home() {
         {datas.map((task) => (
           <div
             key={task.id}
-            className=""
+            className="p-4"  
           >
             <Card className="overflow-hidden w-80 h-50">
               <CardContent className="">
@@ -111,6 +111,12 @@ export default function Home() {
                       variant="outline"
                       onClick={() => DeleteTask(task.id)}
                     >Delete</Button>
+                  </div>
+                  <div>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                    >Assign</Button>
                   </div>
                 </div>
               </CardContent>
