@@ -6,7 +6,8 @@ import { Card, CardContent, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { Session } from "inspector/promises";
+
+
 import AllTasksSkelaton from "@/skeltons/alltaskSkelaton";
 interface TaskType {
   id: number;
@@ -23,6 +24,9 @@ export default function Home() {
   const [datas, setData] = useState<TaskType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const {data: session,status} = useSession();  
+  const [currentPage,setCurrentPage] = useState<number>(1);
+
+  const tasksPerPage = 4;
 
   useEffect(() =>{
     if(status==="unauthenticated"){
@@ -74,10 +78,16 @@ export default function Home() {
     )
   }  
 
+  const indexOfLastTask = currentPage * tasksPerPage;
+  const indexOfFirstTask = indexOfLastTask - tasksPerPage;
+  const currentTasks = datas.slice(indexOfFirstTask,indexOfLastTask);
+  const totalPages = Math.ceil(datas.length/tasksPerPage);  
+
+
   return (
     <div>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {datas.map((task) => (
+        {currentTasks.map((task) => (
           <div
             key={task.id}
             className="p-4"  
@@ -125,6 +135,23 @@ export default function Home() {
           </div>
         ))}
       </div>
+      <div className="flex justify-center mt-6 space-x-2">
+                <Button
+                    disabled={currentPage === 1}
+                    onClick={() => setCurrentPage((prev) => prev - 1)}
+                >
+                    Previous
+                </Button>
+                <span className="px-3 py-1 border rounded">
+                    Page {currentPage} of {totalPages}
+                </span>
+                <Button
+                    disabled={currentPage === totalPages}
+                    onClick={() => setCurrentPage((prev) => prev + 1)}
+                >
+                    Next
+                </Button>  
+            </div>
     </div>
   );
 }

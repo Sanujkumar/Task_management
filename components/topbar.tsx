@@ -100,7 +100,7 @@ function Component() {
         >
           Home
         </Link>
-        <Link href="/pages/AllProject" className="flex w-full items-center py-2 text-lg font-semibold" prefetch={false}>
+        <Link href="/pages/AllProjects" className="flex w-full items-center py-2 text-lg font-semibold" prefetch={false}>
             Projects
           </Link>
         {status === "unauthenticated" && (<>
