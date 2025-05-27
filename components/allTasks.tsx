@@ -36,7 +36,8 @@ export default function Home() {
       const res = await axios.get("http://localhost:3000/api/task", {
         withCredentials: true,
       });
-      setData(res.data.tasks || res.data);
+      console.log(res.data.tasks);  
+      setData(res.data.tasks);
     } catch (err) {
       console.error("Error fetching tasks:", err);
     } finally {

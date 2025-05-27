@@ -42,7 +42,9 @@ function Component() {
             <Link href="/" className="text-bold underline-offset-4 hover:underline " prefetch={false}>
               Home
             </Link>
-
+            <Link href="/pages/AllProjects" className="text-bold underline-offset-4 hover:underline" prefetch={false}>
+            Projects
+          </Link>
             {status === "unauthenticated" && (<>
               <Link href="/auth/register" className="flex text-bold underline-offset-4 hover:underline" prefetch={false}>
                 Signup
@@ -98,6 +100,9 @@ function Component() {
         >
           Home
         </Link>
+        <Link href="/pages/AllProject" className="flex w-full items-center py-2 text-lg font-semibold" prefetch={false}>
+            Projects
+          </Link>
         {status === "unauthenticated" && (<>
           <Link href="/auth/register" className="flex w-full items-center py-2 text-lg font-semibold" prefetch={false}>
             Signup

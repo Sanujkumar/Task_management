@@ -1,7 +1,9 @@
 import Image from 'next/image';
+import { Button } from './ui/button';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
-
+    const router = useRouter();  
     return (
         <div className=" h-screen w-full">
             <div className="h-full w-full bg-gray-100">
@@ -22,8 +24,7 @@ export default function Home() {
 
                 </div>
                 <div>
-
-
+                    <Button onClick={() => router.push("/pages/AllProjects")}>AllProject</Button>
                 </div>
             </div>
         </div>
