@@ -4,7 +4,7 @@ import { getToken } from "next-auth/jwt";
 const secret = process.env.AUTH_SECRET;
 const prisma = new PrismaClient();
 
- export async function PUT(req: NextRequest, context:{params: {id:string}}) {
+ export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
     const token = await getToken({ req, secret });
     console.log("tokenTask",token);  
     
