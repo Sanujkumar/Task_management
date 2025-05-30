@@ -42,7 +42,7 @@ export default function Home() {
 
     const AllTasShowkData = async () => {
         try {
-            const res = await axios.get("http://localhost:3000/api/task/showAllTasks", {
+            const res = await axios.get("http://localhost:3000/api/function/task/showAllTasks", {
                 withCredentials: true,
             });
 

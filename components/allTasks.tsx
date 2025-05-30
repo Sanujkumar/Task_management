@@ -37,7 +37,7 @@ export default function Home() {
 
   const AllTasShowkData = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/task", {
+      const res = await axios.get("http://localhost:3000/api/function/task", {
         withCredentials: true,
       });
       console.log(res.data.tasks);  
@@ -60,7 +60,7 @@ export default function Home() {
 
   const DeleteTask = async (taskId: number) => {
     try {
-      const res = await axios.post("http://localhost:3000/api/task/delete", { id: taskId }, {
+      const res = await axios.post("http://localhost:3000/api/function/task/delete", { id: taskId }, {
         withCredentials: true,
       });  
       if (res.status === 200) {

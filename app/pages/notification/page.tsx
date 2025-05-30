@@ -21,7 +21,7 @@ export default function Notification() {
 
   const notificationData = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/notification", {
+      const res = await axios.get("http://localhost:3000/api/function/notification", {
         withCredentials: true,
       });
       setData(res.data.notification);
