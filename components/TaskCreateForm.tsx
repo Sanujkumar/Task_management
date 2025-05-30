@@ -43,7 +43,7 @@ export default function TaskCreate({topTitle,buttonName,onSubmit,task}:any) {
         // }
 
         try {
-            await onSubmit(taskData); // 🔁 Call prop function
+            await onSubmit(taskData); 
             router.push("/pages/allTasks");
         } catch (error) {
             console.error("Submit failed:", error);

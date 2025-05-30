@@ -135,6 +135,7 @@ export default function Home() {
           </div>
         ))}
       </div>
+      
       <div className="flex justify-center mt-6 space-x-2">
                 <Button
                     disabled={currentPage === 1}

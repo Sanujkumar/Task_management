@@ -49,7 +49,7 @@ export default function Notification() {
           <ul className="">
             {data.map((item: any, index: number) => (
               <li key={index} className="bg-white p-2 rounded-2xl hover:bg-gray-200 shadow">
-                {item.message || JSON.stringify(item)}
+                {item.message }
               </li>
             ))}
           </ul>
