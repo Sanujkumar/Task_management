@@ -1,14 +1,14 @@
 
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
-import { PrismaClient } from "@/app/generated/prisma";
+// import { PrismaClient } from "@/app/generated/prisma";
 import { SessionStrategy } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from 'bcrypt';
 import InstagramProvider from "next-auth/providers/instagram";
 import FacebookProvider from "next-auth/providers/facebook";
-
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
+import { prisma } from "@/lib/prisma";
 
 type User = {
   id: string;
