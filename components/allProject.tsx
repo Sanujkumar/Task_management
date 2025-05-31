@@ -11,6 +11,9 @@ import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import AllTasksSkelaton from "@/skeltons/alltaskSkelaton";
+import { Avatar,AvatarImage,AvatarFallback } from "./ui/avatar";
+
+
 
 interface TaskType {
     id: number;
@@ -28,7 +31,7 @@ export default function Home() {
     const [datas, setData] = useState<TaskType[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [currentPage, setCurrentPage] = useState<number>(1);
-    const tasksPerPage = 4; 
+    const tasksPerPage = 4;
 
     const { data: session, status } = useSession();
     const router = useRouter();
@@ -46,14 +49,14 @@ export default function Home() {
                 withCredentials: true,
             });
 
-            const allTasks = res.data.Alltask 
+            const allTasks = res.data.Alltask
             setData(allTasks);
         } catch (err) {
             console.error("Error fetching tasks:", err);
         } finally {
             setLoading(false);
         }
-    };
+    };  
 
     useEffect(() => {
         AllTasShowkData();
@@ -65,6 +68,9 @@ export default function Home() {
     const indexOfFirstTask = indexOfLastTask - tasksPerPage;
     const currentTasks = datas.slice(indexOfFirstTask, indexOfLastTask);
     const totalPages = Math.ceil(datas.length / tasksPerPage);
+    const user = session?.user;
+    const name = user?.name || "U";
+    const firstLetter = name?.charAt(0).toUpperCase(); 
 
     return (
         <div className="p-4">
@@ -73,6 +79,7 @@ export default function Home() {
                     <div key={task.id} className="p-4">
                         <Card className="overflow-hidden w-80 h-50">
                             <CardContent>
+                                
                                 <CardTitle>{task.title}</CardTitle>
                                 <CardTitle>{task.description}</CardTitle>
                                 <p>Date: {new Date(task.date).toLocaleDateString()}</p>
@@ -101,9 +108,8 @@ export default function Home() {
                     onClick={() => setCurrentPage((prev) => prev + 1)}
                 >
                     Next
-                </Button>  
+                </Button>
             </div>
-        </div>  
+        </div>
     );
 }
-     

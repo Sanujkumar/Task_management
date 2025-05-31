@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 
 export default function updateTask() {  
     const params = useParams();
-    const taskId = params?.taskId;
+    const taskId = params?.taskId;  
     console.log("fTaskId",taskId);  
 
         const EditTask = async (taskData:any) => {

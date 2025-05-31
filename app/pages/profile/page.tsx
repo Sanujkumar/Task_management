@@ -25,7 +25,7 @@ function ProfileFunction() {
     }
 
     const user = session.user;
-    const name = user?.name || "U"; // fallback name
+    const name = user?.name || "U"; 
     const firstLetter = name.charAt(0).toUpperCase();
     console.log(user?.image);
 
