@@ -60,7 +60,7 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   webpack: (config:any) => {
-    config.externals = [...config.externals, '@prisma/client'];
+    config.externals = [...config.externals, '@/app/generated/prisma'];
     return config;
   },
   

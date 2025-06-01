@@ -5,8 +5,7 @@ import GoogleProvider from "next-auth/providers/google";
 import { SessionStrategy } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from 'bcrypt';
-import InstagramProvider from "next-auth/providers/instagram";
-import FacebookProvider from "next-auth/providers/facebook";
+
 // const prisma = new PrismaClient();
 import { prisma } from "@/lib/prisma";
 
@@ -69,15 +68,7 @@ export const authOptions = {
       allowDangerousEmailAccountLinking: true,
     }),    
     
-    InstagramProvider({
-    clientId: process.env.INSTAGRAM_CLIENT_ID,
-    clientSecret: process.env.INSTAGRAM_CLIENT_SECRET
-    }),
-
-    FacebookProvider({
-    clientId: process.env.FACEBOOK_CLIENT_ID || "",
-    clientSecret: process.env.FACEBOOK_CLIENT_SECRET || ""
-    })  
+    
 
   ],
   
