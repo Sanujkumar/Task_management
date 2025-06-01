@@ -1,7 +1,7 @@
 
 import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@/app/generated/prisma"; 
+import { PrismaClient } from "../../../generated/prisma"; 
 const secret = process.env.NEXTAUTH_SECRET;
 
 const prisma = new PrismaClient(); 

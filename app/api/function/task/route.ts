@@ -1,4 +1,5 @@
-import { PrismaClient } from "@/app/generated/prisma";
+import { PrismaClient } from "../../../generated/prisma";
+
 import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 

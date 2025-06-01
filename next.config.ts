@@ -25,9 +25,10 @@
 //   },
 // };     
 
+import type { NextConfig } from "next";
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig:  NextConfig  = {
   async headers() {
     return [
       {
@@ -49,7 +50,7 @@ const nextConfig = {
             key: "Access-Control-Allow-Headers",
             value: "X-Requested-With, Content-Type, Authorization",
           },
-        ],
+        ],   
       },
     ];
   },
@@ -59,12 +60,9 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  webpack: (config:any) => {
-    config.externals = [...config.externals, '@/app/generated/prisma'];
-    return config;
-  },
+     
   
 };
 
-module.exports = nextConfig;
+export default nextConfig;
 
