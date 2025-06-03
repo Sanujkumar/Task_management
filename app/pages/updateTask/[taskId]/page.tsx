@@ -10,7 +10,7 @@ export default function updateTask() {
 
         const EditTask = async (taskData:any) => {
             console.log("sending Tasks",taskData)
-            await axios.put(`http://localhost:3000/api/function/task/updateTask/${taskId}`, taskData, { withCredentials: true })
+            await axios.put(`https://task-management-vkvv.onrender.com/api/function/task/updateTask/${taskId}`, taskData, { withCredentials: true })
         }
 
         return (

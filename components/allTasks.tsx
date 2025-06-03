@@ -30,13 +30,13 @@ export default function Home() {
   useEffect(() =>{
     if(status==="unauthenticated"){
       alert("your are not login");
-      router.push("/auth/login");  
+      router.push("https://task-management-vkvv.onrender.com/auth/login");  
     }
   },[]);  
 
   const AllTasShowkData = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/function/task", {
+      const res = await axios.get("https://task-management-vkvv.onrender.com/api/function/task", {
         withCredentials: true,
       });
       console.log(res.data.tasks);  
@@ -54,12 +54,12 @@ export default function Home() {
 
   const router = useRouter();
   const Update = (taskId:Number) => {
-    router.push(`http://localhost:3000/pages/updateTask/${taskId}`);  
+    router.push(`https://task-management-vkvv.onrender.com/pages/updateTask/${taskId}`);  
   }
 
   const DeleteTask = async (taskId: number) => {
     try {
-      const res = await axios.post("http://localhost:3000/api/function/task/delete", { id: taskId }, {
+      const res = await axios.post("https://task-management-vkvv.onrender.com/api/function/task/delete", { id: taskId }, {
         withCredentials: true,
       });  
       if (res.status === 200) {

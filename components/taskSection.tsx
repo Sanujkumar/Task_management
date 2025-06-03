@@ -35,14 +35,14 @@ export default function UserDropdown() {
       {open && (
         <div className=" absolute mt-2 w-40 bg-white shadow-md border rounded z-10">
           <Button
-            onClick={() => router.push("/pages/createTask")}
+            onClick={() => router.push("https://task-management-vkvv.onrender.com/pages/createTask")}
             size="sm"
             variant="link"
           >
             CreateTask
           </Button>
           <Button
-            onClick={() => router.push("/pages/allTasks")}
+            onClick={() => router.push("https://task-management-vkvv.onrender.com/pages/allTasks")}
             size="sm"
             variant="link"
           >

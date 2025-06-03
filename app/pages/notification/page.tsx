@@ -15,13 +15,13 @@ export default function Notification() {
   useEffect(() =>{
     if(status==="unauthenticated"){
       alert("your are not login");
-      router.push("/auth/login");
+      router.push("https://task-management-vkvv.onrender.com/auth/login");
     }
   },[]);    
 
   const notificationData = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/function/notification", {
+      const res = await axios.get("https://task-management-vkvv.onrender.com/api/function/notification", {
         withCredentials: true,
       });
       setData(res.data.notification);

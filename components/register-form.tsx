@@ -35,15 +35,15 @@ export default function Signup({
             return;  
         }
         try {
-            const res = await axios.post("/api/register", {
+            const res = await axios.post("https://task-management-vkvv.onrender.com/api/register", {
                 email,
                 password,
                 phone,    
                 name
             });  
-
+      
             if (res.status == 201) {
-                router.push("http://localhost:3000/auth/login");
+                router.push("https://task-management-vkvv.onrender.com/auth/login");
             } else {
                 alert("Signup failed. Please try again.");
             }

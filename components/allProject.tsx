@@ -39,13 +39,13 @@ export default function Home() {
     useEffect(() => {
         if (status === "unauthenticated") {
             alert("You are not logged in");
-            router.push("/auth/login");
+            router.push("https://task-management-vkvv.onrender.com/auth/login");
         }
     }, [status]);
 
     const AllTasShowkData = async () => {
         try {
-            const res = await axios.get("http://localhost:3000/api/function/task/showAllTasks", {
+            const res = await axios.get("https://task-management-vkvv.onrender.com/api/function/task/showAllTasks", {
                 withCredentials: true,
             });
 

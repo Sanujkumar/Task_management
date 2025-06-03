@@ -20,7 +20,7 @@ export default function TaskCreate({topTitle,buttonName,onSubmit,task}:any) {
     useEffect(() => {
         if(status === "unauthenticated"){
             alert("you are not logged in!");
-            router.push("/auth/login");  
+            router.push("https://task-management-vkvv.onrender.com/auth/login");  
         }
     });  
 
@@ -44,7 +44,7 @@ export default function TaskCreate({topTitle,buttonName,onSubmit,task}:any) {
 
         try {
             await onSubmit(taskData); 
-            router.push("/pages/allTasks");
+            router.push("https://task-management-vkvv.onrender.com/pages/allTasks");
         } catch (error) {
             console.error("Submit failed:", error);
         }

@@ -31,7 +31,7 @@ function ProfileFunction() {
 
   
     const ShowALlTasks = () => {
-        router.push("/pages/allTasks");    
+        router.push("https://task-management-vkvv.onrender.com/pages/allTasks");    
     }
 
     return (

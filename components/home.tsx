@@ -24,7 +24,7 @@ export default function Home() {
 
                 </div>
                 <div>
-                    <Button onClick={() => router.push("/pages/AllProjects")}>AllProject</Button>
+                    <Button onClick={() => router.push("https://task-management-vkvv.onrender.com/pages/AllProjects")}>AllProject</Button>
                 </div>
             </div>
         </div>
