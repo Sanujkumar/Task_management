@@ -150,7 +150,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "E:\\stamura intern\\task_mangment\\app\\generated\\prisma",
+      "value": "C:\\Users\\sanuj\\OneDrive\\Desktop\\task_mangment\\app\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -164,7 +164,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "E:\\stamura intern\\task_mangment\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\sanuj\\OneDrive\\Desktop\\task_mangment\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {

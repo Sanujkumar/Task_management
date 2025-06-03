@@ -7,7 +7,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from 'bcrypt';
 
 // const prisma = new PrismaClient();  
-import { prisma } from "@/lib/prisma";
+import { prisma } from "./prisma";
 
 type User = {
   id: string;

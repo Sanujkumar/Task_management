@@ -1,36 +1,13 @@
-
-// module.exports = {
-//   async headers() {
-//     return [
-//       {
-//         source: "/api/(.*)", 
-//         headers: [
-//           {
-//             key: "Access-Control-Allow-Credentials",
-//             value: "true",
-//           },
-//           {
-//             key: "Access-Control-Allow-Origin",
-//             value: "http://localhost:3000", 
-//           },
-//         ],
-//       },   
-//     ];
-//   },
-//   images: {
-//     domains: ['startinfinity.s3.us-east-2.amazonaws.com'], // ✅ add the actual domain here
-//   },
-//   eslint: {
-//     ignoreDuringBuilds: true,
-//   },
-// };     
+   
 
 import type { NextConfig } from "next";
 
-/** @type {import('next').NextConfig} */
+
 const nextConfig:  NextConfig  = {
+  
   async headers() {
     return [
+      
       {
         source: "/api/:path*",
         headers: [
@@ -60,7 +37,16 @@ const nextConfig:  NextConfig  = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-     
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.(js|ts|tsx)$/,
+      exclude: [
+        /node_modules/,
+        /C:\\Users\\sanuj\\Application Data/ // explicitly exclude problematic path
+      ],
+    });
+    return config;
+  },
   
 };
 

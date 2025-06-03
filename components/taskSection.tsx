@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { RiArrowDownSLine } from "react-icons/ri";
-import { Button } from './ui/button';
+import { Button } from '../components/ui/button';
 import { useRouter } from 'next/navigation';
 import { RiArrowUpSLine } from "react-icons/ri";
 

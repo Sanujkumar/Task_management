@@ -10,8 +10,8 @@ import { Card, CardContent, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import AllTasksSkelaton from "@/skeltons/alltaskSkelaton";
-import { Avatar,AvatarImage,AvatarFallback } from "./ui/avatar";
+import AllTasksSkelaton from "../skeltons/alltaskSkelaton";  
+
 
 
 

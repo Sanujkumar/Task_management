@@ -1,10 +1,10 @@
 "use client"
 
 import { SessionProvider, useSession } from "next-auth/react";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
+import { Avatar, AvatarImage, AvatarFallback } from "../../../components/ui/avatar";
+import { Button } from "../../../components/ui/button";
 import { useRouter } from "next/navigation";
-import ProfileSkeleton from "@/skeltons/profileSkeleton";  
+import ProfileSkeleton from "../../../skeltons/profileSkeleton";  
 export default function Profile() {
     return (
         <SessionProvider>

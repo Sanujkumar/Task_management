@@ -1,11 +1,10 @@
 "use client"
-import { SessionProvider, signIn, signOut, useSession } from "next-auth/react";
-import Home from "@/components/home";
+import Home from "../components/home";
 
 export default function main() {
 
   
-  return (
+  return (    
     <>
     <Home/>
     </>

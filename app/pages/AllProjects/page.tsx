@@ -1,4 +1,4 @@
-import AllProject from "@/components/allProject"
+import AllProject from "../../../components/allProject"
 
 export default function AllProjects(){
     return(

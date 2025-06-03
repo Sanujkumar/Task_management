@@ -13,18 +13,30 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "baseUrl": ".",    
-    "paths": {
-      "@/*": ["./*"]   
-    },
     "plugins": [
       {
         "name": "next"
       }
     ],
+    "paths": {
+      "@/*": ["./*"]
+    }  
+    
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/sining1"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "app",
+    "pages",
+    "components",
+    "lib",
+    "prisma",
+    "public",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    ".next",
+    "**/Application Data/**"
+  ]  
 }
-
-
+    

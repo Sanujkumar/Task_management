@@ -1,9 +1,9 @@
 "use client"
 
-import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet"
-import { Button } from "@/components/ui/button"
+import { Sheet, SheetTrigger, SheetContent } from "../components/ui/sheet"
+import { Button } from "../components/ui/button"
 import Link from "next/link"
-import Dark from "@/components/ui/dark";
+import Dark from "../components/ui/dark";
 import { IoIosNotifications } from "react-icons/io";
 import { SessionProvider, signIn, signOut, useSession } from "next-auth/react";
 import TaskSection from "./taskSection";  

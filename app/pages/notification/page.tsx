@@ -4,7 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";  
-import NotificationSkeleton from "@/skeltons/notificationSkeleton";  
+import NotificationSkeleton from "../../../skeltons/notificationSkeleton";  
 export default function Notification() {
 
   const {data:session,status} = useSession();

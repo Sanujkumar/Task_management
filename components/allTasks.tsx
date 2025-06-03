@@ -7,7 +7,7 @@ import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
-import AllTasksSkelaton from "@/skeltons/alltaskSkelaton";
+import AllTasksSkelaton from "../skeltons/alltaskSkelaton";
 interface TaskType {
   id: number;
   title: string;
