@@ -11,7 +11,7 @@ import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import AllTasksSkelaton from "../skeltons/alltaskSkelaton";  
-
+import { Url } from "../lib/config";
 
 
 
@@ -39,13 +39,13 @@ export default function Home() {
     useEffect(() => {
         if (status === "unauthenticated") {
             alert("You are not logged in");
-            router.push("https://task-management-vkvv.onrender.com/auth/login");
+            router.push(`${Url}/auth/login`);
         }
     }, [status]);
 
     const AllTasShowkData = async () => {
         try {
-            const res = await axios.get("https://task-management-vkvv.onrender.com/api/function/task/showAllTasks", {
+            const res = await axios.get(`${Url}/api/function/task/showAllTasks`, {
                 withCredentials: true,
             });
 

@@ -6,6 +6,7 @@ import { Card, CardContent, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { Url } from "../lib/config";
 
 import AllTasksSkelaton from "../skeltons/alltaskSkelaton";
 interface TaskType {
@@ -30,13 +31,13 @@ export default function Home() {
   useEffect(() =>{
     if(status==="unauthenticated"){
       alert("your are not login");
-      router.push("https://task-management-vkvv.onrender.com/auth/login");  
+      router.push(`${Url}/auth/login`);  
     }
   },[]);  
 
   const AllTasShowkData = async () => {
     try {
-      const res = await axios.get("https://task-management-vkvv.onrender.com/api/function/task", {
+      const res = await axios.get(`${Url}/api/function/task`, {
         withCredentials: true,
       });
       console.log(res.data.tasks);  
@@ -54,12 +55,12 @@ export default function Home() {
 
   const router = useRouter();
   const Update = (taskId:Number) => {
-    router.push(`https://task-management-vkvv.onrender.com/pages/updateTask/${taskId}`);  
+    router.push(`${Url}/pages/updateTask/${taskId}`);  
   }
 
   const DeleteTask = async (taskId: number) => {
     try {
-      const res = await axios.post("https://task-management-vkvv.onrender.com/api/function/task/delete", { id: taskId }, {
+      const res = await axios.post(`${Url}/api/function/task/delete`, { id: taskId }, {
         withCredentials: true,
       });  
       if (res.status === 200) {

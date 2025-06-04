@@ -8,6 +8,7 @@ import { IoIosNotifications } from "react-icons/io";
 import { SessionProvider, signIn, signOut, useSession } from "next-auth/react";
 import TaskSection from "./taskSection";  
 import { MdTask } from "react-icons/md";
+import { Url } from "../lib/config";
 
 export default function Topbar() {
 
@@ -33,23 +34,23 @@ function Component() {
 
         <SheetContent side="left">
 
-          <Link href="https://task-management-vkvv.onrender.com/" className="mr-6  p-4 lg:flex" prefetch={false}>
+          <Link href={Url} className="mr-6  p-4 lg:flex" prefetch={false}>
            <MdTask size={30}/>
             <span className="sr-only">Task management</span>
           </Link>
 
           <div className=" grid gap-2 py-6 px-4">
-            <Link href="https://task-management-vkvv.onrender.com/" className="text-bold underline-offset-4 hover:underline " prefetch={false}>
+            <Link href={Url} className="text-bold underline-offset-4 hover:underline " prefetch={false}>
               Home
             </Link>
-            <Link href="https://task-management-vkvv.onrender.com/pages/AllProjects" className="text-bold underline-offset-4 hover:underline" prefetch={false}>
+            <Link href={`${Url}/pages/AllProjects`} className="text-bold underline-offset-4 hover:underline" prefetch={false}>
             Projects
           </Link>
             {status === "unauthenticated" && (<>
-              <Link href="https://task-management-vkvv.onrender.com/auth/register" className="flex text-bold underline-offset-4 hover:underline" prefetch={false}>
+              <Link href={`${Url}/auth/register`} className="flex text-bold underline-offset-4 hover:underline" prefetch={false}>
                 Signup
               </Link>
-              <Link href="https://task-management-vkvv.onrender.com/auth/login" className="text-bold underline-offset-4 hover:underline" prefetch={false}>
+              <Link href={`${Url}/auth/login`} className="text-bold underline-offset-4 hover:underline" prefetch={false}>
                 Login
               </Link>
             </>
@@ -64,7 +65,7 @@ function Component() {
                 onClick={() => signOut()}
               >signOut</Button>
 
-               <Link href="https://task-management-vkvv.onrender.com/pages/profile" className="text-bold underline-offset-4 hover:underline" prefetch={false}>
+               <Link href={`${Url}/pages/profile`} className="text-bold underline-offset-4 hover:underline" prefetch={false}>
               Profile
             </Link>
               </>
@@ -80,7 +81,7 @@ function Component() {
             </div>
             <div className="mt-2">
             <Link
-              href="https://task-management-vkvv.onrender.com/pages/notification">
+              href={`${Url}/pages/notification`}>    
                <IoIosNotifications size={36} />
             </Link>
             </div>
@@ -94,23 +95,23 @@ function Component() {
       </Link>
       <nav className="ml-auto hidden lg:flex gap-6 items-center">
         <Link
-          href="https://task-management-vkvv.onrender.com"
+          href={Url}
           className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50"
           prefetch={false}
         >
           Home
         </Link>
-        <Link href="https://task-management-vkvv.onrender.com/pages/AllProjects" className="flex w-full items-center py-2 text-lg font-semibold" prefetch={false}>
+        <Link href={`${Url}/pages/AllProjects`} className="flex w-full items-center py-2 text-lg font-semibold" prefetch={false}>
             Projects
           </Link>
         {status === "unauthenticated" && (<>
-          <Link href="https://task-management-vkvv.onrender.com/auth/register" className="flex w-full items-center py-2 text-lg font-semibold" prefetch={false}>
+          <Link href={`${Url}/auth/register`} className="flex w-full items-center py-2 text-lg font-semibold" prefetch={false}>
             Signup
           </Link>
-          <Link href="https://task-management-vkvv.onrender.com/auth/login" className="flex w-full items-center py-2 text-lg font-semibold" prefetch={false}>
+          <Link href={`${Url}/auth/login`} className="flex w-full items-center py-2 text-lg font-semibold" prefetch={false}>
             Login
           </Link>
-          <Link href="https://task-management-vkvv.onrender.com/pages/profile" className="flex w-full items-center py-2 text-lg font-semibold" prefetch={false}>
+          <Link href={`${Url}/pages/profile`} className="flex w-full items-center py-2 text-lg font-semibold" prefetch={false}>
               Profile
             </Link>
         </>
@@ -124,7 +125,7 @@ function Component() {
             onClick={() => signOut()}
           >signOut</Button>
 
-           <Link href="https://task-management-vkvv.onrender.com/pages/profile" className="flex w-full items-center py-2 text-lg font-semibold" prefetch={false}>
+           <Link href={`${Url}/pages/profile`} className="flex w-full items-center py-2 text-lg font-semibold" prefetch={false}>
               Profile
             </Link>
             </>
@@ -139,7 +140,7 @@ function Component() {
           <Dark />
         </div>
         <Link
-          href="https://task-management-vkvv.onrender.com/pages/notification">
+          href={`${Url}/pages/notification`}>  
            <IoIosNotifications size={36} />
         </Link>
       </nav>

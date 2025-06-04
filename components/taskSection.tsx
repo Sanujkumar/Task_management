@@ -6,7 +6,7 @@ import { RiArrowDownSLine } from "react-icons/ri";
 import { Button } from '../components/ui/button';
 import { useRouter } from 'next/navigation';
 import { RiArrowUpSLine } from "react-icons/ri";
-
+import { Url } from '../lib/config';
 
 export default function UserDropdown() {
   const [open, setOpen] = useState(false);
@@ -35,14 +35,14 @@ export default function UserDropdown() {
       {open && (
         <div className=" absolute mt-2 w-40 bg-white shadow-md border rounded z-10">
           <Button
-            onClick={() => router.push("https://task-management-vkvv.onrender.com/pages/createTask")}
+            onClick={() => router.push(`${Url}/pages/createTask`)}
             size="sm"
             variant="link"
           >
             CreateTask
           </Button>
           <Button
-            onClick={() => router.push("https://task-management-vkvv.onrender.com/pages/allTasks")}
+            onClick={() => router.push(`${Url}/pages/allTasks`)}
             size="sm"
             variant="link"
           >

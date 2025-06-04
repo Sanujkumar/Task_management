@@ -7,9 +7,7 @@ import { Label } from "../components/ui/label"
 import { useRef } from "react";
 import axios from "axios";
 import { useRouter } from 'next/navigation';
-
-
-
+import { Url } from "../lib/config"
 
 
 export default function Signup({
@@ -35,7 +33,7 @@ export default function Signup({
             return;  
         }
         try {
-            const res = await axios.post("https://task-management-vkvv.onrender.com/api/register", {
+            const res = await axios.post(`${Url}/api/register`, {
                 email,
                 password,
                 phone,    
@@ -43,7 +41,7 @@ export default function Signup({
             });  
       
             if (res.status == 201) {
-                router.push("https://task-management-vkvv.onrender.com/auth/login");
+                router.push(`${Url}/auth/login`);
             } else {
                 alert("Signup failed. Please try again.");
             }

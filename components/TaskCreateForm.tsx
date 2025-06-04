@@ -6,6 +6,7 @@ import { useEffect, useRef } from "react";
 import axios from "axios";
 import { useRouter } from 'next/navigation';
 import { useSession } from "next-auth/react";
+import { Url } from "../lib/config";
 
 export default function TaskCreate({topTitle,buttonName,onSubmit,task}:any) {
     const {data: session,status} = useSession();  
@@ -20,7 +21,7 @@ export default function TaskCreate({topTitle,buttonName,onSubmit,task}:any) {
     useEffect(() => {
         if(status === "unauthenticated"){
             alert("you are not logged in!");
-            router.push("https://task-management-vkvv.onrender.com/auth/login");  
+            router.push(`${Url}/auth/login`);  
         }
     });  
 
@@ -44,7 +45,7 @@ export default function TaskCreate({topTitle,buttonName,onSubmit,task}:any) {
 
         try {
             await onSubmit(taskData); 
-            router.push("https://task-management-vkvv.onrender.com/pages/allTasks");
+            router.push(`${Url}/pages/allTasks`);
         } catch (error) {
             console.error("Submit failed:", error);
         }

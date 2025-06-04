@@ -32,7 +32,7 @@ const nextConfig:  NextConfig  = {
     ];
   },
   images: {
-    domains: ['startinfinity.s3.us-east-2.amazonaws.com'],
+    domains: ['img.favpng.com'],
   },
   eslint: {
     ignoreDuringBuilds: true,

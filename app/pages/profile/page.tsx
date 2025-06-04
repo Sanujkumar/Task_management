@@ -5,6 +5,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "../../../components/ui/avat
 import { Button } from "../../../components/ui/button";
 import { useRouter } from "next/navigation";
 import ProfileSkeleton from "../../../skeltons/profileSkeleton";  
+import { Url } from "../../../lib/config";
 export default function Profile() {
     return (
         <SessionProvider>
@@ -31,7 +32,7 @@ function ProfileFunction() {
 
   
     const ShowALlTasks = () => {
-        router.push("https://task-management-vkvv.onrender.com/pages/allTasks");    
+        router.push(`${Url}/pages/allTasks`);    
     }
 
     return (

@@ -2,6 +2,7 @@
 import CreateTask from "../../../../components/TaskCreateForm";
 import axios from "axios";
 import { useParams } from "next/navigation";
+import { Url } from "../../../../lib/config";
 
 export default function updateTask() {  
     const params = useParams();
@@ -10,7 +11,7 @@ export default function updateTask() {
 
         const EditTask = async (taskData:any) => {
             console.log("sending Tasks",taskData)
-            await axios.put(`https://task-management-vkvv.onrender.com/api/function/task/updateTask/${taskId}`, taskData, { withCredentials: true })
+            await axios.put(`${Url}/api/function/task/updateTask/${taskId}`, taskData, { withCredentials: true })
         }
 
         return (

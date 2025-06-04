@@ -5,6 +5,9 @@ import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";  
 import NotificationSkeleton from "../../../skeltons/notificationSkeleton";  
+import { Url } from "../../../lib/config";
+
+
 export default function Notification() {
 
   const {data:session,status} = useSession();
@@ -15,13 +18,13 @@ export default function Notification() {
   useEffect(() =>{
     if(status==="unauthenticated"){
       alert("your are not login");
-      router.push("https://task-management-vkvv.onrender.com/auth/login");
+      router.push(`${Url}`);
     }
   },[]);    
 
   const notificationData = async () => {
     try {
-      const res = await axios.get("https://task-management-vkvv.onrender.com/api/function/notification", {
+      const res = await axios.get(`${Url}/api/function/notification`, {
         withCredentials: true,
       });
       setData(res.data.notification);
@@ -30,7 +33,7 @@ export default function Notification() {
       console.error("Failed to fetch notifications:", error);
     } finally {
       setLoading(false);
-    }
+    }  
   };
 
   useEffect(() => {
