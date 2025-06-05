@@ -77,7 +77,7 @@ export default function Home() {
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {currentTasks.map((task) => (
                     <div key={task.id} className="p-4">
-                        <Card className="overflow-hidden w-80 h-50">
+                        <Card className="overflow-hidden w-65 h-50 sm:w-80 sm:h-50">
                             <CardContent>
                                 
                                 <CardTitle>{task.title}</CardTitle>
