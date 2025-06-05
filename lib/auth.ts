@@ -140,11 +140,7 @@ export const authOptions = {
       console.log("JWT callback - token AFTER:", token);
       return token;
     },
-
     
-    
-
-
     async session({ session, token }: any) {
       if (session.user && token?.id) {
         session.user.id = token.id;

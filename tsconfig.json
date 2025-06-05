@@ -13,6 +13,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "types": ["next-auth"],  
     "plugins": [
       {
         "name": "next"
@@ -29,6 +30,7 @@
     "pages",
     "components",
     "lib",
+    "types",  
     "prisma",
     "public",
     ".next/types/**/*.ts"

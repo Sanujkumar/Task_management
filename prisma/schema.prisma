@@ -14,7 +14,8 @@ model User {
   password      String
   name          String?
   phone         String?
-  notificaion   Notification[]
+  skills        String?
+  notificaion   Notification[]  
   assignedTasks Task[]         @relation("AssignedTasks")
   tasks         Task[]         @relation("CreatedTasks")
 }

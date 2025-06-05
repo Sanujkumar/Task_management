@@ -22,6 +22,9 @@ export default function Topbar() {
 
 function Component() {
   const { data: session, status } = useSession();
+ 
+  
+  
   return (
     <header className="flex h-20 w-full shrink-0 items-center px-4 md:px-6">
       <Sheet>
@@ -65,7 +68,7 @@ function Component() {
                 onClick={() => signOut()}
               >signOut</Button>
 
-               <Link href={`${Url}/pages/profile`} className="text-bold underline-offset-4 hover:underline" prefetch={false}>
+               <Link href={`${Url}/pages/profile/profileShow/${session.user.id}`} className="text-bold underline-offset-4 hover:underline" prefetch={false}>
               Profile
             </Link>
               </>
@@ -111,9 +114,7 @@ function Component() {
           <Link href={`${Url}/auth/login`} className="flex w-full items-center py-2 text-lg font-semibold" prefetch={false}>
             Login
           </Link>
-          <Link href={`${Url}/pages/profile`} className="flex w-full items-center py-2 text-lg font-semibold" prefetch={false}>
-              Profile
-            </Link>
+          
         </>
         )}
 
@@ -125,9 +126,9 @@ function Component() {
             onClick={() => signOut()}
           >signOut</Button>
 
-           <Link href={`${Url}/pages/profile`} className="flex w-full items-center py-2 text-lg font-semibold" prefetch={false}>
+           <Link href={`${Url}/pages/profile/profileShow/${session.user.id}`} className="flex w-full items-center py-2 text-lg font-semibold" prefetch={false}>
               Profile
-            </Link>
+            </Link>   
             </>
         )}
 
