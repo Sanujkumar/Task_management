@@ -53,7 +53,7 @@ export default function TaskCreate({topTitle,buttonName,onSubmit,task}:any) {
 
     return (
         <div className="w-full min-h-screen flex justify-center items-center bg-gray-100">
-            <div className=" w-3/4 h-120  flex justify-center items-center">
+            <div className=" w-3/4 h-150  flex justify-center items-center">
                 <div className="bg-white text-center rounded-4xl h-full w-3/4 p-4">
                     <div>
                         {/* <p className="text-3xl"><span className="text-yellow-600">Task</span><span className="text-yellow-500">Create</span></p> */}
@@ -77,6 +77,18 @@ export default function TaskCreate({topTitle,buttonName,onSubmit,task}:any) {
                             <Label htmlFor="Priority" className="text-md">Priority</Label>
                             <Input ref={priorityRef} className=" bg-white mb-2" type="text" placeholder="Priority" />
                         </div>
+                        <div className="pr-2 pl-2">
+                            <Label htmlFor="In-details" className="text-md">In-details</Label>
+                            <Input ref={priorityRef} className=" bg-white mb-2" type="text" placeholder="details description" />
+                        </div>
+                        <div className="pr-2 pl-2">
+                            <Label htmlFor="Price" className="text-md">Price</Label>
+                            <Input ref={priorityRef} className=" bg-white mb-2" type="text" placeholder="price" />
+                        </div>
+                        <div className="pr-2 pl-2">
+                            <Label htmlFor="Priority" className="text-md">Mention skills</Label>
+                            <Input ref={priorityRef} className=" bg-white mb-2" type="text" placeholder="here mention skills" />
+                        </div>
                         <div className="pr-2 pl-2 flex items-center ">
                             <Label htmlFor="Status" className="text-md" >Status</Label>
                             <Input ref={StatusRef} className="h-4 w-6" type="checkbox" placeholder="Status" />
@@ -90,7 +102,7 @@ export default function TaskCreate({topTitle,buttonName,onSubmit,task}:any) {
                             >{buttonName}</Button>
                         </div>
                     </div>
-                </div>
+                </div>  
             </div>
         </div>
     )

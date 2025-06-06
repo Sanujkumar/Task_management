@@ -83,16 +83,19 @@ export default function Home() {
   const currentTasks = datas.slice(indexOfFirstTask,indexOfLastTask);
   const totalPages = Math.ceil(datas.length/tasksPerPage);  
 
+  const showdetails = () => {
+        router.push("/pages/projectsViewDetails");
+    }
 
   return (
     <div>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 ">
         {currentTasks.map((task) => (
           <div
             key={task.id}
-            className="p-4"    
+            className="pl-8 sm:p-4"    
           >   
-            <Card className="overflow-hidden w-65 h-50 sm:w-80 sm:h-50 ">
+            <Card onClick={showdetails} className="overflow-hidden w-65 h-50 sm:w-80 sm:h-50 hover:bg-gray-100 cursor-pointer">
               <CardContent className="">
 
                 <CardTitle className="">{task.title}</CardTitle>

@@ -22,7 +22,7 @@ export const POST = (async (req: NextRequest) => {
   try {
 
     const body = await req.json();
-    const { title, description, date, priority, status, assigneeId } = body;
+    const { title, description, date, priority,inDetails,price,skills, status, assigneeId } = body;
     const userId = Number(token.id);
     console.log("userId", userId);
     const task = await prisma.task.create({
@@ -31,11 +31,14 @@ export const POST = (async (req: NextRequest) => {
         description,
         date: new Date(date),
         priority,
+        inDetails,
+        price,
+        skills,
         status,
         userId,
         assigneeId
       },
-    });
+    });  
 
     if (assigneeId) {
       await prisma.notification.create({

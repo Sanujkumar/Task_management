@@ -2299,12 +2299,14 @@ export namespace Prisma {
 
   export type TaskAvgAggregateOutputType = {
     id: number | null
+    price: number | null
     userId: number | null
     assigneeId: number | null
   }
 
   export type TaskSumAggregateOutputType = {
     id: number | null
+    price: number | null
     userId: number | null
     assigneeId: number | null
   }
@@ -2315,6 +2317,9 @@ export namespace Prisma {
     description: string | null
     date: Date | null
     priority: string | null
+    inDetails: string | null
+    price: number | null
+    skills: string | null
     status: boolean | null
     userId: number | null
     assigneeId: number | null
@@ -2326,6 +2331,9 @@ export namespace Prisma {
     description: string | null
     date: Date | null
     priority: string | null
+    inDetails: string | null
+    price: number | null
+    skills: string | null
     status: boolean | null
     userId: number | null
     assigneeId: number | null
@@ -2337,6 +2345,9 @@ export namespace Prisma {
     description: number
     date: number
     priority: number
+    inDetails: number
+    price: number
+    skills: number
     status: number
     userId: number
     assigneeId: number
@@ -2346,12 +2357,14 @@ export namespace Prisma {
 
   export type TaskAvgAggregateInputType = {
     id?: true
+    price?: true
     userId?: true
     assigneeId?: true
   }
 
   export type TaskSumAggregateInputType = {
     id?: true
+    price?: true
     userId?: true
     assigneeId?: true
   }
@@ -2362,6 +2375,9 @@ export namespace Prisma {
     description?: true
     date?: true
     priority?: true
+    inDetails?: true
+    price?: true
+    skills?: true
     status?: true
     userId?: true
     assigneeId?: true
@@ -2373,6 +2389,9 @@ export namespace Prisma {
     description?: true
     date?: true
     priority?: true
+    inDetails?: true
+    price?: true
+    skills?: true
     status?: true
     userId?: true
     assigneeId?: true
@@ -2384,6 +2403,9 @@ export namespace Prisma {
     description?: true
     date?: true
     priority?: true
+    inDetails?: true
+    price?: true
+    skills?: true
     status?: true
     userId?: true
     assigneeId?: true
@@ -2482,6 +2504,9 @@ export namespace Prisma {
     description: string
     date: Date
     priority: string
+    inDetails: string
+    price: number
+    skills: string
     status: boolean
     userId: number
     assigneeId: number | null
@@ -2512,6 +2537,9 @@ export namespace Prisma {
     description?: boolean
     date?: boolean
     priority?: boolean
+    inDetails?: boolean
+    price?: boolean
+    skills?: boolean
     status?: boolean
     userId?: boolean
     assigneeId?: boolean
@@ -2525,6 +2553,9 @@ export namespace Prisma {
     description?: boolean
     date?: boolean
     priority?: boolean
+    inDetails?: boolean
+    price?: boolean
+    skills?: boolean
     status?: boolean
     userId?: boolean
     assigneeId?: boolean
@@ -2538,6 +2569,9 @@ export namespace Prisma {
     description?: boolean
     date?: boolean
     priority?: boolean
+    inDetails?: boolean
+    price?: boolean
+    skills?: boolean
     status?: boolean
     userId?: boolean
     assigneeId?: boolean
@@ -2551,12 +2585,15 @@ export namespace Prisma {
     description?: boolean
     date?: boolean
     priority?: boolean
+    inDetails?: boolean
+    price?: boolean
+    skills?: boolean
     status?: boolean
     userId?: boolean
     assigneeId?: boolean
   }
 
-  export type TaskOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "date" | "priority" | "status" | "userId" | "assigneeId", ExtArgs["result"]["task"]>
+  export type TaskOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "date" | "priority" | "inDetails" | "price" | "skills" | "status" | "userId" | "assigneeId", ExtArgs["result"]["task"]>
   export type TaskInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     assignee?: boolean | Task$assigneeArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -2582,6 +2619,9 @@ export namespace Prisma {
       description: string
       date: Date
       priority: string
+      inDetails: string
+      price: number
+      skills: string
       status: boolean
       userId: number
       assigneeId: number | null
@@ -3015,6 +3055,9 @@ export namespace Prisma {
     readonly description: FieldRef<"Task", 'String'>
     readonly date: FieldRef<"Task", 'DateTime'>
     readonly priority: FieldRef<"Task", 'String'>
+    readonly inDetails: FieldRef<"Task", 'String'>
+    readonly price: FieldRef<"Task", 'Int'>
+    readonly skills: FieldRef<"Task", 'String'>
     readonly status: FieldRef<"Task", 'Boolean'>
     readonly userId: FieldRef<"Task", 'Int'>
     readonly assigneeId: FieldRef<"Task", 'Int'>
@@ -4554,6 +4597,9 @@ export namespace Prisma {
     description: 'description',
     date: 'date',
     priority: 'priority',
+    inDetails: 'inDetails',
+    price: 'price',
+    skills: 'skills',
     status: 'status',
     userId: 'userId',
     assigneeId: 'assigneeId'
@@ -4748,6 +4794,9 @@ export namespace Prisma {
     description?: StringFilter<"Task"> | string
     date?: DateTimeFilter<"Task"> | Date | string
     priority?: StringFilter<"Task"> | string
+    inDetails?: StringFilter<"Task"> | string
+    price?: IntFilter<"Task"> | number
+    skills?: StringFilter<"Task"> | string
     status?: BoolFilter<"Task"> | boolean
     userId?: IntFilter<"Task"> | number
     assigneeId?: IntNullableFilter<"Task"> | number | null
@@ -4761,6 +4810,9 @@ export namespace Prisma {
     description?: SortOrder
     date?: SortOrder
     priority?: SortOrder
+    inDetails?: SortOrder
+    price?: SortOrder
+    skills?: SortOrder
     status?: SortOrder
     userId?: SortOrder
     assigneeId?: SortOrderInput | SortOrder
@@ -4777,6 +4829,9 @@ export namespace Prisma {
     description?: StringFilter<"Task"> | string
     date?: DateTimeFilter<"Task"> | Date | string
     priority?: StringFilter<"Task"> | string
+    inDetails?: StringFilter<"Task"> | string
+    price?: IntFilter<"Task"> | number
+    skills?: StringFilter<"Task"> | string
     status?: BoolFilter<"Task"> | boolean
     userId?: IntFilter<"Task"> | number
     assigneeId?: IntNullableFilter<"Task"> | number | null
@@ -4790,6 +4845,9 @@ export namespace Prisma {
     description?: SortOrder
     date?: SortOrder
     priority?: SortOrder
+    inDetails?: SortOrder
+    price?: SortOrder
+    skills?: SortOrder
     status?: SortOrder
     userId?: SortOrder
     assigneeId?: SortOrderInput | SortOrder
@@ -4809,6 +4867,9 @@ export namespace Prisma {
     description?: StringWithAggregatesFilter<"Task"> | string
     date?: DateTimeWithAggregatesFilter<"Task"> | Date | string
     priority?: StringWithAggregatesFilter<"Task"> | string
+    inDetails?: StringWithAggregatesFilter<"Task"> | string
+    price?: IntWithAggregatesFilter<"Task"> | number
+    skills?: StringWithAggregatesFilter<"Task"> | string
     status?: BoolWithAggregatesFilter<"Task"> | boolean
     userId?: IntWithAggregatesFilter<"Task"> | number
     assigneeId?: IntNullableWithAggregatesFilter<"Task"> | number | null
@@ -4945,6 +5006,9 @@ export namespace Prisma {
     description: string
     date?: Date | string
     priority: string
+    inDetails?: string
+    price?: number
+    skills?: string
     status: boolean
     assignee?: UserCreateNestedOneWithoutAssignedTasksInput
     user: UserCreateNestedOneWithoutTasksInput
@@ -4956,6 +5020,9 @@ export namespace Prisma {
     description: string
     date?: Date | string
     priority: string
+    inDetails?: string
+    price?: number
+    skills?: string
     status: boolean
     userId: number
     assigneeId?: number | null
@@ -4966,6 +5033,9 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     priority?: StringFieldUpdateOperationsInput | string
+    inDetails?: StringFieldUpdateOperationsInput | string
+    price?: IntFieldUpdateOperationsInput | number
+    skills?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     assignee?: UserUpdateOneWithoutAssignedTasksNestedInput
     user?: UserUpdateOneRequiredWithoutTasksNestedInput
@@ -4977,6 +5047,9 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     priority?: StringFieldUpdateOperationsInput | string
+    inDetails?: StringFieldUpdateOperationsInput | string
+    price?: IntFieldUpdateOperationsInput | number
+    skills?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     userId?: IntFieldUpdateOperationsInput | number
     assigneeId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -4988,6 +5061,9 @@ export namespace Prisma {
     description: string
     date?: Date | string
     priority: string
+    inDetails?: string
+    price?: number
+    skills?: string
     status: boolean
     userId: number
     assigneeId?: number | null
@@ -4998,6 +5074,9 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     priority?: StringFieldUpdateOperationsInput | string
+    inDetails?: StringFieldUpdateOperationsInput | string
+    price?: IntFieldUpdateOperationsInput | number
+    skills?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -5007,6 +5086,9 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     priority?: StringFieldUpdateOperationsInput | string
+    inDetails?: StringFieldUpdateOperationsInput | string
+    price?: IntFieldUpdateOperationsInput | number
+    skills?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     userId?: IntFieldUpdateOperationsInput | number
     assigneeId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -5249,6 +5331,9 @@ export namespace Prisma {
     description?: SortOrder
     date?: SortOrder
     priority?: SortOrder
+    inDetails?: SortOrder
+    price?: SortOrder
+    skills?: SortOrder
     status?: SortOrder
     userId?: SortOrder
     assigneeId?: SortOrder
@@ -5256,6 +5341,7 @@ export namespace Prisma {
 
   export type TaskAvgOrderByAggregateInput = {
     id?: SortOrder
+    price?: SortOrder
     userId?: SortOrder
     assigneeId?: SortOrder
   }
@@ -5266,6 +5352,9 @@ export namespace Prisma {
     description?: SortOrder
     date?: SortOrder
     priority?: SortOrder
+    inDetails?: SortOrder
+    price?: SortOrder
+    skills?: SortOrder
     status?: SortOrder
     userId?: SortOrder
     assigneeId?: SortOrder
@@ -5277,6 +5366,9 @@ export namespace Prisma {
     description?: SortOrder
     date?: SortOrder
     priority?: SortOrder
+    inDetails?: SortOrder
+    price?: SortOrder
+    skills?: SortOrder
     status?: SortOrder
     userId?: SortOrder
     assigneeId?: SortOrder
@@ -5284,6 +5376,7 @@ export namespace Prisma {
 
   export type TaskSumOrderByAggregateInput = {
     id?: SortOrder
+    price?: SortOrder
     userId?: SortOrder
     assigneeId?: SortOrder
   }
@@ -5756,6 +5849,9 @@ export namespace Prisma {
     description: string
     date?: Date | string
     priority: string
+    inDetails?: string
+    price?: number
+    skills?: string
     status: boolean
     user: UserCreateNestedOneWithoutTasksInput
   }
@@ -5766,6 +5862,9 @@ export namespace Prisma {
     description: string
     date?: Date | string
     priority: string
+    inDetails?: string
+    price?: number
+    skills?: string
     status: boolean
     userId: number
   }
@@ -5785,6 +5884,9 @@ export namespace Prisma {
     description: string
     date?: Date | string
     priority: string
+    inDetails?: string
+    price?: number
+    skills?: string
     status: boolean
     assignee?: UserCreateNestedOneWithoutAssignedTasksInput
   }
@@ -5795,6 +5897,9 @@ export namespace Prisma {
     description: string
     date?: Date | string
     priority: string
+    inDetails?: string
+    price?: number
+    skills?: string
     status: boolean
     assigneeId?: number | null
   }
@@ -5859,6 +5964,9 @@ export namespace Prisma {
     description?: StringFilter<"Task"> | string
     date?: DateTimeFilter<"Task"> | Date | string
     priority?: StringFilter<"Task"> | string
+    inDetails?: StringFilter<"Task"> | string
+    price?: IntFilter<"Task"> | number
+    skills?: StringFilter<"Task"> | string
     status?: BoolFilter<"Task"> | boolean
     userId?: IntFilter<"Task"> | number
     assigneeId?: IntNullableFilter<"Task"> | number | null
@@ -6077,6 +6185,9 @@ export namespace Prisma {
     description: string
     date?: Date | string
     priority: string
+    inDetails?: string
+    price?: number
+    skills?: string
     status: boolean
     userId: number
   }
@@ -6087,6 +6198,9 @@ export namespace Prisma {
     description: string
     date?: Date | string
     priority: string
+    inDetails?: string
+    price?: number
+    skills?: string
     status: boolean
     assigneeId?: number | null
   }
@@ -6110,6 +6224,9 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     priority?: StringFieldUpdateOperationsInput | string
+    inDetails?: StringFieldUpdateOperationsInput | string
+    price?: IntFieldUpdateOperationsInput | number
+    skills?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     user?: UserUpdateOneRequiredWithoutTasksNestedInput
   }
@@ -6120,6 +6237,9 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     priority?: StringFieldUpdateOperationsInput | string
+    inDetails?: StringFieldUpdateOperationsInput | string
+    price?: IntFieldUpdateOperationsInput | number
+    skills?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     userId?: IntFieldUpdateOperationsInput | number
   }
@@ -6130,6 +6250,9 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     priority?: StringFieldUpdateOperationsInput | string
+    inDetails?: StringFieldUpdateOperationsInput | string
+    price?: IntFieldUpdateOperationsInput | number
+    skills?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     userId?: IntFieldUpdateOperationsInput | number
   }
@@ -6139,6 +6262,9 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     priority?: StringFieldUpdateOperationsInput | string
+    inDetails?: StringFieldUpdateOperationsInput | string
+    price?: IntFieldUpdateOperationsInput | number
+    skills?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     assignee?: UserUpdateOneWithoutAssignedTasksNestedInput
   }
@@ -6149,6 +6275,9 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     priority?: StringFieldUpdateOperationsInput | string
+    inDetails?: StringFieldUpdateOperationsInput | string
+    price?: IntFieldUpdateOperationsInput | number
+    skills?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     assigneeId?: NullableIntFieldUpdateOperationsInput | number | null
   }
@@ -6159,6 +6288,9 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     priority?: StringFieldUpdateOperationsInput | string
+    inDetails?: StringFieldUpdateOperationsInput | string
+    price?: IntFieldUpdateOperationsInput | number
+    skills?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     assigneeId?: NullableIntFieldUpdateOperationsInput | number | null
   }

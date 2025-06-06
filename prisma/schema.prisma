@@ -27,6 +27,9 @@ model Task {
   description String
   date        DateTime @default(now())
   priority    String
+  inDetails   String @default("")
+  price       Int @default(0)  
+  skills      String @default("")
   status      Boolean
   userId      Int
   assigneeId  Int?
