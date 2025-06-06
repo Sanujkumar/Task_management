@@ -52,9 +52,9 @@ export default function TaskCreate({topTitle,buttonName,onSubmit,task}:any) {
     }
 
     return (
-        <div className="w-full min-h-screen flex justify-center items-center">
+        <div className="w-full min-h-screen flex justify-center items-center bg-gray-100">
             <div className=" w-3/4 h-120  flex justify-center items-center">
-                <div className=" bg-amber-200 text-center rounded-4xl h-full w-3/4 p-4">
+                <div className="bg-white text-center rounded-4xl h-full w-3/4 p-4">
                     <div>
                         {/* <p className="text-3xl"><span className="text-yellow-600">Task</span><span className="text-yellow-500">Create</span></p> */}
                         <p>{topTitle}</p>
@@ -84,8 +84,8 @@ export default function TaskCreate({topTitle,buttonName,onSubmit,task}:any) {
                         <div className=" mt-4  flex justify-end">
                             <Button
                                 size="lg"
-                                variant="destructive"
-                                className=""
+                                variant="outline"
+                                className="bg-gray-300"
                                 onClick={handleSubmit}
                             >{buttonName}</Button>
                         </div>

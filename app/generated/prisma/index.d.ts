@@ -1126,6 +1126,7 @@ export namespace Prisma {
     name: string | null
     phone: string | null
     skills: string | null
+    about: string | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -1135,6 +1136,7 @@ export namespace Prisma {
     name: string | null
     phone: string | null
     skills: string | null
+    about: string | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -1144,6 +1146,7 @@ export namespace Prisma {
     name: number
     phone: number
     skills: number
+    about: number
     _all: number
   }
 
@@ -1163,6 +1166,7 @@ export namespace Prisma {
     name?: true
     phone?: true
     skills?: true
+    about?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -1172,6 +1176,7 @@ export namespace Prisma {
     name?: true
     phone?: true
     skills?: true
+    about?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -1181,6 +1186,7 @@ export namespace Prisma {
     name?: true
     phone?: true
     skills?: true
+    about?: true
     _all?: true
   }
 
@@ -1277,6 +1283,7 @@ export namespace Prisma {
     name: string | null
     phone: string | null
     skills: string | null
+    about: string | null
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -1305,6 +1312,7 @@ export namespace Prisma {
     name?: boolean
     phone?: boolean
     skills?: boolean
+    about?: boolean
     notificaion?: boolean | User$notificaionArgs<ExtArgs>
     assignedTasks?: boolean | User$assignedTasksArgs<ExtArgs>
     tasks?: boolean | User$tasksArgs<ExtArgs>
@@ -1318,6 +1326,7 @@ export namespace Prisma {
     name?: boolean
     phone?: boolean
     skills?: boolean
+    about?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1327,6 +1336,7 @@ export namespace Prisma {
     name?: boolean
     phone?: boolean
     skills?: boolean
+    about?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -1336,9 +1346,10 @@ export namespace Prisma {
     name?: boolean
     phone?: boolean
     skills?: boolean
+    about?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "name" | "phone" | "skills", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "name" | "phone" | "skills" | "about", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     notificaion?: boolean | User$notificaionArgs<ExtArgs>
     assignedTasks?: boolean | User$assignedTasksArgs<ExtArgs>
@@ -1362,6 +1373,7 @@ export namespace Prisma {
       name: string | null
       phone: string | null
       skills: string | null
+      about: string | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -1794,6 +1806,7 @@ export namespace Prisma {
     readonly name: FieldRef<"User", 'String'>
     readonly phone: FieldRef<"User", 'String'>
     readonly skills: FieldRef<"User", 'String'>
+    readonly about: FieldRef<"User", 'String'>
   }
     
 
@@ -4528,7 +4541,8 @@ export namespace Prisma {
     password: 'password',
     name: 'name',
     phone: 'phone',
-    skills: 'skills'
+    skills: 'skills',
+    about: 'about'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -4662,6 +4676,7 @@ export namespace Prisma {
     name?: StringNullableFilter<"User"> | string | null
     phone?: StringNullableFilter<"User"> | string | null
     skills?: StringNullableFilter<"User"> | string | null
+    about?: StringNullableFilter<"User"> | string | null
     notificaion?: NotificationListRelationFilter
     assignedTasks?: TaskListRelationFilter
     tasks?: TaskListRelationFilter
@@ -4674,6 +4689,7 @@ export namespace Prisma {
     name?: SortOrderInput | SortOrder
     phone?: SortOrderInput | SortOrder
     skills?: SortOrderInput | SortOrder
+    about?: SortOrderInput | SortOrder
     notificaion?: NotificationOrderByRelationAggregateInput
     assignedTasks?: TaskOrderByRelationAggregateInput
     tasks?: TaskOrderByRelationAggregateInput
@@ -4689,6 +4705,7 @@ export namespace Prisma {
     name?: StringNullableFilter<"User"> | string | null
     phone?: StringNullableFilter<"User"> | string | null
     skills?: StringNullableFilter<"User"> | string | null
+    about?: StringNullableFilter<"User"> | string | null
     notificaion?: NotificationListRelationFilter
     assignedTasks?: TaskListRelationFilter
     tasks?: TaskListRelationFilter
@@ -4701,6 +4718,7 @@ export namespace Prisma {
     name?: SortOrderInput | SortOrder
     phone?: SortOrderInput | SortOrder
     skills?: SortOrderInput | SortOrder
+    about?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -4718,6 +4736,7 @@ export namespace Prisma {
     name?: StringNullableWithAggregatesFilter<"User"> | string | null
     phone?: StringNullableWithAggregatesFilter<"User"> | string | null
     skills?: StringNullableWithAggregatesFilter<"User"> | string | null
+    about?: StringNullableWithAggregatesFilter<"User"> | string | null
   }
 
   export type TaskWhereInput = {
@@ -4848,6 +4867,7 @@ export namespace Prisma {
     name?: string | null
     phone?: string | null
     skills?: string | null
+    about?: string | null
     notificaion?: NotificationCreateNestedManyWithoutUserInput
     assignedTasks?: TaskCreateNestedManyWithoutAssigneeInput
     tasks?: TaskCreateNestedManyWithoutUserInput
@@ -4860,6 +4880,7 @@ export namespace Prisma {
     name?: string | null
     phone?: string | null
     skills?: string | null
+    about?: string | null
     notificaion?: NotificationUncheckedCreateNestedManyWithoutUserInput
     assignedTasks?: TaskUncheckedCreateNestedManyWithoutAssigneeInput
     tasks?: TaskUncheckedCreateNestedManyWithoutUserInput
@@ -4871,6 +4892,7 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     skills?: NullableStringFieldUpdateOperationsInput | string | null
+    about?: NullableStringFieldUpdateOperationsInput | string | null
     notificaion?: NotificationUpdateManyWithoutUserNestedInput
     assignedTasks?: TaskUpdateManyWithoutAssigneeNestedInput
     tasks?: TaskUpdateManyWithoutUserNestedInput
@@ -4883,6 +4905,7 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     skills?: NullableStringFieldUpdateOperationsInput | string | null
+    about?: NullableStringFieldUpdateOperationsInput | string | null
     notificaion?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     assignedTasks?: TaskUncheckedUpdateManyWithoutAssigneeNestedInput
     tasks?: TaskUncheckedUpdateManyWithoutUserNestedInput
@@ -4895,6 +4918,7 @@ export namespace Prisma {
     name?: string | null
     phone?: string | null
     skills?: string | null
+    about?: string | null
   }
 
   export type UserUpdateManyMutationInput = {
@@ -4903,6 +4927,7 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     skills?: NullableStringFieldUpdateOperationsInput | string | null
+    about?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -4912,6 +4937,7 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     skills?: NullableStringFieldUpdateOperationsInput | string | null
+    about?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TaskCreateInput = {
@@ -5097,6 +5123,7 @@ export namespace Prisma {
     name?: SortOrder
     phone?: SortOrder
     skills?: SortOrder
+    about?: SortOrder
   }
 
   export type UserAvgOrderByAggregateInput = {
@@ -5110,6 +5137,7 @@ export namespace Prisma {
     name?: SortOrder
     phone?: SortOrder
     skills?: SortOrder
+    about?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -5119,6 +5147,7 @@ export namespace Prisma {
     name?: SortOrder
     phone?: SortOrder
     skills?: SortOrder
+    about?: SortOrder
   }
 
   export type UserSumOrderByAggregateInput = {
@@ -5857,6 +5886,7 @@ export namespace Prisma {
     name?: string | null
     phone?: string | null
     skills?: string | null
+    about?: string | null
     notificaion?: NotificationCreateNestedManyWithoutUserInput
     tasks?: TaskCreateNestedManyWithoutUserInput
   }
@@ -5868,6 +5898,7 @@ export namespace Prisma {
     name?: string | null
     phone?: string | null
     skills?: string | null
+    about?: string | null
     notificaion?: NotificationUncheckedCreateNestedManyWithoutUserInput
     tasks?: TaskUncheckedCreateNestedManyWithoutUserInput
   }
@@ -5883,6 +5914,7 @@ export namespace Prisma {
     name?: string | null
     phone?: string | null
     skills?: string | null
+    about?: string | null
     notificaion?: NotificationCreateNestedManyWithoutUserInput
     assignedTasks?: TaskCreateNestedManyWithoutAssigneeInput
   }
@@ -5894,6 +5926,7 @@ export namespace Prisma {
     name?: string | null
     phone?: string | null
     skills?: string | null
+    about?: string | null
     notificaion?: NotificationUncheckedCreateNestedManyWithoutUserInput
     assignedTasks?: TaskUncheckedCreateNestedManyWithoutAssigneeInput
   }
@@ -5920,6 +5953,7 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     skills?: NullableStringFieldUpdateOperationsInput | string | null
+    about?: NullableStringFieldUpdateOperationsInput | string | null
     notificaion?: NotificationUpdateManyWithoutUserNestedInput
     tasks?: TaskUpdateManyWithoutUserNestedInput
   }
@@ -5931,6 +5965,7 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     skills?: NullableStringFieldUpdateOperationsInput | string | null
+    about?: NullableStringFieldUpdateOperationsInput | string | null
     notificaion?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     tasks?: TaskUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -5952,6 +5987,7 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     skills?: NullableStringFieldUpdateOperationsInput | string | null
+    about?: NullableStringFieldUpdateOperationsInput | string | null
     notificaion?: NotificationUpdateManyWithoutUserNestedInput
     assignedTasks?: TaskUpdateManyWithoutAssigneeNestedInput
   }
@@ -5963,6 +5999,7 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     skills?: NullableStringFieldUpdateOperationsInput | string | null
+    about?: NullableStringFieldUpdateOperationsInput | string | null
     notificaion?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     assignedTasks?: TaskUncheckedUpdateManyWithoutAssigneeNestedInput
   }
@@ -5973,6 +6010,7 @@ export namespace Prisma {
     name?: string | null
     phone?: string | null
     skills?: string | null
+    about?: string | null
     assignedTasks?: TaskCreateNestedManyWithoutAssigneeInput
     tasks?: TaskCreateNestedManyWithoutUserInput
   }
@@ -5984,6 +6022,7 @@ export namespace Prisma {
     name?: string | null
     phone?: string | null
     skills?: string | null
+    about?: string | null
     assignedTasks?: TaskUncheckedCreateNestedManyWithoutAssigneeInput
     tasks?: TaskUncheckedCreateNestedManyWithoutUserInput
   }
@@ -6010,6 +6049,7 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     skills?: NullableStringFieldUpdateOperationsInput | string | null
+    about?: NullableStringFieldUpdateOperationsInput | string | null
     assignedTasks?: TaskUpdateManyWithoutAssigneeNestedInput
     tasks?: TaskUpdateManyWithoutUserNestedInput
   }
@@ -6021,6 +6061,7 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     skills?: NullableStringFieldUpdateOperationsInput | string | null
+    about?: NullableStringFieldUpdateOperationsInput | string | null
     assignedTasks?: TaskUncheckedUpdateManyWithoutAssigneeNestedInput
     tasks?: TaskUncheckedUpdateManyWithoutUserNestedInput
   }

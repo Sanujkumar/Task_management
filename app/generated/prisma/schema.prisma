@@ -15,6 +15,7 @@ model User {
   name          String?
   phone         String?
   skills        String?
+  about         String?
   notificaion   Notification[]
   assignedTasks Task[]         @relation("AssignedTasks")
   tasks         Task[]         @relation("CreatedTasks")

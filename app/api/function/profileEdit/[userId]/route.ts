@@ -18,13 +18,14 @@ export async function PUT(req: NextRequest, context: { params: Promise<{ userId:
     try {
         const { userId } = await context.params;
         const body = await req.json();
-
-        const { name, phone, skills } = body;
+         
+        const { name, phone, skills,about } = body;  
         const updateData: Record<string, any> = {};
 
          if (name !== undefined && name !== "") updateData.name = name;
         if (phone !== undefined && phone !== "") updateData.phone = phone;
         if (skills !== undefined && skills !== "") updateData.skills = skills;
+        if(about !== undefined && about !== "") updateData.about = about;  
 
         if(name !== "undefined"){
             updateData

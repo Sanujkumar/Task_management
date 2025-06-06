@@ -23,6 +23,8 @@ export default function ProfileUpdateForm({ className, userId, ...props }: Props
     const nameRef = useRef<HTMLInputElement | null>(null);
     const phoneRef = useRef<HTMLInputElement | null>(null);
     const skiilsRef = useRef<HTMLInputElement | null>(null);
+    const aboutRef = useRef<HTMLInputElement | null>(null);  
+
     const {data:session,update} = useSession();
 
     const handleSubmitSignup = async (e: React.FormEvent) => {
@@ -30,12 +32,14 @@ export default function ProfileUpdateForm({ className, userId, ...props }: Props
         const name = nameRef.current?.value;
         const phone = phoneRef.current?.value;
         const skills = skiilsRef.current?.value;
+        const about = aboutRef.current?.value;
 
         try {
             const res = await axios.put(`${Url}/api/function/profileEdit/${userId}`, {
                 name,
                 phone,   
-                skills
+                skills,
+                about
             },{withCredentials:true});  
    
             if (res.status === 200) {
@@ -70,13 +74,17 @@ export default function ProfileUpdateForm({ className, userId, ...props }: Props
                                 <Label htmlFor="skills">Skills</Label>
                                 <Input id="skills"  ref={skiilsRef} />
                             </div>
+                            <div className="grid gap-2">
+                                <Label htmlFor="skills">About</Label>
+                                <Input id="skills"  ref={aboutRef} />
+                            </div>
                             <Button type="submit" className="w-full">Update</Button>
                         </div>
                     </form>
                 </CardContent>
             </Card>
         </div>
-    )
+    )  
 }
 
    

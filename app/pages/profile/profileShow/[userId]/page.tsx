@@ -29,6 +29,7 @@ function ProfileFunction() {
         email: string;
         phone: number;
         skills: string;
+        about: string;
     }
 
     const [data, setData] = useState<dataTypes>();
@@ -40,7 +41,7 @@ function ProfileFunction() {
             withCredentials: true,
         });
         setData(res.data.data);
-        console.log(res.data);
+        console.log(res.data.data);
     };
 
 
@@ -85,15 +86,20 @@ function ProfileFunction() {
                                 </div>
                             </div>
                             <div>
-                                <h1 className="text-xl font-semibold">{name}</h1>
+                                <h1 className=" text-smsm:text-xl font-semibold">{name}</h1>
                             </div>
                         </div>
                         <div>
-                            <div className="flex-block gap-4 sm:flex">
-                                <span>email=</span>
+                            <h1 className="text-xl ">contact details</h1>
+                            <div className="flex gap-x-2 sm:flex">
+                                <span>email =</span>
                                 <p className="text-sm text-gray-700">{user.email}</p>
                             </div>
-                            <div className="pt-4">
+                            <div className="flex gap-x-2">
+                                <span>phone no =</span>
+                                <div>{data?.phone}</div>
+                            </div>
+                            <div className="pt-8">
                                 <Button onClick={ShowAllTasks}>AllTasks</Button>
                             </div>
                         </div>
@@ -105,6 +111,14 @@ function ProfileFunction() {
                                 <p className="text-md text-gray-700"> {data.skills}</p>
                             ) : (
                                 <p className="text-sm text-gray-400">No skills added yet.</p>
+                            )}
+                        </div>
+                        <div>
+                            <Label className="pb-2 ">About</Label>
+                            {data?.about ? (   
+                                <p className="text-md text-gray-700">{data?.about}</p>
+                            ):(
+                                <p className="text-gray-400 text-sm">this about section </p>
                             )}
                         </div>
                         <div className="">
