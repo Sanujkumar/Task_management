@@ -29,7 +29,7 @@ model Task {
   priority    String
   inDetails   String 
   price       Int 
-  skills      String  
+  skills      String     
   status      Boolean
   userId      Int
   assigneeId  Int?

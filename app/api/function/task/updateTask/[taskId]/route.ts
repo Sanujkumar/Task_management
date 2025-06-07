@@ -19,21 +19,36 @@ export async function PUT(
     );
   }
 
+  type taskUpdatedDataTypes = {
+  title?: string,
+  description?: string,
+  date?: Date,
+  inDetails?: string,
+  price?: number,
+  skills?: string,
+  priority?: string,
+  status?: boolean,
+};
+
   try {
     const { taskId } = await context.params; 
     const body = await req.json();
-    const { title, description, date, priority, status } = body;
+    const taskUpdatedData:taskUpdatedDataTypes  = {};
+    const { title, description, date,inDetails,price,skills, priority, status } = body;
 
+    if (title !== "undefined" && title !== "") taskUpdatedData.title = title;
+if (description !== "undefined" && description !== "") taskUpdatedData.description = description;
+if (date !== "undefined" && date !== "") taskUpdatedData.date = date;
+if (inDetails !== "undefined" && inDetails !== "") taskUpdatedData.inDetails = inDetails;
+if (price !== "undefined" && price !== "") taskUpdatedData.price = Number(price);  
+if (skills !== "undefined" && skills !== "") taskUpdatedData.skills = skills;
+if (priority !== "undefined" && priority !== "") taskUpdatedData.priority = priority;
+if (status !== "undefined" && status !== "") taskUpdatedData.status = status;
+  
     await prisma.task.update({
-      where: { id: Number(taskId) },  
-      data: {
-        title,
-        description,
-        date: new Date(date),
-        priority,
-        status,
-      },
-    });
+      where: { id: Number(taskId) },    
+      data: taskUpdatedData      
+    });  
 
     return NextResponse.json(
       { message: "Task updated successfully" },

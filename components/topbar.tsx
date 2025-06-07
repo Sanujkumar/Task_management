@@ -9,7 +9,7 @@ import { SessionProvider, signIn, signOut, useSession } from "next-auth/react";
 import TaskSection from "./taskSection";  
 import { MdTask } from "react-icons/md";
 import { Url } from "../lib/config";
-
+import toast from "react-hot-toast";
 export default function Topbar() {
 
 
@@ -23,8 +23,12 @@ export default function Topbar() {
 function Component() {
   const { data: session, status } = useSession();
  
-  
-  
+ 
+  const handleSignOut = async () => {
+    toast.success("Signed out successfully"); 
+    await signOut({ callbackUrl: "/" });      
+  };
+    
   return (
     <header className="flex h-20 w-full shrink-0 items-center px-4 md:px-6">
       <Sheet>
@@ -65,7 +69,7 @@ function Component() {
                 variant="link"
                 size="sm"
                 className="w-18 pr-8"
-                onClick={() => signOut()}
+                onClick={handleSignOut}
               >signOut</Button>
 
                <Link href={`${Url}/pages/profile/profileShow/${session.user.id}`} className="text-bold underline-offset-4 hover:underline" prefetch={false}>
@@ -123,7 +127,7 @@ function Component() {
             variant="outline"
             size="sm"
             className="w-18"
-            onClick={() => signOut()}
+            onClick={handleSignOut}
           >signOut</Button>
 
            <Link href={`${Url}/pages/profile/profileShow/${session.user.id}`} className="flex w-full items-center py-2 text-lg font-semibold" prefetch={false}>

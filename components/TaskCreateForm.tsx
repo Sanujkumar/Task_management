@@ -9,6 +9,7 @@ import { Button } from "../components/ui/button";
 import { Card, CardContent } from "../components/ui/card";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
+import toast from "react-hot-toast";
 
 export default function TaskCreate({topTitle,buttonName,onSubmit,task,className,
   ...props}:any) {   
@@ -17,17 +18,17 @@ export default function TaskCreate({topTitle,buttonName,onSubmit,task,className,
     const titleRef = useRef<HTMLInputElement>(null);
     const descriptionRef = useRef<HTMLInputElement>(null);
     const dateRef = useRef<HTMLInputElement>(null);
-    const priorityRef = useRef<HTMLInputElement>(null);
     const inDetailsRef = useRef<HTMLInputElement>(null);
     const priceRef = useRef<HTMLInputElement>(null);  
-    const skiilsRef = useRef<HTMLInputElement>(null);  
+    const skillsRef = useRef<HTMLInputElement>(null); 
+    const priorityRef = useRef<HTMLInputElement>(null); 
     const StatusRef = useRef<HTMLInputElement>(null);
 
     const router = useRouter();
 
     useEffect(() => {
         if(status === "unauthenticated"){
-            alert("you are not logged in!");
+            toast.error("you are not logged in!");
             router.push(`${Url}/auth/login`);  
         }
     });  
@@ -39,19 +40,23 @@ export default function TaskCreate({topTitle,buttonName,onSubmit,task,className,
             title: titleRef.current?.value || " ",
             description: descriptionRef.current?.value || "",
             date: dateRef.current?.value || "",
+            inDetails: inDetailsRef.current?.value || "",
+            price: priceRef.current?.value || "",
+            skills: skillsRef.current?.value || "",
             priority: priorityRef.current?.value || "",
             status: StatusRef.current?.checked || false,
         }
       
-
+    
         try {
             await onSubmit(taskData);   
+            toast.success(`successfully task is ${topTitle}`);;  
             router.push(`${Url}/pages/allTasks`);
         } catch (error) {
             console.error("Submit failed:", error);
         }
     }
-
+      
     return (
         <div className={cn("flex flex-col gap-6", className)} {...props}>
             <Card className="overflow-hidden ">
@@ -75,15 +80,15 @@ export default function TaskCreate({topTitle,buttonName,onSubmit,task,className,
                             </div>
                             <div className="grid gap-2">
                                 <Label htmlFor="indetails">In-details</Label>
-                                <Input id="In-details" type="text" className="h-20" ref={inDetailsRef} />  
+                                <Input id="InDetails" type="text" className="h-20" ref={inDetailsRef} />  
                             </div>
                             <div className="grid gap-2">
                                 <Label htmlFor="price">price</Label>
-                                <Input id="priority" type="number" ref={priceRef} />
+                                <Input id="price" type="number" ref={priceRef} />
                             </div>  
                             <div className="grid gap-2">
-                                <Label htmlFor="priority">skills</Label>
-                                <Input id="skills" type="text" ref={skiilsRef} />
+                                <Label htmlFor="skills">skills</Label>
+                                <Input id="skills" type="text" ref={skillsRef} />
                             </div>
                             <div className="grid gap-2">
                                 <Label htmlFor="priority">priority</Label>
@@ -100,9 +105,9 @@ export default function TaskCreate({topTitle,buttonName,onSubmit,task,className,
                         </div>
                     </form>
                 </CardContent>
-            </Card>
+            </Card>  
         </div>
-    )  
+    )    
 }
 
 

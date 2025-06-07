@@ -8,6 +8,7 @@ import { useRef } from "react";
 import axios from "axios";
 import { useRouter } from 'next/navigation';
 import { Url } from "../lib/config"
+import toast from "react-hot-toast"
 
 
 export default function Signup({
@@ -41,11 +42,13 @@ export default function Signup({
             });  
       
             if (res.status == 201) {
+                toast.success("your are successfully signup");  
                 router.push(`${Url}/auth/login`);
             } else {
-                alert("Signup failed. Please try again.");
+                toast.error("Signup failed. Please try again.");
             }
         } catch (error) {
+            toast.error(`${error}`)
             console.log("something went wrong", error);
         }
     }

@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import AllTasksSkelaton from "../skeltons/alltaskSkelaton";  
 import { Url } from "../lib/config";
+import toast from "react-hot-toast";
 
 
 
@@ -52,6 +53,7 @@ export default function Home() {
 
             const allTasks = res.data.Alltask
             setData(allTasks);
+            toast.success("show all your task")
         } catch (err) {
             console.error("Error fetching tasks:", err);
         } finally {

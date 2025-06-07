@@ -3,6 +3,7 @@ import CreateTask from "../../../../components/TaskCreateForm";
 import axios from "axios";
 import { useParams } from "next/navigation";
 import { Url } from "../../../../lib/config";
+import toast from "react-hot-toast";
 
 export default function updateTask() {
     const params = useParams();
@@ -13,6 +14,7 @@ export default function updateTask() {
     const EditTask = async (taskData: any) => {
         console.log("sending Tasks", taskData)
         await axios.put(`${Url}/api/function/task/updateTask/${taskId}`, taskData, { withCredentials: true })
+        toast.success("your task updated successful");  
     }
 
     return (

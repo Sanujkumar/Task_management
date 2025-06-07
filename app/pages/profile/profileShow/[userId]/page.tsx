@@ -11,15 +11,14 @@ import ProfileSkeleton from "../../../../../skeltons/profileSkeleton";
 import { Url } from "../../../../../lib/config";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-dropdown-menu";
-import { link } from "fs";
 
-export default function Profile() {
-    return <ProfileFunction />;
-}
+  
+import toast from "react-hot-toast";
+  
+   
 
-function ProfileFunction() {
+export default function ProfileFunction() {
     const { data: session, status } = useSession();
     const router = useRouter();
 
@@ -61,7 +60,8 @@ function ProfileFunction() {
     }
 
     if (!user) {
-        return <div>User not logged in</div>;
+        toast.error("you are not login so please login")
+         return router.push("/auth/login");
     }
     console.log("name", data?.name);
     const name = data?.name || "U";

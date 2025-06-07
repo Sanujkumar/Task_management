@@ -4,7 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Topbar from "../components/topbar";
 import ClientProviders from "../components/clientProviders";
-
+import {Toaster } from "react-hot-toast";
   
 
 const geistSans = Geist({
@@ -40,6 +40,7 @@ export default function RootLayout({
 
         <ClientProviders>
         <Topbar />
+        <Toaster/>
         {children}
         </ClientProviders>
 

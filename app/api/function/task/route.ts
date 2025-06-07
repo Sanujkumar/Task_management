@@ -1,8 +1,6 @@
 import { PrismaClient } from "../../../generated/prisma";
-
 import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
-
 
 const secret = process.env.NEXTAUTH_SECRET;
 const prisma = new PrismaClient();
@@ -23,6 +21,7 @@ export const POST = (async (req: NextRequest) => {
 
     const body = await req.json();
     const { title, description, date, priority,inDetails,price,skills, status, assigneeId } = body;
+    console.log(title,description,date,priority,inDetails,price,skills);  
     const userId = Number(token.id);
     console.log("userId", userId);
     const task = await prisma.task.create({
@@ -32,7 +31,7 @@ export const POST = (async (req: NextRequest) => {
         date: new Date(date),
         priority,
         inDetails,
-        price,
+        price:Number(price),
         skills,
         status,
         userId,

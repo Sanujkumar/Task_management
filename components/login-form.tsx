@@ -8,8 +8,8 @@ import { getSession, signIn } from "next-auth/react";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Url } from "../lib/config"
-
-
+import toast from "react-hot-toast"
+  
 export default function LoginForm({
   className,
   ...props
@@ -37,6 +37,7 @@ export default function LoginForm({
     });
     console.log("res",res);   
     if (res?.ok) {
+      toast.success("signup successfully"); 
       const session = await getSession();  
       router.push(`${Url}`);    
     }

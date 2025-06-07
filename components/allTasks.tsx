@@ -9,6 +9,7 @@ import { useSession } from "next-auth/react";
 import { Url } from "../lib/config";
 
 import AllTasksSkelaton from "../skeltons/alltaskSkelaton";
+import toast from "react-hot-toast";
 interface TaskType {
   id: number;
   title: string;
@@ -64,10 +65,11 @@ export default function Home() {
         withCredentials: true,
       });  
       if (res.status === 200) {
-        alert("Deleted successfully");
+        toast.success("your task is deleted succesful")
         AllTasShowkData();
       }
     } catch (error) {
+      toast.error(`${error}`)
       console.error("Error deleting task:", error);
     }
   };

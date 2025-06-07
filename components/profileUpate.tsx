@@ -13,6 +13,7 @@ import axios from "axios";
 import { useRouter } from 'next/navigation';
 import { Url } from "../lib/config"
 import { useSession } from "next-auth/react"
+import toast from "react-hot-toast"
 
 type Props = {
   userId: string | string[];
@@ -43,12 +44,13 @@ export default function ProfileUpdateForm({ className, userId, ...props }: Props
             },{withCredentials:true});  
    
             if (res.status === 200) {
-                alert("Profile updated successfully!");  
+                toast.success("successfuly update your profile")  
                 router.push(`${Url}/pages/profile/profileShow/${userId}`);
             } else {
-                alert("something went wrong");
+                toast.error("something went wrong");
             }
         } catch (error) {
+            toast.error(`${error}`)  ;
             console.log("something went wrong", error);
         }
     }
@@ -84,7 +86,7 @@ export default function ProfileUpdateForm({ className, userId, ...props }: Props
                 </CardContent>
             </Card>
         </div>
-    )  
+    )    
 }
 
    
