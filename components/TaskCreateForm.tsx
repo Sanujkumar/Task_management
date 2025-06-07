@@ -1,19 +1,26 @@
 "use client"
-import { Label } from "../components/ui/label";
-import { Input } from "../components/ui/input";
-import { Button } from "../components/ui/button";
+
 import { useEffect, useRef } from "react";
-import axios from "axios";
 import { useRouter } from 'next/navigation';
 import { useSession } from "next-auth/react";
 import { Url } from "../lib/config";
+import { cn } from "../lib/utils";
+import { Button } from "../components/ui/button";
+import { Card, CardContent } from "../components/ui/card";
+import { Input } from "../components/ui/input";
+import { Label } from "../components/ui/label";
 
-export default function TaskCreate({topTitle,buttonName,onSubmit,task}:any) {
+export default function TaskCreate({topTitle,buttonName,onSubmit,task,className,
+  ...props}:any) {   
+
     const {data: session,status} = useSession();  
     const titleRef = useRef<HTMLInputElement>(null);
     const descriptionRef = useRef<HTMLInputElement>(null);
     const dateRef = useRef<HTMLInputElement>(null);
     const priorityRef = useRef<HTMLInputElement>(null);
+    const inDetailsRef = useRef<HTMLInputElement>(null);
+    const priceRef = useRef<HTMLInputElement>(null);  
+    const skiilsRef = useRef<HTMLInputElement>(null);  
     const StatusRef = useRef<HTMLInputElement>(null);
 
     const router = useRouter();
@@ -25,7 +32,8 @@ export default function TaskCreate({topTitle,buttonName,onSubmit,task}:any) {
         }
     });  
 
-    const handleSubmit = async () => {
+    const handleSubmitData = async (e: React.FormEvent) => {
+         e.preventDefault();
 
         const taskData = {
             title: titleRef.current?.value || " ",
@@ -34,17 +42,10 @@ export default function TaskCreate({topTitle,buttonName,onSubmit,task}:any) {
             priority: priorityRef.current?.value || "",
             status: StatusRef.current?.checked || false,
         }
-        // const res = await axios.post("http://localhost:3000/api/task", taskData, {
-        //     withCredentials: true
-        // });
-
-
-        // if (res.status === 201) {
-        //     router.push("/pages/allTasks");
-        // }
+      
 
         try {
-            await onSubmit(taskData); 
+            await onSubmit(taskData);   
             router.push(`${Url}/pages/allTasks`);
         } catch (error) {
             console.error("Submit failed:", error);
@@ -52,58 +53,57 @@ export default function TaskCreate({topTitle,buttonName,onSubmit,task}:any) {
     }
 
     return (
-        <div className="w-full min-h-screen flex justify-center items-center bg-gray-100">
-            <div className=" w-3/4 h-150  flex justify-center items-center">
-                <div className="bg-white text-center rounded-4xl h-full w-3/4 p-4">
-                    <div>
-                        {/* <p className="text-3xl"><span className="text-yellow-600">Task</span><span className="text-yellow-500">Create</span></p> */}
-                        <p>{topTitle}</p>
-                    </div>
-                    <div className="">
-                        <div className="pr-2 pl-2">
-                            <Label htmlFor="Title" className="text-md">Title</Label>
-                            <Input ref={titleRef} className=" bg-white mb-2" type="text" placeholder="Tittle" />
-                        </div>
-                        <div className="pr-2 pl-2">
-                            <Label htmlFor="Description" className="text-md">Description</Label>
-                            <Input ref={descriptionRef} className=" bg-white mb-2" type="text" placeholder="Description" />
-                        </div>
-                        <div className="pr-2 pl-2">
-                            <Label htmlFor="Date" className="text-md">Date</Label>
-                            <Input ref={dateRef} className=" bg-white mb-2" type="date" placeholder="Description" />
-                        </div>
+        <div className={cn("flex flex-col gap-6", className)} {...props}>
+            <Card className="overflow-hidden ">
+                <CardContent className="grid p-0 ">
+                    <form onSubmit={handleSubmitData} className="p-6 md:p-8">
+                        <div className="flex flex-col gap-6 ">
+                            <div className="flex flex-col items-center text-center">
+                                <h1 className="text-2xl font-bold">{topTitle}</h1>
+                            </div>
+                            <div className="grid gap-2">
+                                <Label htmlFor="title">Title</Label>
+                                <Input id="name" type="text"  ref={titleRef} />
+                            </div>
+                            <div className="grid gap-2">
+                                <Label htmlFor="description">description</Label>
+                                <Input id="description" type="text"  ref={descriptionRef} />
+                            </div>
+                            <div className="grid gap-2">
+                                <Label htmlFor="date">date</Label>
+                                <Input id="date" type="date"  ref={dateRef} />
+                            </div>
+                            <div className="grid gap-2">
+                                <Label htmlFor="indetails">In-details</Label>
+                                <Input id="In-details" type="text" className="h-20" ref={inDetailsRef} />  
+                            </div>
+                            <div className="grid gap-2">
+                                <Label htmlFor="price">price</Label>
+                                <Input id="priority" type="number" ref={priceRef} />
+                            </div>  
+                            <div className="grid gap-2">
+                                <Label htmlFor="priority">skills</Label>
+                                <Input id="skills" type="text" ref={skiilsRef} />
+                            </div>
+                            <div className="grid gap-2">
+                                <Label htmlFor="priority">priority</Label>
+                                <Input id="priority" type="text" ref={priorityRef} />
+                            </div>
+                            <div className="flex space-x-2 ">
+                                <span>Status</span>
+                                <span className="">
+                                <Input id="status" type="checkbox" className=" h-6 w-4" ref={StatusRef} />
+                                </span>  
+                            </div>
 
-                        <div className="pr-2 pl-2">
-                            <Label htmlFor="Priority" className="text-md">Priority</Label>
-                            <Input ref={priorityRef} className=" bg-white mb-2" type="text" placeholder="Priority" />
+                            <Button type="submit" className="w-full">{buttonName}</Button>   
                         </div>
-                        <div className="pr-2 pl-2">
-                            <Label htmlFor="In-details" className="text-md">In-details</Label>
-                            <Input ref={priorityRef} className=" bg-white mb-2" type="text" placeholder="details description" />
-                        </div>
-                        <div className="pr-2 pl-2">
-                            <Label htmlFor="Price" className="text-md">Price</Label>
-                            <Input ref={priorityRef} className=" bg-white mb-2" type="text" placeholder="price" />
-                        </div>
-                        <div className="pr-2 pl-2">
-                            <Label htmlFor="Priority" className="text-md">Mention skills</Label>
-                            <Input ref={priorityRef} className=" bg-white mb-2" type="text" placeholder="here mention skills" />
-                        </div>
-                        <div className="pr-2 pl-2 flex items-center ">
-                            <Label htmlFor="Status" className="text-md" >Status</Label>
-                            <Input ref={StatusRef} className="h-4 w-6" type="checkbox" placeholder="Status" />
-                        </div>
-                        <div className=" mt-4  flex justify-end">
-                            <Button
-                                size="lg"
-                                variant="outline"
-                                className="bg-gray-300"
-                                onClick={handleSubmit}
-                            >{buttonName}</Button>
-                        </div>
-                    </div>
-                </div>  
-            </div>
+                    </form>
+                </CardContent>
+            </Card>
         </div>
-    )
+    )  
 }
+
+
+

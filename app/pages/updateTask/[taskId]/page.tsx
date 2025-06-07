@@ -4,19 +4,24 @@ import axios from "axios";
 import { useParams } from "next/navigation";
 import { Url } from "../../../../lib/config";
 
-export default function updateTask() {  
+export default function updateTask() {
     const params = useParams();
-    const taskId = params?.taskId;  
-    console.log("fTaskId",taskId);  
+    const taskId = params?.taskId;
 
-        const EditTask = async (taskData:any) => {
-            console.log("sending Tasks",taskData)
-            await axios.put(`${Url}/api/function/task/updateTask/${taskId}`, taskData, { withCredentials: true })
-        }
+    console.log("fTaskId", taskId);
 
-        return (
-        <CreateTask topTitle="EditTask" buttonName="Update" onSubmit={EditTask} />
-    )     
-    
-      
-}        
+    const EditTask = async (taskData: any) => {
+        console.log("sending Tasks", taskData)
+        await axios.put(`${Url}/api/function/task/updateTask/${taskId}`, taskData, { withCredentials: true })
+    }
+
+    return (
+        <div className="bg-muted flex min-h-svh flex-col items-center justify-center p-6 md:p-10">
+            <div className="w-full max-w-sm md:max-w-3xl">
+                <CreateTask topTitle="EditTask" buttonName="Update" onSubmit={EditTask} />
+            </div>
+        </div>
+    )
+
+
+}          

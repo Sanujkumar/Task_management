@@ -5006,9 +5006,9 @@ export namespace Prisma {
     description: string
     date?: Date | string
     priority: string
-    inDetails?: string
-    price?: number
-    skills?: string
+    inDetails: string
+    price: number
+    skills: string
     status: boolean
     assignee?: UserCreateNestedOneWithoutAssignedTasksInput
     user: UserCreateNestedOneWithoutTasksInput
@@ -5020,9 +5020,9 @@ export namespace Prisma {
     description: string
     date?: Date | string
     priority: string
-    inDetails?: string
-    price?: number
-    skills?: string
+    inDetails: string
+    price: number
+    skills: string
     status: boolean
     userId: number
     assigneeId?: number | null
@@ -5061,9 +5061,9 @@ export namespace Prisma {
     description: string
     date?: Date | string
     priority: string
-    inDetails?: string
-    price?: number
-    skills?: string
+    inDetails: string
+    price: number
+    skills: string
     status: boolean
     userId: number
     assigneeId?: number | null
@@ -5849,9 +5849,9 @@ export namespace Prisma {
     description: string
     date?: Date | string
     priority: string
-    inDetails?: string
-    price?: number
-    skills?: string
+    inDetails: string
+    price: number
+    skills: string
     status: boolean
     user: UserCreateNestedOneWithoutTasksInput
   }
@@ -5862,9 +5862,9 @@ export namespace Prisma {
     description: string
     date?: Date | string
     priority: string
-    inDetails?: string
-    price?: number
-    skills?: string
+    inDetails: string
+    price: number
+    skills: string
     status: boolean
     userId: number
   }
@@ -5884,9 +5884,9 @@ export namespace Prisma {
     description: string
     date?: Date | string
     priority: string
-    inDetails?: string
-    price?: number
-    skills?: string
+    inDetails: string
+    price: number
+    skills: string
     status: boolean
     assignee?: UserCreateNestedOneWithoutAssignedTasksInput
   }
@@ -5897,9 +5897,9 @@ export namespace Prisma {
     description: string
     date?: Date | string
     priority: string
-    inDetails?: string
-    price?: number
-    skills?: string
+    inDetails: string
+    price: number
+    skills: string
     status: boolean
     assigneeId?: number | null
   }
@@ -6185,9 +6185,9 @@ export namespace Prisma {
     description: string
     date?: Date | string
     priority: string
-    inDetails?: string
-    price?: number
-    skills?: string
+    inDetails: string
+    price: number
+    skills: string
     status: boolean
     userId: number
   }
@@ -6198,9 +6198,9 @@ export namespace Prisma {
     description: string
     date?: Date | string
     priority: string
-    inDetails?: string
-    price?: number
-    skills?: string
+    inDetails: string
+    price: number
+    skills: string
     status: boolean
     assigneeId?: number | null
   }

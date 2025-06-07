@@ -87,7 +87,7 @@ export default function Home() {
         router.push("/pages/projectsViewDetails");
     }
 
-  return (
+  return (   
     <div>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 ">
         {currentTasks.map((task) => (

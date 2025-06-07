@@ -21,6 +21,7 @@ interface TaskType {
     description: string;
     date: string;
     priority: string;
+    price: number,
     status: boolean;
     userId: number;
     assigneeId?: number;
@@ -74,7 +75,7 @@ export default function Home() {
 
     const showdetails = () => {
         router.push("/pages/projectsViewDetails");
-    }
+    }  
 
     return (
         <div className="p-4">
@@ -87,10 +88,12 @@ export default function Home() {
                                 <CardTitle>{task.title}</CardTitle>
                                 <CardTitle>{task.description}</CardTitle>
                                 <p>Date: {new Date(task.date).toLocaleDateString()}</p>
+                                <p>price: {task.price}</p>
                                 <p>Priority: {task.priority}</p>
                                 <p className={`text-sm font-semibold mt-2 ${task.status ? "text-green-600" : "text-red-600"}`}>
                                     Status: {task.status ? "Completed" : "Pending"}
                                 </p>
+                                
                             </CardContent>
                         </Card>
                     </div>
