@@ -86,7 +86,7 @@ export default function Home() {
   const totalPages = Math.ceil(datas.length/tasksPerPage);  
 
   const showdetails = () => {
-        router.push("/pages/projectsViewDetails");
+        router.push("/pages/projectview");
     }
 
   return (   

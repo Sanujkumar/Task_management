@@ -24,6 +24,5 @@ export default function updateTask() {
             </div>
         </div>
     )
-
-
+    
 }          

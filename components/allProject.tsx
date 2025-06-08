@@ -75,8 +75,8 @@ export default function Home() {
     const name = user?.name || "U";
     const firstLetter = name?.charAt(0).toUpperCase(); 
 
-    const showdetails = () => {
-        router.push("/pages/projectsViewDetails");
+    const showdetails = (taskId:number) => {
+        router.push(`/pages/projectview/${taskId}`);  
     }  
 
     return (
@@ -84,7 +84,7 @@ export default function Home() {
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {currentTasks.map((task) => (
                     <div key={task.id} className="pl-8 sm:p-4">
-                        <Card onClick={showdetails} className="overflow-hidden w-65 h-50 sm:w-80 sm:h-50  hover:bg-gray-100 cursor-pointer ">
+                        <Card onClick={() => showdetails(task.id)} className="overflow-hidden w-65 h-50 sm:w-80 sm:h-50  hover:bg-gray-100 cursor-pointer ">
                             <CardContent>
                                 
                                 <CardTitle>{task.title}</CardTitle>
