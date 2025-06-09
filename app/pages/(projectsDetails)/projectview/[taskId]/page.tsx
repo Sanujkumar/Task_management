@@ -59,7 +59,7 @@ export default function projectview() {
         )
     }
 
-    
+
 
     // useEffect(() => {
     //     if (status === "unauthenticated") {
@@ -73,33 +73,32 @@ export default function projectview() {
 
     return (
         <div className="bg-white w-full h-screen">
-            <div className="h-full w-full pt-4 ">
-                <div className="m-4 ">
-                    <div className="">
-                        <CardContent className="rounded-3xl h-120 sm:h-85 w-3/4 space-y-4 bg-white hover:bg-gray-100 outline-1">
-                            <CardTitle className="text-center pt-4">{data.title}</CardTitle>
-                            <CardDescription>{data.description}</CardDescription>
-                            <div className="space-y-4">
-                                <p className="">aboutTasks: {data.inDetails}</p>
-                                <p>requirement Skills: {data.skills}</p>
-                                <p>priority: {data.priority}</p>
-                                <p className={`text-sm font-semibold mt-2 ${data.status ? "text-green-600" : "text-red-600"}`}>
-                                    Status: {data.status ? "Completed" : "Pending"}
-                                </p>
-                                <p>completedDate: {new Date(data.date).toLocaleDateString()}</p>
-                            </div>
-                        </CardContent>
-                    </div>
-                    <div className="">
-                        <CardContent className="mt-4 rounded-4xl h-40 w-3/4 bg-white pt-4 hover:bg-gray-100 outline-1">
-                            <CardTitle>contact details</CardTitle>
-                            <div className="flex flex-col space-y-2 mt-2">
-                                <span>name: {data.user.name}</span>
-                                <span>email: {data.user.email}</span>
-                                <span>Mo: {data.user.phone}</span>
-                            </div>
-                        </CardContent>
-                    </div>
+            <div className="h-full w-full  pt-2">
+                <div className="outline-1  p-10 m-5 space-y-4 ">
+                    <CardContent className="rounded-3xl h-80 space-y-4 bg-white hover:bg-gray-100 outline-1">
+                        <CardTitle className="text-center pt-4">{data.title}</CardTitle>
+                        <CardDescription>{data.description}</CardDescription>
+                        <div className="space-y-4">
+                            <p className="">aboutTasks: {data.inDetails}</p>
+                            <p>requirement Skills: {data.skills}</p>
+                            <p>priority: {data.priority}</p>
+                            <p className={`text-sm font-semibold mt-2 ${data.status ? "text-green-600" : "text-red-600"}`}>
+                                Status: {data.status ? "Completed" : "Pending"}
+                            </p>
+                            <p>completedDate: {new Date(data.date).toLocaleDateString()}</p>
+                        </div>
+                    </CardContent>
+
+
+                    <CardContent className=" rounded-4xl h-40 pt-4 bg-white hover:bg-gray-100 outline-1">
+                        <CardTitle>contact details</CardTitle>
+                        <div className="flex flex-col space-y-2 mt-2">
+                            <span>name: {data.user.name}</span>
+                            <span>email: {data.user.email}</span>
+                            <span>Mo: {data.user.phone}</span>
+                        </div>
+                    </CardContent>
+
                 </div>
             </div>
         </div>
