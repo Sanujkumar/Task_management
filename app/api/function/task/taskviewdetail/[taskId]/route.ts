@@ -20,7 +20,17 @@ export async function GET(req: NextRequest, context: { params: Promise<{ taskId:
         const {taskId} = await context.params;  
         console.log(taskId);  
         const data = await prisma.task.findUnique({
-            where: { id: Number(taskId) }
+            where: { id: Number(taskId) },
+            include: {
+                user: {
+                    select: {
+                       id: true,
+                       name: true,
+                       phone: true,
+                       email: true 
+                    }
+                }
+            }
         });
 
         return NextResponse.json({
@@ -47,9 +57,18 @@ export async function GET(req: NextRequest, context: { params: Promise<{ taskId:
 //         "skills": "",
 //         "status": false,
 //         "userId": 15,
-//         "assigneeId": null
+//         "assigneeId": null,
+//         "user": {
+//             "id": 15,
+//             "email": "guru@gmail.com",
+//             "password": "$2b$10$DOc6bTkxk06/nzLwowDFTeTYg3jqJz5DKSSVIaNXFtj4S6btek38q",
+//             "name": "Sanuj Kumar",
+//             "phone": "6201483904",
+//             "skills": null,
+//             "about": null
+//         }
 //     }
-// }
+
 
 //api is here
 // http://localhost:3000/api/function/task/taskviewdetail/30

@@ -4,20 +4,46 @@ import axios from "axios";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-
-
-export default function projectview(){
-    const [data,setData] = useState();
-    const [loading,setLoading] = useState(true);
+import AllTasksSkelaton from "../../../../../skeltons/alltaskSkelaton";
+import { Card, CardAction, CardContent, CardDescription, CardTitle } from "@/components/ui/card";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+interface dataTypes {
+    id: number;
+    title: string;
+    description: string;
+    date: string;
+    priority: string;
+    inDetails: string;
+    price: number,
+    skills: string,
+    status: boolean;
+    userId: number;
+    assigneeId?: number;
+    user: {
+        id: number;
+        name: string;
+        email: string;
+        phone: string;
+        image?: string;
+    }
+}
+export default function projectview() {
+    const [data, setData] = useState<dataTypes>();
+    const [loading, setLoading] = useState(true);
+    const { data: session, status } = useSession();
+    const router = useRouter();
     const params = useParams();
     const taskId = params.taskId;
 
     const projectData = async () => {
-        try{
-        const res = await axios.get(`${Url}/api/function/task/${taskId}`,{withCredentials: true});
-        setData(res.data);
-        setLoading(false);
-        }catch(error){
+        try {
+            const res = await axios.get(`${Url}/api/function/task/taskviewdetail/${taskId}`, { withCredentials: true });
+            const taskDetails = res.data.data;
+            setData(taskDetails);
+            console.log("data", res.data.data);
+            setLoading(false);
+        } catch (error) {
             console.log(error);
             toast.error("somethinge went wrong");
         }
@@ -25,11 +51,57 @@ export default function projectview(){
 
     useEffect(() => {
         projectData();
-    },[]);
+    }, []);
+
+    if (loading || !data) {
+        return (
+            <div className="flex justify-center">Loading...........</div>
+        )
+    }
+
+    
+
+    // useEffect(() => {
+    //     if (status === "unauthenticated") {
+    //         alert("your are not login");
+    //         router.push(`${Url}`);
+    //     }
+    // }, []);
+
+    // const user = session?.user;
+    // const image = user?.image
 
     return (
-        <div>
-            hi there is view details section!
+        <div className="bg-white w-full h-screen">
+            <div className="h-full w-full pt-4 ">
+                <div className="m-4 ">
+                    <div className="">
+                        <CardContent className="rounded-3xl h-120 sm:h-85 w-3/4 space-y-4 bg-white hover:bg-gray-100 outline-1">
+                            <CardTitle className="text-center pt-4">{data.title}</CardTitle>
+                            <CardDescription>{data.description}</CardDescription>
+                            <div className="space-y-4">
+                                <p className="">aboutTasks: {data.inDetails}</p>
+                                <p>requirement Skills: {data.skills}</p>
+                                <p>priority: {data.priority}</p>
+                                <p className={`text-sm font-semibold mt-2 ${data.status ? "text-green-600" : "text-red-600"}`}>
+                                    Status: {data.status ? "Completed" : "Pending"}
+                                </p>
+                                <p>completedDate: {new Date(data.date).toLocaleDateString()}</p>
+                            </div>
+                        </CardContent>
+                    </div>
+                    <div className="">
+                        <CardContent className="mt-4 rounded-4xl h-40 w-3/4 bg-white pt-4 hover:bg-gray-100 outline-1">
+                            <CardTitle>contact details</CardTitle>
+                            <div className="flex flex-col space-y-2 mt-2">
+                                <span>name: {data.user.name}</span>
+                                <span>email: {data.user.email}</span>
+                                <span>Mo: {data.user.phone}</span>
+                            </div>
+                        </CardContent>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
