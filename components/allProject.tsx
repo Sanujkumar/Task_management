@@ -3,21 +3,22 @@
 
 
 "use client";
+  
 
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
-import { useRouter } from "next/navigation";
+import {useRouter, useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
-import AllTasksSkelaton from "../skeltons/alltaskSkelaton";  
+import AllTasksSkelaton from "../skeltons/alltaskSkelaton";
 import { Url } from "../lib/config";
 import toast from "react-hot-toast";
 
 
 
 interface TaskType {
-    id: number;
+    id: number;  
     title: string;
     description: string;
     date: string;
@@ -45,13 +46,19 @@ export default function Home() {
         }
     }, [status]);
 
+    const searchParams = useSearchParams();
+    const search = searchParams.get("search") ;  
+    const price = searchParams.get("price");
+      
     const AllTasShowkData = async () => {
         try {
-            const res = await axios.get(`${Url}/api/function/task/showAllTasks`, {
+            const res = await axios.get(`${Url}/api/function/projectFilter`, {
+                params: {search,price },   
                 withCredentials: true,
-            });
-
-            const allTasks = res.data.Alltask
+            });  
+     
+            const allTasks = res.data.data
+            console.log("data",allTasks);  
             setData(allTasks);
             toast.success("show all your task")
         } catch (err) {
@@ -59,11 +66,11 @@ export default function Home() {
         } finally {
             setLoading(false);
         }
-    };  
+    };
 
     useEffect(() => {
         AllTasShowkData();
-    }, []);
+    }, [search,price]);
 
     if (loading) return <AllTasksSkelaton />;
 
@@ -71,13 +78,13 @@ export default function Home() {
     const indexOfFirstTask = indexOfLastTask - tasksPerPage;
     const currentTasks = datas.slice(indexOfFirstTask, indexOfLastTask);
     const totalPages = Math.ceil(datas.length / tasksPerPage);
-    const user = session?.user;
+    const user = session?.user;  
     const name = user?.name || "U";
-    const firstLetter = name?.charAt(0).toUpperCase(); 
+    const firstLetter = name?.charAt(0).toUpperCase();
 
-    const showdetails = (taskId:number) => {
-        router.push(`/pages/projectview/${taskId}`);  
-    }  
+    const showdetails = (taskId: number) => {
+        router.push(`/pages/projectview/${taskId}`);
+    }
 
     return (
         <div className="p-4">
@@ -86,7 +93,7 @@ export default function Home() {
                     <div key={task.id} className="pl-8 sm:p-4">
                         <Card onClick={() => showdetails(task.id)} className="overflow-hidden w-65 h-50 sm:w-80 sm:h-50  hover:bg-gray-100 cursor-pointer ">
                             <CardContent>
-                                
+
                                 <CardTitle>{task.title}</CardTitle>
                                 <CardTitle>{task.description}</CardTitle>
                                 <p>Date: {new Date(task.date).toLocaleDateString()}</p>
@@ -95,7 +102,7 @@ export default function Home() {
                                 <p className={`text-sm font-semibold mt-2 ${task.status ? "text-green-600" : "text-red-600"}`}>
                                     Status: {task.status ? "Completed" : "Pending"}
                                 </p>
-                                
+
                             </CardContent>
                         </Card>
                     </div>

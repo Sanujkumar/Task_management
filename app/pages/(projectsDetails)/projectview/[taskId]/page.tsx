@@ -2,7 +2,7 @@
 import { Url } from "@/lib/config";
 import axios from "axios";
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 
@@ -29,7 +29,7 @@ export default function projectview(){
 
     return (
         <div>
-            
+            hi there is view details section!
         </div>
     )
 }
