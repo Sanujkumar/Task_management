@@ -75,7 +75,7 @@ export default function projectview() {
         <div className="bg-white w-full h-screen">
             <div className="h-full w-full  pt-2">
                 <div className="outline-1  p-10 m-5 space-y-4 ">
-                    <CardContent className="rounded-3xl h-80 space-y-4 bg-white hover:bg-gray-100 outline-1">
+                    <CardContent className="rounded-3xl h-auto  space-y-4 bg-white hover:bg-gray-100 outline-1">
                         <CardTitle className="text-center pt-4">{data.title}</CardTitle>
                         <CardDescription>{data.description}</CardDescription>
                         <div className="space-y-4">
@@ -90,7 +90,7 @@ export default function projectview() {
                     </CardContent>
 
 
-                    <CardContent className=" rounded-4xl h-40 pt-4 bg-white hover:bg-gray-100 outline-1">
+                    <CardContent className=" rounded-4xl h-auto pt-4 bg-white hover:bg-gray-100 outline-1">
                         <CardTitle>contact details</CardTitle>
                         <div className="flex flex-col space-y-2 mt-2">
                             <span>name: {data.user.name}</span>
