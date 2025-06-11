@@ -7,7 +7,7 @@ const nextConfig:  NextConfig  = {
   
   async headers() {
     return [
-      
+          
       {
         source: "/api/:path*",
         headers: [
@@ -45,6 +45,8 @@ const nextConfig:  NextConfig  = {
         /C:\\Users\\sanuj\\Application Data/ // explicitly exclude problematic path
       ],
     });
+    
+
     return config;
   },
   

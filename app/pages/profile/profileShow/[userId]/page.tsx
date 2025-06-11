@@ -20,6 +20,7 @@ import toast from "react-hot-toast";
 
 export default function ProfileFunction() {
     const { data: session, status } = useSession();
+    const [loading,setLoading] = useState(true);
     const router = useRouter();
 
 
@@ -40,6 +41,7 @@ export default function ProfileFunction() {
             withCredentials: true,
         });
         setData(res.data.data);
+        setLoading(false);
         console.log(res.data.data);
     };
 
@@ -55,8 +57,8 @@ export default function ProfileFunction() {
 
 
 
-    if (status === "loading") {
-        return <ProfileSkeleton />;
+    if (loading) {
+        return <ProfileSkeleton />;  
     }
 
     if (!user) {

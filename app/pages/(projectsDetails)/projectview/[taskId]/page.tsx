@@ -8,6 +8,8 @@ import AllTasksSkelaton from "../../../../../skeltons/alltaskSkelaton";
 import { Card, CardAction, CardContent, CardDescription, CardTitle } from "@/components/ui/card";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import ProjectVDSkeleton from "../../../../../skeltons/projectVDSkeleton";
+
 interface dataTypes {
     id: number;
     title: string;
@@ -28,6 +30,7 @@ interface dataTypes {
         image?: string;
     }
 }
+
 export default function projectview() {
     const [data, setData] = useState<dataTypes>();
     const [loading, setLoading] = useState(true);
@@ -55,7 +58,7 @@ export default function projectview() {
 
     if (loading || !data) {
         return (
-            <div className="flex justify-center">Loading...........</div>
+            <div><ProjectVDSkeleton/></div>
         )
     }
 
@@ -73,9 +76,9 @@ export default function projectview() {
 
     return (
         <div className="bg-white w-full h-screen">
-            <div className="h-full w-full  pt-2">
-                <div className="outline-1  p-10 m-5 space-y-4 ">
-                    <CardContent className="rounded-3xl h-auto  space-y-4 bg-white hover:bg-gray-100 outline-1">
+            <div className="h-full w-full ">
+                <div className="outline-1 p-5 m-5 space-y-4 w-auto h-auto ">
+                    <CardContent className="rounded-3xl h-auto  space-y-4 bg-white hover:bg-gray-100 outline-1 p-4">
                         <CardTitle className="text-center pt-4">{data.title}</CardTitle>
                         <CardDescription>{data.description}</CardDescription>
                         <div className="space-y-4">
@@ -90,7 +93,7 @@ export default function projectview() {
                     </CardContent>
 
 
-                    <CardContent className=" rounded-4xl h-auto pt-4 bg-white hover:bg-gray-100 outline-1">
+                    <CardContent className=" rounded-4xl h-auto p-4 bg-white hover:bg-gray-100 outline-1">
                         <CardTitle>contact details</CardTitle>
                         <div className="flex flex-col space-y-2 mt-2">
                             <span>name: {data.user.name}</span>

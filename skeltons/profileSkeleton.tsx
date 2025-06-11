@@ -2,13 +2,15 @@ import { Skeleton } from "../components/ui/skeleton"
 
 export default function ProfileSkeleton() {
   return (
-    <div className="flex  justify-center items-center space-x-4 pt-40 ">
-      <Skeleton className="h-20 w-20 sm:h-30 sm:w-30 rounded-full" />
-      <div className="space-y-2">
-        <Skeleton className="h-6 w-[300px] " />
-        <Skeleton className="h-6 w-[250px] " />
+    <div className="space-x-2 ">
+      <div>
+        <div>
+          <Skeleton className="h-60 w-auto m-10 rounded-4xl" />
+        </div>
+        <div>
+          <Skeleton className="h-60 w-auto rounded-4xl m-10"/>
+        </div>
       </div>
-    </div>   
+    </div>
   )
 }
-     

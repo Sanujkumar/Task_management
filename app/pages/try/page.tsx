@@ -1,7 +1,6 @@
-import Filter from "../../../components/filters"
-
-export default function tye(){  
-    return(
-        <Filter/>    
+import ProfileSkeleton from "../../../skeltons/profileSkeleton"
+export default function Example(){
+    return(  
+        <ProfileSkeleton/>  
     )
-} 
+}
