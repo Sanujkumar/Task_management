@@ -10,17 +10,8 @@ import TaskSection from "./taskSection";
 import { MdTask } from "react-icons/md";
 import { Url } from "../lib/config";
 import toast from "react-hot-toast";
+   
 export default function Topbar() {
-
-
-  return (
-    <SessionProvider>
-      <Component />
-    </SessionProvider>
-  );
-}
-
-function Component() {
   const { data: session, status } = useSession();
  
  
@@ -68,7 +59,7 @@ function Component() {
               <Button
                 variant="link"
                 size="sm"
-                className="w-18 pr-8"
+                className="w-18 pr-8"   
                 onClick={handleSignOut}
               >signOut</Button>
 

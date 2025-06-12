@@ -37,7 +37,7 @@ export default function LoginForm({
     });
     console.log("res",res);   
     if (res?.ok) {
-      toast.success("signup successfully"); 
+      toast.success("login successfully"); 
       const session = await getSession();  
       router.push(`${Url}`);    
     }

@@ -9,6 +9,7 @@ import { Card, CardAction, CardContent, CardDescription, CardTitle } from "@/com
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import ProjectVDSkeleton from "../../../../../skeltons/projectVDSkeleton";
+import { Avatar,AvatarImage,AvatarFallback } from "@/components/ui/avatar";
 
 interface dataTypes {
     id: number;
@@ -35,10 +36,20 @@ export default function projectview() {
     const [data, setData] = useState<dataTypes>();
     const [loading, setLoading] = useState(true);
     const { data: session, status } = useSession();
+
     const router = useRouter();
     const params = useParams();
     const taskId = params.taskId;
 
+    useEffect(() => {
+        if (status === "unauthenticated") {
+            toast.error("your are not login");
+            router.push(`${Url}`);
+        }
+    }, []);
+
+    
+   
     const projectData = async () => {
         try {
             const res = await axios.get(`${Url}/api/function/task/taskviewdetail/${taskId}`, { withCredentials: true });
@@ -58,28 +69,38 @@ export default function projectview() {
 
     if (loading || !data) {
         return (
-            <div><ProjectVDSkeleton/></div>
+            <div><ProjectVDSkeleton /></div>
         )
     }
+    
+
+    const name = data?.user.name  
+    const firstLetter = name.charAt(0).toUpperCase();
+    const image = "https://img.freepik.com/free-photo/handsome-bearded-guy-posing-against-white-wall_273609-20598.jpg?semt=ais_hybrid&w=740"
+    
 
 
 
-    // useEffect(() => {
-    //     if (status === "unauthenticated") {
-    //         alert("your are not login");
-    //         router.push(`${Url}`);
-    //     }
-    // }, []);
 
-    // const user = session?.user;
-    // const image = user?.image
 
     return (
         <div className="bg-white w-full h-screen">
             <div className="h-full w-full ">
                 <div className="outline-1 p-5 m-5 space-y-4 w-auto h-auto ">
                     <CardContent className="rounded-3xl h-auto  space-y-4 bg-white hover:bg-gray-100 outline-1 p-4">
-                        <CardTitle className="text-center pt-4">{data.title}</CardTitle>
+                      <div className="flex gap-6  ">
+                        <span  className="">
+                            <Avatar  className="w-18 h-18 sm:w-26 sm:h-26">
+                                {image ? (
+                                    <AvatarImage src={image} alt={name} />
+                                ) : (
+                                    <AvatarFallback>{firstLetter}</AvatarFallback>
+                                )}
+                            </Avatar>
+                        </span>  
+
+                        <CardTitle className="text-center pt-6">{data.title}</CardTitle>
+                        </div>
                         <CardDescription>{data.description}</CardDescription>
                         <div className="space-y-4">
                             <p className="">aboutTasks: {data.inDetails}</p>
