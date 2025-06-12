@@ -93,9 +93,9 @@ export default function Home() {
         {currentTasks.map((task) => (
           <div
             key={task.id}
-            className="pl-8 sm:p-4"    
+            className="p-5"      
           >   
-            <Card className="overflow-hidden w-65 h-50 sm:w-80 sm:h-50  cursor-pointer">
+            <Card className="overflow-hidden w-auto h-auto  cursor-pointer">
               <CardContent className="">
 
                 <CardTitle className="">{task.title}</CardTitle>
