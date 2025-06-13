@@ -133,9 +133,9 @@ export default function projectview() {
                                     <p className="font-semibold">PDF Preview:</p>
                                     <iframe
                                         src={data.pdfUrl}
-                                        width="450px"
+                                        width="200"
                                         height="200px"
-                                        className="border rounded-2xl outline-1"
+                                        className="border  rounded-2xl outline-1"
                                     ></iframe>
 
                                     <p className="text-sm text-gray-600 mt-1">
