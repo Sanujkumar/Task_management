@@ -33,9 +33,11 @@ model Task {
   status      Boolean
   userId      Int
   assigneeId  Int?
+  videoUrl    String?
+  pdfUrl      String?
   assignee    User?    @relation("AssignedTasks", fields: [assigneeId], references: [id])
   user        User     @relation("CreatedTasks", fields: [userId], references: [id])
-}
+}   
 
 model Notification {
   id      Int    @id @default(autoincrement())

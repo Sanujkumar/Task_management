@@ -2323,6 +2323,8 @@ export namespace Prisma {
     status: boolean | null
     userId: number | null
     assigneeId: number | null
+    videoUrl: string | null
+    pdfUrl: string | null
   }
 
   export type TaskMaxAggregateOutputType = {
@@ -2337,6 +2339,8 @@ export namespace Prisma {
     status: boolean | null
     userId: number | null
     assigneeId: number | null
+    videoUrl: string | null
+    pdfUrl: string | null
   }
 
   export type TaskCountAggregateOutputType = {
@@ -2351,6 +2355,8 @@ export namespace Prisma {
     status: number
     userId: number
     assigneeId: number
+    videoUrl: number
+    pdfUrl: number
     _all: number
   }
 
@@ -2381,6 +2387,8 @@ export namespace Prisma {
     status?: true
     userId?: true
     assigneeId?: true
+    videoUrl?: true
+    pdfUrl?: true
   }
 
   export type TaskMaxAggregateInputType = {
@@ -2395,6 +2403,8 @@ export namespace Prisma {
     status?: true
     userId?: true
     assigneeId?: true
+    videoUrl?: true
+    pdfUrl?: true
   }
 
   export type TaskCountAggregateInputType = {
@@ -2409,6 +2419,8 @@ export namespace Prisma {
     status?: true
     userId?: true
     assigneeId?: true
+    videoUrl?: true
+    pdfUrl?: true
     _all?: true
   }
 
@@ -2510,6 +2522,8 @@ export namespace Prisma {
     status: boolean
     userId: number
     assigneeId: number | null
+    videoUrl: string | null
+    pdfUrl: string | null
     _count: TaskCountAggregateOutputType | null
     _avg: TaskAvgAggregateOutputType | null
     _sum: TaskSumAggregateOutputType | null
@@ -2543,6 +2557,8 @@ export namespace Prisma {
     status?: boolean
     userId?: boolean
     assigneeId?: boolean
+    videoUrl?: boolean
+    pdfUrl?: boolean
     assignee?: boolean | Task$assigneeArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["task"]>
@@ -2559,6 +2575,8 @@ export namespace Prisma {
     status?: boolean
     userId?: boolean
     assigneeId?: boolean
+    videoUrl?: boolean
+    pdfUrl?: boolean
     assignee?: boolean | Task$assigneeArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["task"]>
@@ -2575,6 +2593,8 @@ export namespace Prisma {
     status?: boolean
     userId?: boolean
     assigneeId?: boolean
+    videoUrl?: boolean
+    pdfUrl?: boolean
     assignee?: boolean | Task$assigneeArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["task"]>
@@ -2591,9 +2611,11 @@ export namespace Prisma {
     status?: boolean
     userId?: boolean
     assigneeId?: boolean
+    videoUrl?: boolean
+    pdfUrl?: boolean
   }
 
-  export type TaskOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "date" | "priority" | "inDetails" | "price" | "skills" | "status" | "userId" | "assigneeId", ExtArgs["result"]["task"]>
+  export type TaskOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "date" | "priority" | "inDetails" | "price" | "skills" | "status" | "userId" | "assigneeId" | "videoUrl" | "pdfUrl", ExtArgs["result"]["task"]>
   export type TaskInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     assignee?: boolean | Task$assigneeArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -2625,6 +2647,8 @@ export namespace Prisma {
       status: boolean
       userId: number
       assigneeId: number | null
+      videoUrl: string | null
+      pdfUrl: string | null
     }, ExtArgs["result"]["task"]>
     composites: {}
   }
@@ -3061,6 +3085,8 @@ export namespace Prisma {
     readonly status: FieldRef<"Task", 'Boolean'>
     readonly userId: FieldRef<"Task", 'Int'>
     readonly assigneeId: FieldRef<"Task", 'Int'>
+    readonly videoUrl: FieldRef<"Task", 'String'>
+    readonly pdfUrl: FieldRef<"Task", 'String'>
   }
     
 
@@ -4602,7 +4628,9 @@ export namespace Prisma {
     skills: 'skills',
     status: 'status',
     userId: 'userId',
-    assigneeId: 'assigneeId'
+    assigneeId: 'assigneeId',
+    videoUrl: 'videoUrl',
+    pdfUrl: 'pdfUrl'
   };
 
   export type TaskScalarFieldEnum = (typeof TaskScalarFieldEnum)[keyof typeof TaskScalarFieldEnum]
@@ -4800,6 +4828,8 @@ export namespace Prisma {
     status?: BoolFilter<"Task"> | boolean
     userId?: IntFilter<"Task"> | number
     assigneeId?: IntNullableFilter<"Task"> | number | null
+    videoUrl?: StringNullableFilter<"Task"> | string | null
+    pdfUrl?: StringNullableFilter<"Task"> | string | null
     assignee?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
@@ -4816,6 +4846,8 @@ export namespace Prisma {
     status?: SortOrder
     userId?: SortOrder
     assigneeId?: SortOrderInput | SortOrder
+    videoUrl?: SortOrderInput | SortOrder
+    pdfUrl?: SortOrderInput | SortOrder
     assignee?: UserOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
   }
@@ -4835,6 +4867,8 @@ export namespace Prisma {
     status?: BoolFilter<"Task"> | boolean
     userId?: IntFilter<"Task"> | number
     assigneeId?: IntNullableFilter<"Task"> | number | null
+    videoUrl?: StringNullableFilter<"Task"> | string | null
+    pdfUrl?: StringNullableFilter<"Task"> | string | null
     assignee?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
@@ -4851,6 +4885,8 @@ export namespace Prisma {
     status?: SortOrder
     userId?: SortOrder
     assigneeId?: SortOrderInput | SortOrder
+    videoUrl?: SortOrderInput | SortOrder
+    pdfUrl?: SortOrderInput | SortOrder
     _count?: TaskCountOrderByAggregateInput
     _avg?: TaskAvgOrderByAggregateInput
     _max?: TaskMaxOrderByAggregateInput
@@ -4873,6 +4909,8 @@ export namespace Prisma {
     status?: BoolWithAggregatesFilter<"Task"> | boolean
     userId?: IntWithAggregatesFilter<"Task"> | number
     assigneeId?: IntNullableWithAggregatesFilter<"Task"> | number | null
+    videoUrl?: StringNullableWithAggregatesFilter<"Task"> | string | null
+    pdfUrl?: StringNullableWithAggregatesFilter<"Task"> | string | null
   }
 
   export type NotificationWhereInput = {
@@ -5010,6 +5048,8 @@ export namespace Prisma {
     price: number
     skills: string
     status: boolean
+    videoUrl?: string | null
+    pdfUrl?: string | null
     assignee?: UserCreateNestedOneWithoutAssignedTasksInput
     user: UserCreateNestedOneWithoutTasksInput
   }
@@ -5026,6 +5066,8 @@ export namespace Prisma {
     status: boolean
     userId: number
     assigneeId?: number | null
+    videoUrl?: string | null
+    pdfUrl?: string | null
   }
 
   export type TaskUpdateInput = {
@@ -5037,6 +5079,8 @@ export namespace Prisma {
     price?: IntFieldUpdateOperationsInput | number
     skills?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
     assignee?: UserUpdateOneWithoutAssignedTasksNestedInput
     user?: UserUpdateOneRequiredWithoutTasksNestedInput
   }
@@ -5053,6 +5097,8 @@ export namespace Prisma {
     status?: BoolFieldUpdateOperationsInput | boolean
     userId?: IntFieldUpdateOperationsInput | number
     assigneeId?: NullableIntFieldUpdateOperationsInput | number | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TaskCreateManyInput = {
@@ -5067,6 +5113,8 @@ export namespace Prisma {
     status: boolean
     userId: number
     assigneeId?: number | null
+    videoUrl?: string | null
+    pdfUrl?: string | null
   }
 
   export type TaskUpdateManyMutationInput = {
@@ -5078,6 +5126,8 @@ export namespace Prisma {
     price?: IntFieldUpdateOperationsInput | number
     skills?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TaskUncheckedUpdateManyInput = {
@@ -5092,6 +5142,8 @@ export namespace Prisma {
     status?: BoolFieldUpdateOperationsInput | boolean
     userId?: IntFieldUpdateOperationsInput | number
     assigneeId?: NullableIntFieldUpdateOperationsInput | number | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type NotificationCreateInput = {
@@ -5337,6 +5389,8 @@ export namespace Prisma {
     status?: SortOrder
     userId?: SortOrder
     assigneeId?: SortOrder
+    videoUrl?: SortOrder
+    pdfUrl?: SortOrder
   }
 
   export type TaskAvgOrderByAggregateInput = {
@@ -5358,6 +5412,8 @@ export namespace Prisma {
     status?: SortOrder
     userId?: SortOrder
     assigneeId?: SortOrder
+    videoUrl?: SortOrder
+    pdfUrl?: SortOrder
   }
 
   export type TaskMinOrderByAggregateInput = {
@@ -5372,6 +5428,8 @@ export namespace Prisma {
     status?: SortOrder
     userId?: SortOrder
     assigneeId?: SortOrder
+    videoUrl?: SortOrder
+    pdfUrl?: SortOrder
   }
 
   export type TaskSumOrderByAggregateInput = {
@@ -5853,6 +5911,8 @@ export namespace Prisma {
     price: number
     skills: string
     status: boolean
+    videoUrl?: string | null
+    pdfUrl?: string | null
     user: UserCreateNestedOneWithoutTasksInput
   }
 
@@ -5867,6 +5927,8 @@ export namespace Prisma {
     skills: string
     status: boolean
     userId: number
+    videoUrl?: string | null
+    pdfUrl?: string | null
   }
 
   export type TaskCreateOrConnectWithoutAssigneeInput = {
@@ -5888,6 +5950,8 @@ export namespace Prisma {
     price: number
     skills: string
     status: boolean
+    videoUrl?: string | null
+    pdfUrl?: string | null
     assignee?: UserCreateNestedOneWithoutAssignedTasksInput
   }
 
@@ -5902,6 +5966,8 @@ export namespace Prisma {
     skills: string
     status: boolean
     assigneeId?: number | null
+    videoUrl?: string | null
+    pdfUrl?: string | null
   }
 
   export type TaskCreateOrConnectWithoutUserInput = {
@@ -5970,6 +6036,8 @@ export namespace Prisma {
     status?: BoolFilter<"Task"> | boolean
     userId?: IntFilter<"Task"> | number
     assigneeId?: IntNullableFilter<"Task"> | number | null
+    videoUrl?: StringNullableFilter<"Task"> | string | null
+    pdfUrl?: StringNullableFilter<"Task"> | string | null
   }
 
   export type TaskUpsertWithWhereUniqueWithoutUserInput = {
@@ -6190,6 +6258,8 @@ export namespace Prisma {
     skills: string
     status: boolean
     userId: number
+    videoUrl?: string | null
+    pdfUrl?: string | null
   }
 
   export type TaskCreateManyUserInput = {
@@ -6203,6 +6273,8 @@ export namespace Prisma {
     skills: string
     status: boolean
     assigneeId?: number | null
+    videoUrl?: string | null
+    pdfUrl?: string | null
   }
 
   export type NotificationUpdateWithoutUserInput = {
@@ -6228,6 +6300,8 @@ export namespace Prisma {
     price?: IntFieldUpdateOperationsInput | number
     skills?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutTasksNestedInput
   }
 
@@ -6242,6 +6316,8 @@ export namespace Prisma {
     skills?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     userId?: IntFieldUpdateOperationsInput | number
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TaskUncheckedUpdateManyWithoutAssigneeInput = {
@@ -6255,6 +6331,8 @@ export namespace Prisma {
     skills?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     userId?: IntFieldUpdateOperationsInput | number
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TaskUpdateWithoutUserInput = {
@@ -6266,6 +6344,8 @@ export namespace Prisma {
     price?: IntFieldUpdateOperationsInput | number
     skills?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
     assignee?: UserUpdateOneWithoutAssignedTasksNestedInput
   }
 
@@ -6280,6 +6360,8 @@ export namespace Prisma {
     skills?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     assigneeId?: NullableIntFieldUpdateOperationsInput | number | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TaskUncheckedUpdateManyWithoutUserInput = {
@@ -6293,6 +6375,8 @@ export namespace Prisma {
     skills?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     assigneeId?: NullableIntFieldUpdateOperationsInput | number | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 

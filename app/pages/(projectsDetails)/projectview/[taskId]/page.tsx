@@ -9,8 +9,8 @@ import { Card, CardAction, CardContent, CardDescription, CardTitle } from "@/com
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import ProjectVDSkeleton from "../../../../../skeltons/projectVDSkeleton";
-import { Avatar,AvatarImage,AvatarFallback } from "@/components/ui/avatar";
-
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import Image from "next/image";
 interface dataTypes {
     id: number;
     title: string;
@@ -22,6 +22,8 @@ interface dataTypes {
     skills: string,
     status: boolean;
     userId: number;
+    videoUrl: string;
+    pdfUrl: string;
     assigneeId?: number;
     user: {
         id: number;
@@ -48,8 +50,8 @@ export default function projectview() {
         }
     }, []);
 
-    
-   
+
+
     const projectData = async () => {
         try {
             const res = await axios.get(`${Url}/api/function/task/taskviewdetail/${taskId}`, { withCredentials: true });
@@ -72,12 +74,12 @@ export default function projectview() {
             <div><ProjectVDSkeleton /></div>
         )
     }
-    
 
-    const name = data?.user.name  
+
+    const name = data?.user.name
     const firstLetter = name.charAt(0).toUpperCase();
     const image = "https://img.freepik.com/free-photo/handsome-bearded-guy-posing-against-white-wall_273609-20598.jpg?semt=ais_hybrid&w=740"
-    
+
 
 
 
@@ -88,18 +90,18 @@ export default function projectview() {
             <div className="h-full w-full ">
                 <div className="outline-1 p-5 m-5 space-y-4 w-auto h-auto ">
                     <CardContent className="rounded-3xl h-auto  space-y-4 bg-white hover:bg-gray-100 outline-1 p-4">
-                      <div className="flex gap-6  ">
-                        <span  className="">
-                            <Avatar  className="w-18 h-18 sm:w-26 sm:h-26">
-                                {image ? (
-                                    <AvatarImage src={image} alt={name} />
-                                ) : (
-                                    <AvatarFallback>{firstLetter}</AvatarFallback>
-                                )}
-                            </Avatar>
-                        </span>  
+                        <div className="flex gap-6  ">
+                            <span className="">
+                                <Avatar className="w-18 h-18 sm:w-26 sm:h-26">
+                                    {image ? (
+                                        <AvatarImage src={image} alt={name} />
+                                    ) : (
+                                        <AvatarFallback>{firstLetter}</AvatarFallback>
+                                    )}
+                                </Avatar>
+                            </span>
 
-                        <CardTitle className="text-center pt-6">{data.title}</CardTitle>
+                            <CardTitle className="text-center pt-6">{data.title}</CardTitle>
                         </div>
                         <CardDescription>{data.description}</CardDescription>
                         <div className="space-y-4">
@@ -110,6 +112,47 @@ export default function projectview() {
                                 Status: {data.status ? "Completed" : "Pending"}
                             </p>
                             <p>completedDate: {new Date(data.date).toLocaleDateString()}</p>
+                          <div className="flex-block md:flex justify-between">
+                            {data.videoUrl && (
+                                <div className="mt-4">
+                                    <p className="font-semibold">See video:</p>
+                                    <video
+                                        src={data.videoUrl}
+                                        controls
+                                        width="50%"
+                                        height="200px"
+                                        className="rounded-2xl ouline-1"
+                                    >
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                            )}
+
+                            {data.pdfUrl && (
+                                <div className="mt-4 ">
+                                    <p className="font-semibold">PDF Preview:</p>
+                                    <iframe
+                                        src={data.pdfUrl}
+                                        width="450px"
+                                        height="200px"
+                                        className="border rounded-2xl outline-1"
+                                    ></iframe>
+
+                                    <p className="text-sm text-gray-600 mt-1">
+                                         Or{" "}
+                                        <a
+                                            href={data.pdfUrl}
+                                            download
+                                            className="text-blue-600 underline"
+                                        >
+                                            Click here to download
+                                           
+                                        </a>.
+                                    </p>
+                                </div>
+                            )}
+                            </div>
+
                         </div>
                     </CardContent>
 

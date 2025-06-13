@@ -141,7 +141,9 @@ exports.Prisma.TaskScalarFieldEnum = {
   skills: 'skills',
   status: 'status',
   userId: 'userId',
-  assigneeId: 'assigneeId'
+  assigneeId: 'assigneeId',
+  videoUrl: 'videoUrl',
+  pdfUrl: 'pdfUrl'
 };
 
 exports.Prisma.NotificationScalarFieldEnum = {
