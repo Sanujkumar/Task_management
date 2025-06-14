@@ -16,10 +16,11 @@ model User {
   phone         String?
   skills        String?
   about         String?
+  image         String?   
   notificaion   Notification[]  
   assignedTasks Task[]         @relation("AssignedTasks")
   tasks         Task[]         @relation("CreatedTasks")
-}
+}  
 
 model Task {
   id          Int      @id @default(autoincrement())

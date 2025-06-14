@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import ProjectVDSkeleton from "../../../../../skeltons/projectVDSkeleton";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import Image from "next/image";
+
 interface dataTypes {
     id: number;
     title: string;
@@ -112,45 +113,45 @@ export default function projectview() {
                                 Status: {data.status ? "Completed" : "Pending"}
                             </p>
                             <p>completedDate: {new Date(data.date).toLocaleDateString()}</p>
-                          <div className="flex-block md:flex justify-between">
-                            {data.videoUrl && (
-                                <div className="mt-4">
-                                    <p className="font-semibold">See video:</p>
-                                    <video
-                                        src={data.videoUrl}
-                                        controls
-                                        width="50%"
-                                        height="200px"
-                                        className="rounded-2xl ouline-1"
-                                    >
-                                        Your browser does not support the video tag.
-                                    </video>
-                                </div>
-                            )}
-
-                            {data.pdfUrl && (
-                                <div className="mt-4 ">
-                                    <p className="font-semibold">PDF Preview:</p>
-                                    <iframe
-                                        src={data.pdfUrl}
-                                        width="200"
-                                        height="200px"
-                                        className="border  rounded-2xl outline-1"
-                                    ></iframe>
-
-                                    <p className="text-sm text-gray-600 mt-1">
-                                         Or{" "}
-                                        <a
-                                            href={data.pdfUrl}
-                                            download
-                                            className="text-blue-600 underline"
+                            <div className="flex-block md:flex  space-x-7">
+                                {data.videoUrl && (
+                                    <div className="mt-4">
+                                        <p className="font-semibold">See video:</p>
+                                        <video
+                                            src={data.videoUrl}
+                                            controls
+                                            width="350px"
+                                            height="200px"
+                                            className="rounded-2xl ouline-1"
                                         >
-                                            Click here to download
-                                           
-                                        </a>.
-                                    </p>
-                                </div>
-                            )}
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    </div>
+                                )}
+
+                                {data.pdfUrl && (
+                                    <div className="mt-4 ">
+                                        <p className="font-semibold">PDF Preview:</p>
+                                        <iframe
+                                            src={`https://docs.google.com/gview?url=${data.pdfUrl}&embedded=true`}
+                                            width="250px"
+                                            height="200px"
+                                            className="rounded-xl border-2 border-gray-400 shadow-lg"
+                                        ></iframe>  
+
+                                        <p className="text-sm text-gray-600 mt-1">
+                                            Or{" "}
+                                            <a
+                                                href={data.pdfUrl}
+                                                download
+                                                className="text-gray-400 hover:text-blue-600 underline"
+                                            >
+                                                Click here to download
+
+                                            </a>.
+                                        </p>
+                                    </div>
+                                )}
                             </div>
 
                         </div>
@@ -171,3 +172,5 @@ export default function projectview() {
         </div>
     )
 }
+
+
