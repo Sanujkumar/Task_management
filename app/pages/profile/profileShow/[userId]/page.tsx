@@ -74,8 +74,8 @@ export default function ProfileFunction() {
 
     return (
         <div className="bg-gray-100 h-screen w-full">
-            <div className="h-full w-full">
-                <div className="bg-white m-4 h-auto w-auto outline-1 p-4 space-y-4">
+            <div className="h-full w-full p-4">
+                <div className="bg-white  h-auto w-auto outline-1 p-4 space-y-4">
                     <div className="flex flex-row p-5 gap-6 bg-white   rounded-4xl outline-1 ">
                         <div className="flex flex-col justify-center text-center">
                             <div>

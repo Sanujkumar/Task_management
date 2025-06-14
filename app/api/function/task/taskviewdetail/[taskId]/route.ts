@@ -27,7 +27,8 @@ export async function GET(req: NextRequest, context: { params: Promise<{ taskId:
                        id: true,
                        name: true,
                        phone: true,
-                       email: true 
+                       email: true ,
+                       image: true  
                     }
                 }
             }

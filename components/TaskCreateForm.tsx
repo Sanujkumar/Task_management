@@ -141,7 +141,7 @@ export default function TaskCreate({ topTitle, buttonName, onSubmit, task, class
 
                             <Button type="submit" className="w-full">{buttonName}</Button>
                         </div>
-                    </form>
+                    </form>    
                 </CardContent>
             </Card>
         </div>

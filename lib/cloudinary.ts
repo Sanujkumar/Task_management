@@ -11,14 +11,14 @@ export const uploadBase64 = async (
   base64: string,
   folder: string,
   resourceType: "image" | "video" | "raw",
-  extension: string // ← Add this line
+  extension: string 
 ) => {
   return await cloudinary.uploader.upload(base64, {
     folder,
     resource_type: resourceType,
-    public_id: `filename-${Date.now()}.${extension}` // ← Use the extension here
+    public_id: `filename-${Date.now()}`   
   });
-};
+};    
 
    
 export default cloudinary;

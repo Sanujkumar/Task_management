@@ -11,6 +11,8 @@ import { useRouter } from "next/navigation";
 import ProjectVDSkeleton from "../../../../../skeltons/projectVDSkeleton";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import Image from "next/image";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 interface dataTypes {
     id: number;
@@ -79,9 +81,15 @@ export default function projectview() {
 
     const name = data?.user.name
     const firstLetter = name.charAt(0).toUpperCase();
-    const image = "https://img.freepik.com/free-photo/handsome-bearded-guy-posing-against-white-wall_273609-20598.jpg?semt=ais_hybrid&w=740"
+    const image = data.user.image;
+    console.log("user Image",image);  
+    console.log("pdfUrlLAst",data.pdfUrl);  
+
+    // const image = "https://img.freepik.com/free-photo/handsome-bearded-guy-posing-against-white-wall_273609-20598.jpg?semt=ais_hybrid&w=740"
 
 
+
+ const sampleUrl = "https://res.cloudinary.com/dl9on566k/raw/upload/v1749826377/tasks/docs/filename-1749826376814"
 
 
 
@@ -93,10 +101,10 @@ export default function projectview() {
                     <CardContent className="rounded-3xl h-auto  space-y-4 bg-white hover:bg-gray-100 outline-1 p-4">
                         <div className="flex gap-6  ">
                             <span className="">
-                                <Avatar className="w-18 h-18 sm:w-26 sm:h-26">
+                                <Avatar className="w-18 h-18 sm:w-26 sm:h-26 border-2 border-black">
                                     {image ? (
-                                        <AvatarImage src={image} alt={name} />
-                                    ) : (
+                                        <AvatarImage src={image} alt={image} />     
+                                    ) : (  
                                         <AvatarFallback>{firstLetter}</AvatarFallback>
                                     )}
                                 </Avatar>
@@ -133,6 +141,7 @@ export default function projectview() {
                                     <div className="mt-4 ">
                                         <p className="font-semibold">PDF Preview:</p>
                                         <iframe
+                                            // src={`https://docs.google.com/gview?url=${data.pdfUrl}&embedded=true`}
                                             src={`https://docs.google.com/gview?url=${data.pdfUrl}&embedded=true`}
                                             width="250px"
                                             height="200px"
@@ -142,7 +151,7 @@ export default function projectview() {
                                         <p className="text-sm text-gray-600 mt-1">
                                             Or{" "}
                                             <a
-                                                href={data.pdfUrl}
+                                                href={data.pdfUrl}  
                                                 download
                                                 className="text-gray-400 hover:text-blue-600 underline"
                                             >
@@ -167,8 +176,14 @@ export default function projectview() {
                         </div>
                     </CardContent>
 
+                    <div className="outline-1 p-2 relative h-40 ">
+                        <h1>Chat</h1>
+                        <Input placeholder="type here" className="rounded-4xl"/>
+                        <Button className="absolute right-4">send</Button>
+                    </div>
+
                 </div>
-            </div>
+            </div>           
         </div>
     )
 }
