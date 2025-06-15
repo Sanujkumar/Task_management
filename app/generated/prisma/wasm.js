@@ -153,6 +153,16 @@ exports.Prisma.NotificationScalarFieldEnum = {
   userId: 'userId'
 };
 
+exports.Prisma.UserDetailInfoScalarFieldEnum = {
+  id: 'id',
+  resume: 'resume',
+  experience: 'experience',
+  linkdinUrl: 'linkdinUrl',
+  githubUrl: 'githubUrl',
+  highestDegree: 'highestDegree',
+  userId: 'userId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -172,7 +182,8 @@ exports.Prisma.NullsOrder = {
 exports.Prisma.ModelName = {
   User: 'User',
   Task: 'Task',
-  Notification: 'Notification'
+  Notification: 'Notification',
+  UserDetailInfo: 'UserDetailInfo'
 };
 
 /**

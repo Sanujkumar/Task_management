@@ -9,17 +9,18 @@ datasource db {
 }
 
 model User {
-  id            Int            @id @default(autoincrement())
-  email         String         @unique
-  password      String
-  name          String?
-  phone         String?
-  skills        String?
-  about         String?
-  image         String?
-  notificaion   Notification[]
-  assignedTasks Task[]         @relation("AssignedTasks")
-  tasks         Task[]         @relation("CreatedTasks")
+  id             Int             @id @default(autoincrement())
+  email          String          @unique
+  password       String
+  name           String?
+  phone          String?
+  skills         String?
+  about          String?
+  image          String?
+  notificaion    Notification[]
+  assignedTasks  Task[]          @relation("AssignedTasks")
+  tasks          Task[]          @relation("CreatedTasks")
+  UserDetailInfo UserDetailInfo?
 }
 
 model Task {
@@ -45,4 +46,15 @@ model Notification {
   message String
   userId  Int
   user    User   @relation(fields: [userId], references: [id])
+}
+
+model UserDetailInfo {
+  id            Int     @id @default(autoincrement())
+  resume        String?
+  experience    String?
+  linkdinUrl    String?
+  githubUrl     String?
+  highestDegree String?
+  userId        Int     @unique
+  user          User    @relation(fields: [userId], references: [id])
 }

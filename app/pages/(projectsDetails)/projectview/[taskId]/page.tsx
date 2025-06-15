@@ -82,14 +82,14 @@ export default function projectview() {
     const name = data?.user.name
     const firstLetter = name.charAt(0).toUpperCase();
     const image = data.user.image;
-    console.log("user Image",image);  
-    console.log("pdfUrlLAst",data.pdfUrl);  
+    console.log("user Image", image);
+    console.log("pdfUrlLAst", data.pdfUrl);
 
     // const image = "https://img.freepik.com/free-photo/handsome-bearded-guy-posing-against-white-wall_273609-20598.jpg?semt=ais_hybrid&w=740"
 
 
 
- const sampleUrl = "https://res.cloudinary.com/dl9on566k/raw/upload/v1749826377/tasks/docs/filename-1749826376814"
+    const sampleUrl = "https://res.cloudinary.com/dl9on566k/raw/upload/v1749826377/tasks/docs/filename-1749826376814"
 
 
 
@@ -103,8 +103,8 @@ export default function projectview() {
                             <span className="">
                                 <Avatar className="w-18 h-18 sm:w-26 sm:h-26 border-2 border-black">
                                     {image ? (
-                                        <AvatarImage src={image} alt={image} />     
-                                    ) : (  
+                                        <AvatarImage src={image} alt={image} />
+                                    ) : (
                                         <AvatarFallback>{firstLetter}</AvatarFallback>
                                     )}
                                 </Avatar>
@@ -121,21 +121,25 @@ export default function projectview() {
                                 Status: {data.status ? "Completed" : "Pending"}
                             </p>
                             <p>completedDate: {new Date(data.date).toLocaleDateString()}</p>
-                            <div className="flex-block md:flex  space-x-7">
+                            <div className="space-x-4  flex-block md:flex ">
+                                <div className=" w-full md:w-1/2">
                                 {data.videoUrl && (
                                     <div className="mt-4">
                                         <p className="font-semibold">See video:</p>
                                         <video
                                             src={data.videoUrl}
                                             controls
-                                            width="350px"
+                                            width="full"
                                             height="200px"
                                             className="rounded-2xl ouline-1"
                                         >
                                             Your browser does not support the video tag.
                                         </video>
                                     </div>
-                                )}
+                                )
+                                }
+                                </div>
+                                <div className=" w-full md:w-1/2">
 
                                 {data.pdfUrl && (
                                     <div className="mt-4 ">
@@ -143,15 +147,18 @@ export default function projectview() {
                                         <iframe
                                             // src={`https://docs.google.com/gview?url=${data.pdfUrl}&embedded=true`}
                                             src={`https://docs.google.com/gview?url=${data.pdfUrl}&embedded=true`}
-                                            width="250px"
-                                            height="200px"
-                                            className="rounded-xl border-2 border-gray-400 shadow-lg"
-                                        ></iframe>  
+                                            style={{
+                                                width: "250px",
+                                                height: "300px",
+                                                border: 'none',
+                                                borderRadius: '12px'
+                                            }}
+                                        ></iframe>
 
                                         <p className="text-sm text-gray-600 mt-1">
                                             Or{" "}
                                             <a
-                                                href={data.pdfUrl}  
+                                                href={data.pdfUrl}
                                                 download
                                                 className="text-gray-400 hover:text-blue-600 underline"
                                             >
@@ -161,6 +168,7 @@ export default function projectview() {
                                         </p>
                                     </div>
                                 )}
+                                </div>
                             </div>
 
                         </div>
@@ -178,12 +186,12 @@ export default function projectview() {
 
                     <div className="outline-1 p-2 relative h-40 ">
                         <h1>Chat</h1>
-                        <Input placeholder="type here" className="rounded-4xl"/>
+                        <Input placeholder="type here" className="rounded-4xl" />
                         <Button className="absolute right-4">send</Button>
                     </div>
 
                 </div>
-            </div>           
+            </div>
         </div>
     )
 }
