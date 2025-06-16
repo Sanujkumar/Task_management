@@ -2,6 +2,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "../../../generated/prisma";
 import { getToken } from "next-auth/jwt";
+import { uploadBase64 } from "../../../../lib/cloudinary";
+
 const prisma = new PrismaClient();
 
 const secret = process.env.AUTH_SECRET;
@@ -15,7 +17,13 @@ export async function POST(req: NextRequest) {
         }, { status: 400 })
     }
     const body = await req.json();
-    const { resume, experience, linkdinUrl, githubUrl, highestDegree } = body;
+    const { pdfBase64, experience, linkdinUrl, githubUrl, highestDegree } = body;
+
+    let resumeUrl: string | null = null;  
+    if(pdfBase64){
+        const pdfUrl = await uploadBase64(pdfBase64, "tasks/docs", "raw", "pdf");
+        resumeUrl = pdfUrl.secure_url
+    }
 
     const userId = token.id;
 
@@ -23,7 +31,7 @@ export async function POST(req: NextRequest) {
     try {
         await prisma.userDetailInfo.create({
             data: {
-                resume,
+                resume: resumeUrl,
                 experience,
                 linkdinUrl,
                 githubUrl,
@@ -82,6 +90,7 @@ type UpdateDataTypes = {
     linkdinUrl?: string;
     githubUrl?: string;
     highestDegree?: string;
+    resumeUrl?: string;
 }
 
 export async function PUT(req: NextRequest) {
@@ -96,14 +105,17 @@ export async function PUT(req: NextRequest) {
     const body = await req.json();
 
     const data: UpdateDataTypes = {}
-    const { resume, experience, linkdinUrl, githubUrl, highestDegree } = body;
-
-
-    if (resume !== "undefined") data.resume = resume;
+    const { pdfBase64, experience, linkdinUrl, githubUrl, highestDegree } = body;
+    
     if (experience !== "undefined") data.experience = experience;
     if (linkdinUrl !== "undefined") data.linkdinUrl = linkdinUrl;
     if (githubUrl !== "undefined") data.githubUrl = githubUrl;
     if (highestDegree !== "undefined") data.highestDegree = highestDegree;
+ 
+    if(pdfBase64){
+        const pdfUrl = await uploadBase64(pdfBase64, "tasks/docs", "raw", "pdf");
+        data.resumeUrl = pdfUrl.secure_url
+    }
 
     try {
         await prisma.userDetailInfo.update({
@@ -121,5 +133,6 @@ export async function PUT(req: NextRequest) {
         }, { status: 500 })
     }  
 }
+    
 
 
