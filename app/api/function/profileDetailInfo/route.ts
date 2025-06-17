@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
         }, { status: 400 })
     }
     const body = await req.json();
-    const { pdfBase64, experience, linkdinUrl, githubUrl, highestDegree } = body;
+    const {skills,about, pdfBase64, experience, linkdinUrl, githubUrl, highestDegree } = body;
 
     let resumeUrl: string | null = null;  
     if(pdfBase64){
@@ -31,6 +31,8 @@ export async function POST(req: NextRequest) {
     try {
         await prisma.userDetailInfo.create({
             data: {
+                skills,
+                about,
                 resume: resumeUrl,
                 experience,
                 linkdinUrl,
@@ -85,12 +87,13 @@ export async function GET(req: NextRequest) {
 }
   
 type UpdateDataTypes = {
-    resume?: string;
+    skills?: string,
+    about?: string,
     experience?: string;
     linkdinUrl?: string;
     githubUrl?: string;
     highestDegree?: string;
-    resumeUrl?: string;
+    resume?: string;
 }
 
 export async function PUT(req: NextRequest) {
@@ -105,22 +108,26 @@ export async function PUT(req: NextRequest) {
     const body = await req.json();
 
     const data: UpdateDataTypes = {}
-    const { pdfBase64, experience, linkdinUrl, githubUrl, highestDegree } = body;
-    
+    const {skills,about, pdfBase64, experience, linkdinUrl, githubUrl, highestDegree } = body;
+
+    if (skills !== "undefined") data.skills = skills;
+    if (about !== "undefined") data.about = about;
     if (experience !== "undefined") data.experience = experience;
     if (linkdinUrl !== "undefined") data.linkdinUrl = linkdinUrl;
     if (githubUrl !== "undefined") data.githubUrl = githubUrl;
     if (highestDegree !== "undefined") data.highestDegree = highestDegree;
+    
+
  
     if(pdfBase64){
         const pdfUrl = await uploadBase64(pdfBase64, "tasks/docs", "raw", "pdf");
-        data.resumeUrl = pdfUrl.secure_url
+        data.resume = pdfUrl.secure_url
     }
-
+    
     try {
         await prisma.userDetailInfo.update({
-            where: { userId },
-            data
+            where: { userId },  
+            data   
         });
 
        return NextResponse.json({

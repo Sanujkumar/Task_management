@@ -14,8 +14,6 @@ model User {
   password       String
   name           String?
   phone          String?
-  skills         String?
-  about          String?
   image          String?
   notificaion    Notification[]
   assignedTasks  Task[]          @relation("AssignedTasks")
@@ -50,6 +48,8 @@ model Notification {
 
 model UserDetailInfo {
   id            Int     @id @default(autoincrement())
+  skills        String?
+  about         String?
   resume        String?
   experience    String?
   linkdinUrl    String?

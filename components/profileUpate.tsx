@@ -43,9 +43,7 @@ export default function ProfileUpdateForm({ className, userId, ...props }: Props
         e.preventDefault();
         const name = nameRef.current?.value;
         const phone = phoneRef.current?.value;
-        const skills = skiilsRef.current?.value;
-        const about = aboutRef.current?.value;
-        const profileImg = profielImgRef.current;
+        
 
         const image = profielImgRef.current?.files?.[0];
         const imageBase64 = image ? await fileToBase64(image) : null;
@@ -59,8 +57,6 @@ export default function ProfileUpdateForm({ className, userId, ...props }: Props
             const res = await axios.put(`${Url}/api/function/profileEdit/${userId}`, {
                 name,
                 phone,
-                skills,
-                about,
                 imageBase64,
                 extension
             }, { withCredentials: true });
@@ -94,15 +90,7 @@ export default function ProfileUpdateForm({ className, userId, ...props }: Props
                             <div className="grid gap-2">
                                 <Label htmlFor="phone">Phone</Label>
                                 <Input id="phone" type="tel" ref={phoneRef} />
-                            </div>
-                            <div className="grid gap-2">
-                                <Label htmlFor="skills">Skills</Label>
-                                <Input id="skills" ref={skiilsRef} />
-                            </div>
-                            <div className="grid gap-2">
-                                <Label htmlFor="about">About</Label>
-                                <Input id="about" ref={aboutRef} />
-                            </div>
+                            </div>  
                             <div className="grid gap-2">
                                 <Label htmlFor="profile-img">Profile Img</Label>
                                 <Input id="profile-img" type="file" accept="image/*" ref={profielImgRef} />
