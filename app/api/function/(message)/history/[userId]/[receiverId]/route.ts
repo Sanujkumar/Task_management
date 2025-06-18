@@ -1,5 +1,5 @@
 
-import { connect } from "http2";
+
 import { PrismaClient } from "../../../../../../../app/generated/prisma"; 
 import { NextRequest, NextResponse } from "next/server";
 
@@ -9,11 +9,14 @@ export async function GET(
   req: NextRequest,
   context : { params: { userId: string; receiverId: string } }
 ) {
-  try {
-    const senderId = Number(context.params.userId);       
-    const receiverId = Number(context.params.receiverId);
+  try {  
+    const { userId, receiverId } = await context.params;
 
-    if (isNaN(senderId) || isNaN(receiverId)) {
+    const senderId = parseInt(userId);
+  const recId = parseInt(receiverId);
+  const roomId = [Number(userId), Number(receiverId)].sort((a, b) => a - b).join("-");
+
+    if (isNaN(senderId) || isNaN(recId)) {
       return NextResponse.json(
         { error: "Invalid userId or receiverId" },
         { status: 400 }
@@ -21,18 +24,8 @@ export async function GET(
     }
 
     const messages = await prisma.message.findMany({
-      where: {
-        OR: [
-          { senderId: senderId, receiverId: receiverId },
-          { senderId: receiverId, receiverId: senderId },
-        ],
-      },
-      include: {
-        sender: {
-          select: { id: true, name: true },
-        },
-      },
-      orderBy: { createdAt: "asc" },
+            where: { roomId },
+           orderBy: { createdAt: "asc" },
     });
 
     console.log(messages);  

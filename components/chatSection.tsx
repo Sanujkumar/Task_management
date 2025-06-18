@@ -1,89 +1,52 @@
-
-
 "use client";
-
 import { useEffect, useState } from "react";
 import { pusherClient } from "@/lib/pusher-client";
 import axios from "axios";
-import { Url } from "@/lib/config";
 
-interface Props{
-  userId: number,
-  receiverId: number
+interface Props {
+  userId: number;
+  receiverId: number;
 }
 
-// const userId = 4;
-//   const partnerId = 16;   
-
-
-export default function ChatBox({userId,receiverId}:Props) {
+export default function ChatBox({ userId, receiverId }: Props) {
   const [messages, setMessages] = useState<any[]>([]);
   const [input, setInput] = useState("");
-
-  const channelName = `chat-${[userId, receiverId].sort().join("-")}`;
-
-  const fetchChatHistory = async () => {
-    try {
-      const res = await axios.get(`${Url}/api/function/history/${userId}/${receiverId}`);
-      setMessages(res.data);
-      console.log("message came",res.data);
-    } catch (err) {
-      console.error("Error fetching messages:", err);
-    }
-  };
-
+  const roomId = [userId, receiverId].sort((a, b) => a - b).join("-");
  
-  const setupPusher = () => {
-    const channel = pusherClient.subscribe(channelName);
 
+  useEffect(() => {
+    axios
+      .get(`/api/function/history/${userId}/${receiverId}`)
+      .then((res) => setMessages(res.data));
+
+    const channel = pusherClient.subscribe(`chat-${roomId}`);
     channel.bind("new-message", (message: any) => {
-      setMessages((prev) => [...prev, message]);
+      setMessages((prev) => {
+        if (prev.find((m) => m.id === message.id)) return prev;
+        return [...prev, message];
+      });
     });
 
     return () => {
-      pusherClient.unsubscribe(channelName);
+      pusherClient.unsubscribe(`chat-${roomId}`);
     };
-  };
-
- 
-  useEffect(() => {
-    fetchChatHistory();
-    const cleanup = setupPusher();
-    return cleanup;
   }, [userId, receiverId]);
-
-
- 
 
   const sendMessage = async () => {
     if (!input.trim()) return;
-
-    try {
-      await axios.post(`${Url}/api/function/send`, {  
-        senderId: userId,
-        receiverId: receiverId,
-        content: input,
-      });
-
-      setInput("");
-    } catch (err) {
-      console.error("Failed to send message:", err);
-    }
+    await axios.post("/api/function/send", { senderId: userId, receiverId, content: input });
+    setInput("");
   };
-        
+
   return (
     <div className="p-4 max-w-md mx-auto">
       <div className="h-64 overflow-y-auto border rounded p-2 bg-white mb-2">
         {messages.map((msg) => (
-          <div
-            key={`${msg.id}-${msg.createdAt}`}  
-            className={`my-2 ${msg.senderId === userId ? "text-right" : "text-left"}`}
-          >
+          <div key={msg.id} className={`my-2 ${msg.senderId === userId ? "text-right" : "text-left"}`}>
             <div className="inline-block bg-blue-100 px-3 py-2 rounded">{msg.content}</div>
           </div>
         ))}
       </div>
-
       <div className="flex gap-2">
         <input
           value={input}

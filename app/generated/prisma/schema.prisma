@@ -67,6 +67,7 @@ model Message {
   createdAt  DateTime @default(now())
   senderId   Int
   receiverId Int
+  roomId     String   @default("")
   sender     User     @relation("SentMessages", fields: [senderId], references: [id])
   receiver   User     @relation("ReceivedMessages", fields: [receiverId], references: [id])
 }

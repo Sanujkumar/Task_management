@@ -168,7 +168,8 @@ exports.Prisma.MessageScalarFieldEnum = {
   content: 'content',
   createdAt: 'createdAt',
   senderId: 'senderId',
-  receiverId: 'receiverId'
+  receiverId: 'receiverId',
+  roomId: 'roomId'
 };
 
 exports.Prisma.SortOrder = {

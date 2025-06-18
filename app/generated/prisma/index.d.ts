@@ -6034,6 +6034,7 @@ export namespace Prisma {
     createdAt: Date | null
     senderId: number | null
     receiverId: number | null
+    roomId: string | null
   }
 
   export type MessageMaxAggregateOutputType = {
@@ -6042,6 +6043,7 @@ export namespace Prisma {
     createdAt: Date | null
     senderId: number | null
     receiverId: number | null
+    roomId: string | null
   }
 
   export type MessageCountAggregateOutputType = {
@@ -6050,6 +6052,7 @@ export namespace Prisma {
     createdAt: number
     senderId: number
     receiverId: number
+    roomId: number
     _all: number
   }
 
@@ -6072,6 +6075,7 @@ export namespace Prisma {
     createdAt?: true
     senderId?: true
     receiverId?: true
+    roomId?: true
   }
 
   export type MessageMaxAggregateInputType = {
@@ -6080,6 +6084,7 @@ export namespace Prisma {
     createdAt?: true
     senderId?: true
     receiverId?: true
+    roomId?: true
   }
 
   export type MessageCountAggregateInputType = {
@@ -6088,6 +6093,7 @@ export namespace Prisma {
     createdAt?: true
     senderId?: true
     receiverId?: true
+    roomId?: true
     _all?: true
   }
 
@@ -6183,6 +6189,7 @@ export namespace Prisma {
     createdAt: Date
     senderId: number
     receiverId: number
+    roomId: string
     _count: MessageCountAggregateOutputType | null
     _avg: MessageAvgAggregateOutputType | null
     _sum: MessageSumAggregateOutputType | null
@@ -6210,6 +6217,7 @@ export namespace Prisma {
     createdAt?: boolean
     senderId?: boolean
     receiverId?: boolean
+    roomId?: boolean
     sender?: boolean | UserDefaultArgs<ExtArgs>
     receiver?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["message"]>
@@ -6220,6 +6228,7 @@ export namespace Prisma {
     createdAt?: boolean
     senderId?: boolean
     receiverId?: boolean
+    roomId?: boolean
     sender?: boolean | UserDefaultArgs<ExtArgs>
     receiver?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["message"]>
@@ -6230,6 +6239,7 @@ export namespace Prisma {
     createdAt?: boolean
     senderId?: boolean
     receiverId?: boolean
+    roomId?: boolean
     sender?: boolean | UserDefaultArgs<ExtArgs>
     receiver?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["message"]>
@@ -6240,9 +6250,10 @@ export namespace Prisma {
     createdAt?: boolean
     senderId?: boolean
     receiverId?: boolean
+    roomId?: boolean
   }
 
-  export type MessageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "createdAt" | "senderId" | "receiverId", ExtArgs["result"]["message"]>
+  export type MessageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "createdAt" | "senderId" | "receiverId" | "roomId", ExtArgs["result"]["message"]>
   export type MessageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sender?: boolean | UserDefaultArgs<ExtArgs>
     receiver?: boolean | UserDefaultArgs<ExtArgs>
@@ -6268,6 +6279,7 @@ export namespace Prisma {
       createdAt: Date
       senderId: number
       receiverId: number
+      roomId: string
     }, ExtArgs["result"]["message"]>
     composites: {}
   }
@@ -6698,6 +6710,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"Message", 'DateTime'>
     readonly senderId: FieldRef<"Message", 'Int'>
     readonly receiverId: FieldRef<"Message", 'Int'>
+    readonly roomId: FieldRef<"Message", 'String'>
   }
     
 
@@ -7186,7 +7199,8 @@ export namespace Prisma {
     content: 'content',
     createdAt: 'createdAt',
     senderId: 'senderId',
-    receiverId: 'receiverId'
+    receiverId: 'receiverId',
+    roomId: 'roomId'
   };
 
   export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
@@ -7597,6 +7611,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Message"> | Date | string
     senderId?: IntFilter<"Message"> | number
     receiverId?: IntFilter<"Message"> | number
+    roomId?: StringFilter<"Message"> | string
     sender?: XOR<UserScalarRelationFilter, UserWhereInput>
     receiver?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
@@ -7607,6 +7622,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     senderId?: SortOrder
     receiverId?: SortOrder
+    roomId?: SortOrder
     sender?: UserOrderByWithRelationInput
     receiver?: UserOrderByWithRelationInput
   }
@@ -7620,6 +7636,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Message"> | Date | string
     senderId?: IntFilter<"Message"> | number
     receiverId?: IntFilter<"Message"> | number
+    roomId?: StringFilter<"Message"> | string
     sender?: XOR<UserScalarRelationFilter, UserWhereInput>
     receiver?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
@@ -7630,6 +7647,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     senderId?: SortOrder
     receiverId?: SortOrder
+    roomId?: SortOrder
     _count?: MessageCountOrderByAggregateInput
     _avg?: MessageAvgOrderByAggregateInput
     _max?: MessageMaxOrderByAggregateInput
@@ -7646,6 +7664,7 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Message"> | Date | string
     senderId?: IntWithAggregatesFilter<"Message"> | number
     receiverId?: IntWithAggregatesFilter<"Message"> | number
+    roomId?: StringWithAggregatesFilter<"Message"> | string
   }
 
   export type UserCreateInput = {
@@ -7960,6 +7979,7 @@ export namespace Prisma {
   export type MessageCreateInput = {
     content: string
     createdAt?: Date | string
+    roomId?: string
     sender: UserCreateNestedOneWithoutSentMessagesInput
     receiver: UserCreateNestedOneWithoutReceivedMessagesInput
   }
@@ -7970,11 +7990,13 @@ export namespace Prisma {
     createdAt?: Date | string
     senderId: number
     receiverId: number
+    roomId?: string
   }
 
   export type MessageUpdateInput = {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    roomId?: StringFieldUpdateOperationsInput | string
     sender?: UserUpdateOneRequiredWithoutSentMessagesNestedInput
     receiver?: UserUpdateOneRequiredWithoutReceivedMessagesNestedInput
   }
@@ -7985,6 +8007,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     senderId?: IntFieldUpdateOperationsInput | number
     receiverId?: IntFieldUpdateOperationsInput | number
+    roomId?: StringFieldUpdateOperationsInput | string
   }
 
   export type MessageCreateManyInput = {
@@ -7993,11 +8016,13 @@ export namespace Prisma {
     createdAt?: Date | string
     senderId: number
     receiverId: number
+    roomId?: string
   }
 
   export type MessageUpdateManyMutationInput = {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    roomId?: StringFieldUpdateOperationsInput | string
   }
 
   export type MessageUncheckedUpdateManyInput = {
@@ -8006,6 +8031,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     senderId?: IntFieldUpdateOperationsInput | number
     receiverId?: IntFieldUpdateOperationsInput | number
+    roomId?: StringFieldUpdateOperationsInput | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -8393,6 +8419,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     senderId?: SortOrder
     receiverId?: SortOrder
+    roomId?: SortOrder
   }
 
   export type MessageAvgOrderByAggregateInput = {
@@ -8407,6 +8434,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     senderId?: SortOrder
     receiverId?: SortOrder
+    roomId?: SortOrder
   }
 
   export type MessageMinOrderByAggregateInput = {
@@ -8415,6 +8443,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     senderId?: SortOrder
     receiverId?: SortOrder
+    roomId?: SortOrder
   }
 
   export type MessageSumOrderByAggregateInput = {
@@ -9085,6 +9114,7 @@ export namespace Prisma {
   export type MessageCreateWithoutSenderInput = {
     content: string
     createdAt?: Date | string
+    roomId?: string
     receiver: UserCreateNestedOneWithoutReceivedMessagesInput
   }
 
@@ -9093,6 +9123,7 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     receiverId: number
+    roomId?: string
   }
 
   export type MessageCreateOrConnectWithoutSenderInput = {
@@ -9108,6 +9139,7 @@ export namespace Prisma {
   export type MessageCreateWithoutReceiverInput = {
     content: string
     createdAt?: Date | string
+    roomId?: string
     sender: UserCreateNestedOneWithoutSentMessagesInput
   }
 
@@ -9116,6 +9148,7 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     senderId: number
+    roomId?: string
   }
 
   export type MessageCreateOrConnectWithoutReceiverInput = {
@@ -9261,6 +9294,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Message"> | Date | string
     senderId?: IntFilter<"Message"> | number
     receiverId?: IntFilter<"Message"> | number
+    roomId?: StringFilter<"Message"> | string
   }
 
   export type MessageUpsertWithWhereUniqueWithoutReceiverInput = {
@@ -9739,6 +9773,7 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     receiverId: number
+    roomId?: string
   }
 
   export type MessageCreateManyReceiverInput = {
@@ -9746,6 +9781,7 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     senderId: number
+    roomId?: string
   }
 
   export type NotificationUpdateWithoutUserInput = {
@@ -9853,6 +9889,7 @@ export namespace Prisma {
   export type MessageUpdateWithoutSenderInput = {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    roomId?: StringFieldUpdateOperationsInput | string
     receiver?: UserUpdateOneRequiredWithoutReceivedMessagesNestedInput
   }
 
@@ -9861,6 +9898,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     receiverId?: IntFieldUpdateOperationsInput | number
+    roomId?: StringFieldUpdateOperationsInput | string
   }
 
   export type MessageUncheckedUpdateManyWithoutSenderInput = {
@@ -9868,11 +9906,13 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     receiverId?: IntFieldUpdateOperationsInput | number
+    roomId?: StringFieldUpdateOperationsInput | string
   }
 
   export type MessageUpdateWithoutReceiverInput = {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    roomId?: StringFieldUpdateOperationsInput | string
     sender?: UserUpdateOneRequiredWithoutSentMessagesNestedInput
   }
 
@@ -9881,6 +9921,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     senderId?: IntFieldUpdateOperationsInput | number
+    roomId?: StringFieldUpdateOperationsInput | string
   }
 
   export type MessageUncheckedUpdateManyWithoutReceiverInput = {
@@ -9888,6 +9929,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     senderId?: IntFieldUpdateOperationsInput | number
+    roomId?: StringFieldUpdateOperationsInput | string
   }
 
 

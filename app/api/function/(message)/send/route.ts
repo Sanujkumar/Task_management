@@ -11,20 +11,19 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
 
     const { senderId, receiverId, content } = body;
+    const roomId = [senderId, receiverId].sort((a, b) => a - b).join("-");
 
     const message = await prisma.message.create({
         data: {
             content,
             senderId: Number(senderId),
-            receiverId: Number(receiverId)
+            receiverId: Number(receiverId),
+            roomId
         },
         include: { sender: true },
     });
-
-
-    const channelName = `chat-${[senderId, receiverId].sort().join("-")}`;
-
-    await pusherServer.trigger(channelName, "new-message", message);
+     
+    await pusherServer.trigger(`chat-${roomId}`, "new-message", message);
     console.log(message);
     return NextResponse.json({ success: true, message });
 }

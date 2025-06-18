@@ -173,10 +173,10 @@ export default function projectview() {
                         </div>
                     </CardContent>
 
-                    <div className="outline-1 p-2 relative h-40 ">
+                    {/* <div className="outline-1 p-2 relative h-40 ">
                         <h1>Chat</h1>
                         <ChatSection userId={userId} receiverId={receiverId}/>
-                    </div>
+                    </div> */}   
 
                 </div>   
             </div>
