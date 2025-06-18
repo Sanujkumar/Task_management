@@ -156,268 +156,252 @@ export default function Home() {
         console.log('Submitted:', { email, message });
     }
 
-        // return (
-        //     <div className=" h-screen w-full">
-        //         <div className="h-full w-full bg-gray-100">
+    return (
+        <>
+            <div className="relative my-10 flex flex-col items-center justify-center mx-10 z-auto right-auto left-auto">
 
-        //             <div className="flex-row p-10 space-y-10 sm:space-x-4 ">
-
-
-        //             </div>
-
-        //             <Button className='ml-10 ' onClick={() => router.push("/pages/AllProjects")}>
-        //                 show
-        //             </Button>
-
-        //         </div>
-        //     </div>
-        // )
-        return (
-            <>
-                <div className="relative my-10 flex flex-col items-center justify-center mx-10 z-auto right-auto left-auto">
-
-                    <div className="absolute inset-y-0 left-0 h-full w-px bg-neutral-200/80 dark:bg-neutral-800/80">
-                        <div className="absolute top-0 h-40 w-px bg-gradient-to-b from-transparent via-blue-500 to-transparent" />
+                <div className="absolute inset-y-0 left-0 h-full w-px bg-neutral-200/80 dark:bg-neutral-800/80">
+                    <div className="absolute top-0 h-40 w-px bg-gradient-to-b from-transparent via-blue-500 to-transparent" />
+                </div>
+                <div className="absolute inset-y-0 right-0 h-full w-px bg-neutral-200/80 dark:bg-neutral-800/80">
+                    <div className="absolute h-40 w-px bg-gradient-to-b from-transparent via-blue-500 to-transparent" />
+                </div>
+                <div className="absolute inset-x-0 bottom-0 h-px w-full bg-neutral-200/80 dark:bg-neutral-800/80">
+                    <div className="absolute mx-auto h-px w-40 bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
+                </div>
+                <motion.div
+                    initial={{
+                        opacity: 0,
+                        y: 10,
+                    }}
+                    animate={{
+                        opacity: 1,
+                        y: 0,
+                    }}
+                    transition={{
+                        duration: 0.3,
+                        delay: 1.2,
+                    }}
+                    className="relative z-10 rounded-3xl border border-neutral-200 bg-neutral-100 p-4 shadow-md dark:border-neutral-800 dark:bg-neutral-900"
+                >
+                    <div className="w-full overflow-hidden rounded-xl border border-gray-300 dark:border-gray-700">
+                        <img
+                            src="https://assets.aceternity.com/pro/aceternity-landing.webp"
+                            alt="Landing page preview"
+                            className="aspect-[16/9] h-auto w-full object-cover"
+                            height={1000}
+                            width={1000}
+                        />
                     </div>
-                    <div className="absolute inset-y-0 right-0 h-full w-px bg-neutral-200/80 dark:bg-neutral-800/80">
-                        <div className="absolute h-40 w-px bg-gradient-to-b from-transparent via-blue-500 to-transparent" />
-                    </div>
-                    <div className="absolute inset-x-0 bottom-0 h-px w-full bg-neutral-200/80 dark:bg-neutral-800/80">
-                        <div className="absolute mx-auto h-px w-40 bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
-                    </div>
-                    <motion.div
+                </motion.div>
+                <div className="px-4 py-10 md:py-20">
+
+                    <h1 className="relative z-10 mx-auto max-w-4xl text-center text-2xl font-bold text-slate-700 md:text-4xl lg:text-7xl dark:text-slate-300">
+                        {"Launch your website in hours, not days"
+                            .split(" ")
+                            .map((word, index) => (
+                                <motion.span
+                                    key={index}
+                                    initial={{ opacity: 0, filter: "blur(4px)", y: 10 }}
+                                    animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+                                    transition={{
+                                        duration: 0.3,
+                                        delay: index * 0.1,
+                                        ease: "easeInOut",
+                                    }}
+                                    className="mr-2 inline-block"
+                                >
+                                    {word}
+                                </motion.span>
+                            ))}
+                    </h1>
+                    <motion.p
                         initial={{
                             opacity: 0,
-                            y: 10,
                         }}
                         animate={{
                             opacity: 1,
-                            y: 0,
                         }}
                         transition={{
                             duration: 0.3,
-                            delay: 1.2,
+                            delay: 0.8,
                         }}
-                        className="relative z-10 rounded-3xl border border-neutral-200 bg-neutral-100 p-4 shadow-md dark:border-neutral-800 dark:bg-neutral-900"
+                        className="relative z-10 mx-auto max-w-xl py-4 text-center text-lg font-normal text-neutral-600 dark:text-neutral-400"
                     >
-                        <div className="w-full overflow-hidden rounded-xl border border-gray-300 dark:border-gray-700">
-                            <img
-                                src="https://assets.aceternity.com/pro/aceternity-landing.webp"
-                                alt="Landing page preview"
-                                className="aspect-[16/9] h-auto w-full object-cover"
-                                height={1000}
-                                width={1000}
-                            />
-                        </div>
+                        With AI, you can launch your website in hours, not days. Try our best
+                        in class, state of the art, cutting edge AI tools to get your website
+                        up.
+                    </motion.p>
+                    <motion.div
+                        initial={{
+                            opacity: 0,
+                        }}
+                        animate={{
+                            opacity: 1,
+                        }}
+                        transition={{
+                            duration: 0.3,
+                            delay: 1,
+                        }}
+                        className="relative z-10 mt-8 flex flex-wrap items-center justify-center gap-4"
+                    >
+                        <button className="w-60 transform rounded-lg bg-black px-6 py-2 font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200">
+                            Explore Now
+                        </button>
+                        <button className="w-60 transform rounded-lg border border-gray-300 bg-white px-6 py-2 font-medium text-black transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-100 dark:border-gray-700 dark:bg-black dark:text-white dark:hover:bg-gray-900">
+                            Contact Support
+                        </button>
                     </motion.div>
-                    <div className="px-4 py-10 md:py-20">
-
-                        <h1 className="relative z-10 mx-auto max-w-4xl text-center text-2xl font-bold text-slate-700 md:text-4xl lg:text-7xl dark:text-slate-300">
-                            {"Launch your website in hours, not days"
-                                .split(" ")
-                                .map((word, index) => (
-                                    <motion.span
-                                        key={index}
-                                        initial={{ opacity: 0, filter: "blur(4px)", y: 10 }}
-                                        animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-                                        transition={{
-                                            duration: 0.3,
-                                            delay: index * 0.1,
-                                            ease: "easeInOut",
-                                        }}
-                                        className="mr-2 inline-block"
-                                    >
-                                        {word}
-                                    </motion.span>
-                                ))}
-                        </h1>
-                        <motion.p
-                            initial={{
-                                opacity: 0,
-                            }}
-                            animate={{
-                                opacity: 1,
-                            }}
-                            transition={{
-                                duration: 0.3,
-                                delay: 0.8,
-                            }}
-                            className="relative z-10 mx-auto max-w-xl py-4 text-center text-lg font-normal text-neutral-600 dark:text-neutral-400"
-                        >
-                            With AI, you can launch your website in hours, not days. Try our best
-                            in class, state of the art, cutting edge AI tools to get your website
-                            up.
-                        </motion.p>
-                        <motion.div
-                            initial={{
-                                opacity: 0,
-                            }}
-                            animate={{
-                                opacity: 1,
-                            }}
-                            transition={{
-                                duration: 0.3,
-                                delay: 1,
-                            }}
-                            className="relative z-10 mt-8 flex flex-wrap items-center justify-center gap-4"
-                        >
-                            <button className="w-60 transform rounded-lg bg-black px-6 py-2 font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200">
-                                Explore Now
-                            </button>
-                            <button className="w-60 transform rounded-lg border border-gray-300 bg-white px-6 py-2 font-medium text-black transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-100 dark:border-gray-700 dark:bg-black dark:text-white dark:hover:bg-gray-900">
-                                Contact Support
-                            </button>
-                        </motion.div>
 
 
-
-                    </div>
 
                 </div>
 
-                <h1 className="text-white text-3xl text-center py-4 font-extrabold">Feature Section</h1>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  relative z-10 py-10 max-w-7xl mx-auto">
-                    {features.map((feature, index) => (
-                        <Feature key={feature.title} {...feature} index={index} />
-                    ))}
-                </div>
+            </div>
 
-                <h1 className="text-white text-3xl text-center py-4 font-extrabold">Testimonial</h1>
-                <AnimatedTestimonials testimonials={testimonials} />
+            <h1 className="text-white text-3xl text-center py-4 font-extrabold">Feature Section</h1>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  relative z-10 py-10 max-w-7xl mx-auto">
+                {features.map((feature, index) => (
+                    <Feature key={feature.title} {...feature} index={index} />
+                ))}
+            </div>
+
+            <h1 className="text-white text-3xl text-center py-4 font-extrabold">Testimonial</h1>
+            <AnimatedTestimonials testimonials={testimonials} />
 
 
-                <div className="min-h-screen bg-gray-100 dark:bg-gray-900 relative">
+            <div className="min-h-screen bg-gray-100 dark:bg-gray-900 relative">
 
-                    <div className="relative w-full max-w-xl flex flex-col items-center justify-center mx-auto">
-                        <div className="bg-gray-100 dark:bg-gray-900 py-12 pt-36 relative">
-                            <div className="max-w-2xl mx-auto p-4 relative z-10">
-                                {' '}
-                                {/* Add relative and z-10 to bring content to the front */}
-                                <h1 className="text-lg md:text-7xl text-center font-sans font-bold mb-8 text-white">
-                                    Contact Us
-                                </h1>
-                                <p className="text-neutral-500 max-w-lg mx-auto my-2 text-sm text-center">
-                                    We&apos;re here to help with any questions about our courses,
-                                    programs, or events. Reach out and let us know how we can assist you
-                                    in your musical journey.
-                                </p>
-                                <form onSubmit={handleSubmit} className="space-y-4 mt-4">
-                                    <input
-                                        type="email"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        placeholder="Your email address"
-                                        className="rounded-lg border border-neutral-800 focus:ring-2 focus:ring-teal-500 w-full p-4 bg-neutral-950 placeholder:text-neutral-700"
-                                        required
-                                    />
-                                    <textarea
-                                        value={message}
-                                        onChange={(e) => setMessage(e.target.value)}
-                                        placeholder="Your message"
-                                        className="rounded-lg border border-neutral-800 focus:ring-2 focus:ring-teal-500 w-full p-4 bg-neutral-950 placeholder:text-neutral-700"
-                                        rows={5}
-                                        required
-                                    ></textarea>
-                                    <button
-                                        type="submit"
-                                        className="px-6 py-2 rounded-lg bg-teal-500 text-white font-medium hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
-                                    >
-                                        Send Message
-                                    </button>
-                                </form>
-                            </div>
+                <div className="relative w-full max-w-xl flex flex-col items-center justify-center mx-auto">
+                    <div className="bg-gray-100 dark:bg-gray-900 py-12 pt-36 relative">
+                        <div className="max-w-2xl mx-auto p-4 relative z-10">
+                            {' '}
+                            {/* Add relative and z-10 to bring content to the front */}
+                            <h1 className="text-lg md:text-7xl text-center font-sans font-bold mb-8 text-white">
+                                Contact Us
+                            </h1>
+                            <p className="text-neutral-500 max-w-lg mx-auto my-2 text-sm text-center">
+                                We&apos;re here to help with any questions about our courses,
+                                programs, or events. Reach out and let us know how we can assist you
+                                in your musical journey.
+                            </p>
+                            <form onSubmit={handleSubmit} className="space-y-4 mt-4">
+                                <input
+                                    type="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    placeholder="Your email address"
+                                    className="rounded-lg border border-neutral-800 focus:ring-2 focus:ring-teal-500 w-full p-4 bg-neutral-950 placeholder:text-neutral-700"
+                                    required
+                                />
+                                <textarea
+                                    value={message}
+                                    onChange={(e) => setMessage(e.target.value)}
+                                    placeholder="Your message"
+                                    className="rounded-lg border border-neutral-800 focus:ring-2 focus:ring-teal-500 w-full p-4 bg-neutral-950 placeholder:text-neutral-700"
+                                    rows={5}
+                                    required
+                                ></textarea>
+                                <button
+                                    type="submit"
+                                    className="px-6 py-2 rounded-lg bg-teal-500 text-white font-medium hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
+                                >
+                                    Send Message
+                                </button>
+                            </form>
                         </div>
-
                     </div>
+
                 </div>
+            </div>
 
 
-                <div className="mt-10">
-                    <footer className='bg-black text-gray-400 py-12'>
-                        <div className='max-w-6xl grid grid-cols-1
+            <div className="mt-10">
+                <footer className='bg-black text-gray-400 py-12'>
+                    <div className='max-w-6xl grid grid-cols-1
         sm:grid-cols-2 lg:grid-cols-4 gap-8 px-4 sm:px-6 lg:px-8 ml-32 lg:mx-auto'>
-                            <div>
-                                <h2 className="text-white text-lg font-semibold mb-4">About Us</h2>
-                                <p className="mb-4">
-                                    Music School is a premier institution dedicated to teaching the art
-                                    and science of music. We nurture talent from the ground up,
-                                    fostering a vibrant community of musicians.
-                                </p>
-                            </div>
-                            <div>
-                                <h2 className="text-white text-lg font-semibold mb-4">Quick Links</h2>
-                                <ul>
-                                    <li>
-                                        <a
-                                            href="#"
-                                            className="hover:text-white transition-colors duration-300"
-                                        >
-                                            Home
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a
-                                            href="#"
-                                            className="hover:text-white transition-colors duration-300"
-                                        >
-                                            About
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a
-                                            href="#"
-                                            className="hover:text-white transition-colors duration-300"
-                                        >
-                                            Courses
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a
-                                            href="#"
-                                            className="hover:text-white transition-colors duration-300"
-                                        >
-                                            Contact
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h2 className="text-white text-lg font-semibold mb-4">Follow Us</h2>
-                                <div className="flex space-x-4">
+                        <div>
+                            <h2 className="text-white text-lg font-semibold mb-4">About Us</h2>
+                            <p className="mb-4">
+                                Music School is a premier institution dedicated to teaching the art
+                                and science of music. We nurture talent from the ground up,
+                                fostering a vibrant community of musicians.
+                            </p>
+                        </div>
+                        <div>
+                            <h2 className="text-white text-lg font-semibold mb-4">Quick Links</h2>
+                            <ul>
+                                <li>
                                     <a
                                         href="#"
                                         className="hover:text-white transition-colors duration-300"
                                     >
-                                        Facebook
+                                        Home
                                     </a>
+                                </li>
+                                <li>
                                     <a
                                         href="#"
                                         className="hover:text-white transition-colors duration-300"
                                     >
-                                        Twitter
+                                        About
                                     </a>
+                                </li>
+                                <li>
                                     <a
                                         href="#"
                                         className="hover:text-white transition-colors duration-300"
                                     >
-                                        Instagram
+                                        Courses
                                     </a>
-                                </div>
-                            </div>
-                            <div>
-                                <h2 className="text-white text-lg font-semibold mb-4">Contact Us</h2>
-                                <p>New Delhi, India</p>
-                                <p>Delhi 10001</p>
-                                <p>Email: info@musicschool.com</p>
-                                <p>Phone: (123) 456-7890</p>
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        className="hover:text-white transition-colors duration-300"
+                                    >
+                                        Contact
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h2 className="text-white text-lg font-semibold mb-4">Follow Us</h2>
+                            <div className="flex space-x-4">
+                                <a
+                                    href="#"
+                                    className="hover:text-white transition-colors duration-300"
+                                >
+                                    Facebook
+                                </a>
+                                <a
+                                    href="#"
+                                    className="hover:text-white transition-colors duration-300"
+                                >
+                                    Twitter
+                                </a>
+                                <a
+                                    href="#"
+                                    className="hover:text-white transition-colors duration-300"
+                                >
+                                    Instagram
+                                </a>
                             </div>
                         </div>
-                        <p className="text-center text-xs pt-8">© 2024 Music School. All rights reserved.</p>
+                        <div>
+                            <h2 className="text-white text-lg font-semibold mb-4">Contact Us</h2>
+                            <p>New Delhi, India</p>
+                            <p>Delhi 10001</p>
+                            <p>Email: info@musicschool.com</p>
+                            <p>Phone: (123) 456-7890</p>
+                        </div>
+                    </div>
+                    <p className="text-center text-xs pt-8">© 2024 Music School. All rights reserved.</p>
 
-                    </footer>
-                </div>
-            </>
-        );
+                </footer>
+            </div>
+        </>
+    );
 
-    
+
 }
