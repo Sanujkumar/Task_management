@@ -18,7 +18,9 @@ model User {
   notificaion   Notification[]  
   assignedTasks Task[]         @relation("AssignedTasks")
   tasks         Task[]         @relation("CreatedTasks")
-  UserDetailInfo      UserDetailInfo?     
+  UserDetailInfo       UserDetailInfo?     
+  sentMessages      Message[] @relation("SentMessages")
+  receivedMessages  Message[] @relation("ReceivedMessages")
 }  
 
 model Task {
@@ -60,7 +62,15 @@ model UserDetailInfo {
   user           User    @relation(fields: [userId], references: [id])
 }
 
-   
+model Message {
+  id           Int     @id  @default(autoincrement())   
+  content      String     
+  createdAt    DateTime  @default(now())  
+  senderId     Int
+  receiverId   Int
+  sender     User     @relation("SentMessages", fields: [senderId], references: [id])
+  receiver   User     @relation("ReceivedMessages", fields: [receiverId], references: [id])  
+}
   
 
 

@@ -1,3 +1,5 @@
+
+
 "use client";
 
 import { useEffect, useState } from "react";
@@ -7,26 +9,24 @@ import { Url } from "@/lib/config";
 
 interface Props{
   userId: number,
-  partnerId: number
+  receiverId: number
 }
 
 // const userId = 4;
 //   const partnerId = 16;   
 
 
-export default function ChatBox({userId,partnerId}:Props) {
+export default function ChatBox({userId,receiverId}:Props) {
   const [messages, setMessages] = useState<any[]>([]);
   const [input, setInput] = useState("");
 
-  const channelName = `chat-${[userId, partnerId].sort().join("-")}`;
+  const channelName = `chat-${[userId, receiverId].sort().join("-")}`;
 
   const fetchChatHistory = async () => {
     try {
-      const res = await axios.post(`${Url}/api/function/history`, {
-        senderId: userId,
-        receiverId: partnerId,
-      });
+      const res = await axios.get(`${Url}/api/function/history/${userId}/${receiverId}`);
       setMessages(res.data);
+      console.log("message came",res.data);
     } catch (err) {
       console.error("Error fetching messages:", err);
     }
@@ -50,7 +50,7 @@ export default function ChatBox({userId,partnerId}:Props) {
     fetchChatHistory();
     const cleanup = setupPusher();
     return cleanup;
-  }, [userId, partnerId]);
+  }, [userId, receiverId]);
 
 
  
@@ -61,7 +61,7 @@ export default function ChatBox({userId,partnerId}:Props) {
     try {
       await axios.post(`${Url}/api/function/send`, {  
         senderId: userId,
-        receiverId: partnerId,
+        receiverId: receiverId,
         content: input,
       });
 
@@ -76,7 +76,7 @@ export default function ChatBox({userId,partnerId}:Props) {
       <div className="h-64 overflow-y-auto border rounded p-2 bg-white mb-2">
         {messages.map((msg) => (
           <div
-            key={msg.id}
+            key={`${msg.id}-${msg.createdAt}`}  
             className={`my-2 ${msg.senderId === userId ? "text-right" : "text-left"}`}
           >
             <div className="inline-block bg-blue-100 px-3 py-2 rounded">{msg.content}</div>

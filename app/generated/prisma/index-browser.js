@@ -163,6 +163,14 @@ exports.Prisma.UserDetailInfoScalarFieldEnum = {
   userId: 'userId'
 };
 
+exports.Prisma.MessageScalarFieldEnum = {
+  id: 'id',
+  content: 'content',
+  createdAt: 'createdAt',
+  senderId: 'senderId',
+  receiverId: 'receiverId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -183,7 +191,8 @@ exports.Prisma.ModelName = {
   User: 'User',
   Task: 'Task',
   Notification: 'Notification',
-  UserDetailInfo: 'UserDetailInfo'
+  UserDetailInfo: 'UserDetailInfo',
+  Message: 'Message'
 };
 
 /**

@@ -10,12 +10,10 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import ProjectVDSkeleton from "../../../../../skeltons/projectVDSkeleton";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import Image from "next/image";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import ChatSection from "../../../../../components/chatSection"
 
 interface dataTypes {
-    id: number;
+    id: number;  
     title: string;
     description: string;
     date: string;
@@ -77,22 +75,13 @@ export default function projectview() {
             <div><ProjectVDSkeleton /></div>
         )
     }
-
-
+    const userId = Number(session?.user.id);
+    const receiverId = data?.user.id;  
     const name = data?.user.name
     const firstLetter = name.charAt(0).toUpperCase();
     const image = data.user.image;
     console.log("user Image", image);
     console.log("pdfUrlLAst", data.pdfUrl);
-
-    // const image = "https://img.freepik.com/free-photo/handsome-bearded-guy-posing-against-white-wall_273609-20598.jpg?semt=ais_hybrid&w=740"
-
-
-
-    const sampleUrl = "https://res.cloudinary.com/dl9on566k/raw/upload/v1749826377/tasks/docs/filename-1749826376814"
-
-
-
 
     return (
         <div className="bg-white w-full h-screen">
@@ -186,11 +175,10 @@ export default function projectview() {
 
                     <div className="outline-1 p-2 relative h-40 ">
                         <h1>Chat</h1>
-                        <Input placeholder="type here" className="rounded-4xl" />
-                        <Button className="absolute right-4">send</Button>
+                        <ChatSection userId={userId} receiverId={receiverId}/>
                     </div>
 
-                </div>
+                </div>   
             </div>
         </div>
     )
