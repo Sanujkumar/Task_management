@@ -14,6 +14,8 @@ import { motion } from "motion/react";
 import { useState, FormEvent } from "react";
 import { useRouter } from 'next/navigation';
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
+import { useSession } from "next-auth/react";
+import { Session } from "inspector/promises";
 
 
 const Feature = ({
@@ -66,38 +68,17 @@ export default function Home() {
         {
             quote:
                 "The attention to detail and innovative features have completely transformed our workflow. This is exactly what we've been looking for.",
-            name: "Sarah Chen",
-            designation: "Product Manager at TechFlow",
-            src: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            name: "Sanuj Kumar",
+            designation: "full-stack developer ",
+            src: "/images/sanujp1-image.jpg",
         },
         {
             quote:
                 "Implementation was seamless and the results exceeded our expectations. The platform's flexibility is remarkable.",
-            name: "Michael Rodriguez",
-            designation: "CTO at InnovateSphere",
-            src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        },
-        {
-            quote:
-                "This solution has significantly improved our team's productivity. The intuitive interface makes complex tasks simple.",
-            name: "Emily Watson",
-            designation: "Operations Director at CloudScale",
-            src: "https://images.unsplash.com/photo-1623582854588-d60de57fa33f?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        },
-        {
-            quote:
-                "Outstanding support and robust features. It's rare to find a product that delivers on all its promises.",
-            name: "James Kim",
-            designation: "Engineering Lead at DataPro",
-            src: "https://images.unsplash.com/photo-1636041293178-808a6762ab39?q=80&w=3464&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        },
-        {
-            quote:
-                "The scalability and performance have been game-changing for our organization. Highly recommend to any growing business.",
-            name: "Lisa Thompson",
-            designation: "VP of Technology at FutureNet",
-            src: "https://images.unsplash.com/photo-1624561172888-ac93c696e10c?q=80&w=2592&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        },
+            name: "Sanuj kumar",
+            designation: "Devops engineer",
+            src: "/images/sanuj2-image.jpg",
+        }
     ];
 
     const features = [
@@ -147,9 +128,13 @@ export default function Home() {
             icon: <IconHeart />,
         },
     ];
+
+    
     const router = useRouter();
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
+
+     const {data:session,status} = useSession();
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -158,7 +143,7 @@ export default function Home() {
 
     return (
         <>
-            <div className="relative my-10 flex flex-col items-center justify-center mx-10 z-auto right-auto left-auto">
+            <div className="relative my-2 flex flex-col items-center justify-center mx-4 z-auto right-auto left-auto">
 
                 <div className="absolute inset-y-0 left-0 h-full w-px bg-neutral-200/80 dark:bg-neutral-800/80">
                     <div className="absolute top-0 h-40 w-px bg-gradient-to-b from-transparent via-blue-500 to-transparent" />
@@ -197,7 +182,7 @@ export default function Home() {
                 <div className="px-4 py-10 md:py-20">
 
                     <h1 className="relative z-10 mx-auto max-w-4xl text-center text-2xl font-bold text-slate-700 md:text-4xl lg:text-7xl dark:text-slate-300">
-                        {"Launch your website in hours, not days"
+                        {"Find skills full work related to own skills and earn money"
                             .split(" ")
                             .map((word, index) => (
                                 <motion.span
@@ -228,9 +213,7 @@ export default function Home() {
                         }}
                         className="relative z-10 mx-auto max-w-xl py-4 text-center text-lg font-normal text-neutral-600 dark:text-neutral-400"
                     >
-                        With AI, you can launch your website in hours, not days. Try our best
-                        in class, state of the art, cutting edge AI tools to get your website
-                        up.
+                        
                     </motion.p>
                     <motion.div
                         initial={{
@@ -245,12 +228,14 @@ export default function Home() {
                         }}
                         className="relative z-10 mt-8 flex flex-wrap items-center justify-center gap-4"
                     >
-                        <button className="w-60 transform rounded-lg bg-black px-6 py-2 font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200">
-                            Explore Now
+                        <button onClick={() => router.push('/pages/AllProjects')} className="w-60 transform rounded-lg bg-black px-6 py-2 font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200">
+                            FindProjects
                         </button>
-                        <button className="w-60 transform rounded-lg border border-gray-300 bg-white px-6 py-2 font-medium text-black transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-100 dark:border-gray-700 dark:bg-black dark:text-white dark:hover:bg-gray-900">
-                            Contact Support
+                        {status==="unauthenticated" && (   
+                        <button  className="w-60 transform rounded-lg border border-gray-300 bg-white px-6 py-2 font-medium text-black transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-100 dark:border-gray-700 dark:bg-black dark:text-white dark:hover:bg-gray-900">
+                           Login
                         </button>
+                        )}
                     </motion.div>
 
 
