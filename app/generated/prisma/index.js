@@ -158,7 +158,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\sanuj\\OneDrive\\Desktop\\task_mangment\\app\\generated\\prisma",
+      "value": "C:\\Users\\Dell\\task_management\\Task_management\\app\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -172,12 +172,11 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\sanuj\\OneDrive\\Desktop\\task_mangment\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\Dell\\task_management\\Task_management\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
-    "schemaEnvPath": "../../../.env"
+    "rootEnvPath": null
   },
   "relativePath": "../../../prisma",
   "clientVersion": "6.8.2",
@@ -186,6 +185,7 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
