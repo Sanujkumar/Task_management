@@ -11,19 +11,20 @@ import ProfileSkeleton from "../../../../../skeltons/profileSkeleton";
 import { Url } from "../../../../../lib/config";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Label } from "@radix-ui/react-dropdown-menu";
+
 
 
 import toast from "react-hot-toast";
+import ProfileDetailInfo from "@/components/ProfileDetailInfo";
 
-   interface dataTypes {
-        name: string;
-        email: string;
-        phone: number;
-        skills: string;
-        about: string;
-        image: string;
-    }
+interface dataTypes {
+    name: string;
+    email: string;
+    phone: number;
+    skills: string;
+    about: string;
+    image: string;
+}
 
 
 export default function ProfileFunction() {
@@ -33,8 +34,8 @@ export default function ProfileFunction() {
     const router = useRouter();
 
 
- 
-   
+
+
     const user = session?.user;
     const userId = user?.id;
 
@@ -70,12 +71,12 @@ export default function ProfileFunction() {
     console.log("name", data?.name);
     const name = data?.name || "U";
     const firstLetter = name.charAt(0).toUpperCase();
-    
+
 
     return (
         <div className="bg-gray-100 h-screen w-full">
             <div className="h-full w-full p-4">
-                <div className="bg-white  h-auto w-auto outline-1 p-4 space-y-4">
+                <div className="bg-white h-auto w-auto outline-1 p-4 space-y-4">
                     <div className="flex flex-row p-5 gap-6 bg-white   rounded-4xl outline-1 ">
                         <div className="flex flex-col justify-center text-center">
                             <div>
@@ -87,7 +88,7 @@ export default function ProfileFunction() {
                                         ) : (
                                             <AvatarFallback>{firstLetter}</AvatarFallback>
                                         )}
-                                    </Avatar>  
+                                    </Avatar>
                                 </div>
                             </div>
                             <div>
@@ -104,38 +105,28 @@ export default function ProfileFunction() {
                                 <span>phone no =</span>
                                 <div>{data?.phone}</div>
                             </div>
-                            <div className="pt-8">
-                                <Button onClick={ShowAllTasks}>AllTasks</Button>
+                            <div className="flex space-x-2">
+                                <div className="pt-8">
+                                    <Button onClick={ShowAllTasks}>AllTasks</Button>
+                                </div>
+                                <div className="pt-8">
+                                    <Button
+                                        onClick={() =>
+                                            router.push(`${Url}/pages/profile/profileUpdateForm/${userId}`)
+                                        }
+
+                                    >
+                                        Update
+                                    </Button>
+                                </div>
                             </div>
                         </div>
-                    </div>  
-                    <div className=" p-5  bg-white rounded-4xl space-y-4 outline-1">
+                    </div>
+                    <div className=" p-5  bg-white rounded-4xl  outline-1 ">
                         <div>
-                            <Label className="pb-2 ">your skills</Label>
-                            {data?.skills ? (
-                                <p className="text-md text-gray-700"> {data.skills}</p>
-                            ) : (
-                                <p className="text-sm text-gray-400">No skills added yet.</p>
-                            )}
+                            <ProfileDetailInfo />
                         </div>
-                        <div>
-                            <Label className="pb-2 ">About</Label>
-                            {data?.about ? (
-                                <p className="text-md text-gray-700">{data?.about}</p>
-                            ) : (
-                                <p className="text-gray-400 text-sm">this about section </p>
-                            )}
-                        </div>
-                        <div className="">
-                            <Button
-                                onClick={() =>
-                                    router.push(`${Url}/pages/profile/profileUpdateForm/${userId}`)
-                                }
 
-                            >
-                                Update
-                            </Button>
-                        </div>
                     </div>
                 </div>
             </div>

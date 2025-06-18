@@ -126,8 +126,6 @@ exports.Prisma.UserScalarFieldEnum = {
   password: 'password',
   name: 'name',
   phone: 'phone',
-  skills: 'skills',
-  about: 'about',
   image: 'image'
 };
 
@@ -153,6 +151,18 @@ exports.Prisma.NotificationScalarFieldEnum = {
   userId: 'userId'
 };
 
+exports.Prisma.UserDetailInfoScalarFieldEnum = {
+  id: 'id',
+  skills: 'skills',
+  about: 'about',
+  resume: 'resume',
+  experience: 'experience',
+  linkdinUrl: 'linkdinUrl',
+  githubUrl: 'githubUrl',
+  highestDegree: 'highestDegree',
+  userId: 'userId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -172,7 +182,8 @@ exports.Prisma.NullsOrder = {
 exports.Prisma.ModelName = {
   User: 'User',
   Task: 'Task',
-  Notification: 'Notification'
+  Notification: 'Notification',
+  UserDetailInfo: 'UserDetailInfo'
 };
 
 /**

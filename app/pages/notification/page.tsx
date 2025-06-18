@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";  
 import NotificationSkeleton from "../../../skeltons/notificationSkeleton";  
 import { Url } from "../../../lib/config";
+import toast from "react-hot-toast";
 
 
 export default function Notification() {
@@ -17,7 +18,7 @@ export default function Notification() {
 
   useEffect(() =>{
     if(status==="unauthenticated"){
-      alert("your are not login");
+      toast.error("your are not login");
       router.push(`${Url}`);
     }
   },[]);    
