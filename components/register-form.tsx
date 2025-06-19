@@ -4,12 +4,13 @@ import { Button } from "../components/ui/button"
 import { Card, CardContent } from "../components/ui/card"
 import { Input } from "../components/ui/input"
 import { Label } from "../components/ui/label"
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import axios from "axios";
 import { useRouter } from 'next/navigation';
 import { Url } from "../lib/config"
 import toast from "react-hot-toast"
-
+import Image from "next/image"
+import { userSchema } from "../lib/zod";
 
 export default function Signup({
     className,
@@ -20,29 +21,75 @@ export default function Signup({
     const passwordRef = useRef<HTMLInputElement | null>(null);
     const phoneRef = useRef<HTMLInputElement | null>(null);
     const nameRef = useRef<HTMLInputElement | null>(null);
-  
-    const handleSubmitSignup = async (e:React.FormEvent) => {
-         e.preventDefault();
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [phone, setPhone] = useState("");
+    const [name, setName] = useState("");
+
+    const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+
+    const validateField = (field: string, value: any) => {
+        const singleFieldSchema = userSchema.shape[field as keyof typeof userSchema.shape];
+        if (!singleFieldSchema) return;
+        const result = singleFieldSchema.safeParse(value);
+
+        setFormErrors((prev) => {
+            const updated = { ...prev };
+            if (!result.success) {
+                updated[field] = result.error.errors[0].message;
+            } else {
+                delete updated[field];
+            }
+            return updated;
+        });  
+    };
+
+
+    
+
+    const handleSubmitSignup = async (e: React.FormEvent) => {
+        e.preventDefault();
         const email = emailRef.current?.value;
         const password = passwordRef.current?.value;
-        const phone = phoneRef.current?.value;    
+        const phone = phoneRef.current?.value;
         const name = nameRef.current?.value;
 
-        
+
+    const result = userSchema.safeParse({email,password,phone,name});
+
+    if (!result.success) {
+        const errorMap: Record<string, string> = {};
+        const errors: any = result.error.format();
+        for (const key in errors) {
+            if (errors[key]?._errors?.[0]) {
+                errorMap[key] = errors[key]._errors[0];
+            }
+        }
+        setFormErrors(errorMap);
+        toast.error("Validation failed!");
+        return;
+    } else {
+        setFormErrors({});
+    }  
+
+
+
         if (!email || !password || !phone || !name) {
             alert("Please fill all fields");
-            return;  
+            return;
         }
+
         try {
             const res = await axios.post(`${Url}/api/register`, {
                 email,
                 password,
-                phone,    
+                phone,
                 name
-            });  
-      
+            });
+
             if (res.status == 201) {
-                toast.success("your are successfully signup");  
+                toast.success("your are successfully signup");
                 router.push(`${Url}/auth/login`);
             } else {
                 toast.error("Signup failed. Please try again.");
@@ -52,6 +99,9 @@ export default function Signup({
             console.log("something went wrong", error);
         }
     }
+
+
+   
 
 
     return (
@@ -72,27 +122,40 @@ export default function Signup({
                                     id="email"
                                     type="email"
                                     placeholder="m@example.com"
-                                    required
                                     ref={emailRef}
+                                    onChange={(e) => {
+                                        setEmail(e.target.value);
+                                        validateField("email", e.target.value)
+                                    }}
+                                     className={`border p-2  ${formErrors.email ? "border-red-500" : "border-gray-500"}`}
+    
                                 />
+                                <p className="text-sm text-gray-500">
+                                    {email.length || 0}/50 characters
+                                </p>
+                                {formErrors.email && <p className="text-sm text-red-500">{formErrors.email}</p>}
                             </div>
                             <div className="grid gap-2">
                                 <div className="flex items-center">
                                     <Label htmlFor="password">Password</Label>
-                                    <a
-                                        href="#"
-                                        className="ml-auto text-sm underline-offset-2 hover:underline"
-                                    >
-                                        Forgot your password?
-                                    </a>
                                 </div>
                                 <Input
                                     id="password"
                                     type="password"
                                     required
                                     ref={passwordRef}
+                                    onChange={(e) => {
+                                        setPassword(e.target.value);
+                                        validateField("password", e.target.value)
+                                    }}
+                                     className={`border p-2  ${formErrors.password ? "border-red-500" : "border-gray-500"}`}
+    
                                 />
-                            </div>
+                                <p className="text-sm text-gray-500">
+                                    {password.length || 0} / 4
+                                </p>
+                                {formErrors.password && <p className="text-sm text-red-500">{formErrors.password}</p>}
+                            </div>  
                             <div className="grid gap-2">
                                 <Label htmlFor="email">Phone</Label>
                                 <Input
@@ -100,8 +163,18 @@ export default function Signup({
                                     type="tel"  
                                     required
                                     ref={phoneRef}
+                                    onChange={(e) => {
+                                        setPhone(e.target.value);
+                                        validateField("phone", e.target.value)
+                                    }}
+                                     className={`border p-2  ${formErrors.phone ? "border-red-500" : "border-gray-500"}`}
+    
                                 />
-                            </div>
+                                <p className="text-sm text-gray-500">
+                                    {phone.length || 0} / 10
+                                </p>
+                                {formErrors.phone && <p className="text-sm text-red-500">{formErrors.phone}</p>}
+                            </div>  
                             <div className="grid gap-2">
                                 <Label htmlFor="email">name</Label>
                                 <Input
@@ -110,33 +183,41 @@ export default function Signup({
                                     placeholder="name"
                                     required
                                     ref={nameRef}
+                                    onChange={(e) => {
+                                        setName(e.target.value);
+                                        validateField("name", e.target.value)
+                                    }}
+                                     className={`border p-2  ${formErrors.name ? "border-red-500" : "border-gray-500"}`}
+    
                                 />
-                            </div>
+                                <p className="text-sm text-gray-500">
+                                    {name.length || 0} / 30
+                                </p>     
+                                {formErrors.name && <p className="text-sm text-red-500">{formErrors.name}</p>}
+                            </div>  
                             <Button type="submit" className="w-full">
                                 Signup
                             </Button>
 
                             <div className="text-center text-sm">
-                                Don&apos;t have an account?{" "}
-                                <a href="#" className="underline underline-offset-4">
-                                    Sign up
+                                Do you have already an account?{" "}
+                                <a href="/auth/login" className="underline underline-offset-4">
+                                    Login
                                 </a>
                             </div>
                         </div>
                     </form>
                     <div className="relative hidden bg-muted md:block">
-                        <img
-                            src="/placeholder.svg"
+                        <Image
+                            src="/images/leftsinup-image.png"
                             alt="Image"
-                            className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+                            fill
+                            className="absolute inset-0 object-cover dark:brightness-[0.5] dark:grayscale"
                         />
                     </div>
                 </CardContent>
             </Card>
-            <div className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-primary">
-                By clicking continue, you agree to our <a href="#">Terms of Service</a>{" "}
-                and <a href="#">Privacy Policy</a>.
-            </div>
+
         </div>
     )
 }

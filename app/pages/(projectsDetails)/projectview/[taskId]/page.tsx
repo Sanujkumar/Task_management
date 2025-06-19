@@ -4,7 +4,6 @@ import axios from "axios";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import AllTasksSkelaton from "../../../../../skeltons/alltaskSkelaton";
 import { Card, CardAction, CardContent, CardDescription, CardTitle } from "@/components/ui/card";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -134,7 +133,6 @@ export default function projectview() {
                                     <div className="mt-4 ">
                                         <p className="font-semibold">PDF Preview:</p>
                                         <iframe
-                                            // src={`https://docs.google.com/gview?url=${data.pdfUrl}&embedded=true`}
                                             src={`https://docs.google.com/gview?url=${data.pdfUrl}&embedded=true`}
                                             style={{
                                                 width: "250px",
@@ -162,7 +160,6 @@ export default function projectview() {
 
                         </div>
                     </CardContent>
-
 
                     <CardContent className=" rounded-4xl h-auto p-4 bg-white hover:bg-gray-100 outline-1">
                         <CardTitle>contact details</CardTitle>

@@ -9,18 +9,18 @@ datasource db {
 }
 
 model User {
-  id            Int            @id @default(autoincrement())
-  email         String         @unique
-  password      String
-  name          String?
-  phone         String?
-  image         String?   
-  notificaion   Notification[]  
-  assignedTasks Task[]         @relation("AssignedTasks")
-  tasks         Task[]         @relation("CreatedTasks")
-  UserDetailInfo       UserDetailInfo?     
-  sentMessages      Message[] @relation("SentMessages")
-  receivedMessages  Message[] @relation("ReceivedMessages")
+  id                 Int            @id @default(autoincrement())
+  email              String         @unique
+  password           String
+  name               String?
+  phone              String?
+  image              String?   
+  notificaion        Notification[]  
+  assignedTasks      Task[]         @relation("AssignedTasks")
+  tasks              Task[]         @relation("CreatedTasks")
+  UserDetailInfo     UserDetailInfo?     
+  sentMessages       Message[] @relation("SentMessages")
+  receivedMessages   Message[] @relation("ReceivedMessages")
 }  
 
 model Task {
@@ -42,17 +42,17 @@ model Task {
 }   
 
 model Notification {
-  id      Int    @id @default(autoincrement())
-  message String
-  userId  Int
-  user    User   @relation(fields: [userId], references: [id])
+  id          Int    @id @default(autoincrement())
+  message     String
+  userId      Int
+  user        User   @relation(fields: [userId], references: [id])
 }
 
 
 model UserDetailInfo {
   id             Int     @id @default(autoincrement())
-  skills        String?
-  about         String?  
+  skills         String?
+  about          String?  
   resume         String?
   experience     String?
   linkdinUrl     String?
@@ -69,8 +69,8 @@ model Message {
   senderId     Int
   receiverId   Int
   roomId       String    @default("")    
-  sender     User     @relation("SentMessages", fields: [senderId], references: [id])
-  receiver   User     @relation("ReceivedMessages", fields: [receiverId], references: [id])  
+  sender       User     @relation("SentMessages", fields: [senderId], references: [id])
+  receiver     User     @relation("ReceivedMessages", fields: [receiverId], references: [id])  
 }
   
 
