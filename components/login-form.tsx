@@ -10,14 +10,35 @@ import { useRouter } from "next/navigation";
 import { Url } from "../lib/config"
 import toast from "react-hot-toast"
 import Image from "next/image"
+import { userSchema } from "../lib/zod";
+
 export default function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  const [error, setError] = useState<HTMLInputElement | string>();
+
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+  const [email, setEmail] = useState('');
   const router = useRouter();
+
+
+  const validateField = (field: string, value: any) => {
+    const singleFieldSchema = userSchema.shape[field as keyof typeof userSchema.shape];
+    if (!singleFieldSchema) return;
+    const result = singleFieldSchema.safeParse(value);
+
+    setFormErrors((prev) => {
+      const updated = { ...prev };
+      if (!result.success) {
+        updated[field] = result.error.errors[0].message;
+      } else {
+        delete updated[field];
+      }
+      return updated;
+    });
+  };   
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,10 +46,23 @@ export default function LoginForm({
     const email = emailRef.current?.value;
     const password = passwordRef.current?.value;
 
-    if (!email || !password) {
-      setError("Please enter both email and password.");
+    const result = userSchema.safeParse({ email, password });
+
+    if (!result.success) {
+      const errorMap: Record<string, string> = {};
+      const errors: any = result.error.format();
+      for (const key in errors) {
+        if (errors[key]?._errors?.[0]) {
+          errorMap[key] = errors[key]._errors[0];
+        }
+      }
+      setFormErrors(errorMap);
+      toast.error("Validation failed!");
       return;
+    } else {
+      setFormErrors({});
     }
+
     console.log("dataf", email, password);
     const res = await signIn("credentials", {
       email,
@@ -61,9 +95,18 @@ export default function LoginForm({
                   id="email"
                   type="email"
                   placeholder="m@example.com"
-                  required
                   ref={emailRef}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    validateField("email", e.target.value)
+                  }}
+                  className={`border p-2  ${formErrors.email ? "border-red-500" : "border-gray-500"}`}
+
                 />
+                <p className="text-sm text-gray-500">
+                  {email.length || 0}/50 characters
+                </p>
+                {formErrors.email && <p className="text-sm text-red-500">{formErrors.email}</p>}
               </div>
               <div className="grid gap-3">
                 <div className="flex items-center">
@@ -98,7 +141,7 @@ export default function LoginForm({
                     viewBox="0 0 24 24"
                     fill="currentColor"
                     className="w-5 h-5 mr-2"
-                  >   
+                  >
                     <path
                       fillRule="evenodd"
                       d="M12 0C5.373 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.6.111.793-.261.793-.58 0-.286-.01-1.04-.016-2.04-3.338.726-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.082-.729.082-.729 1.205.084 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.304.76-1.604-2.665-.3-5.466-1.334-5.466-5.932 0-1.31.469-2.38 1.236-3.22-.124-.303-.536-1.522.117-3.176 0 0 1.008-.322 3.301 1.23a11.52 11.52 0 0 1 3.003-.404c1.02.005 2.047.137 3.003.404 2.291-1.552 3.297-1.23 3.297-1.23.655 1.654.243 2.873.12 3.176.77.84 1.234 1.91 1.234 3.22 0 4.61-2.804 5.628-5.476 5.922.43.372.814 1.102.814 2.222 0 1.604-.014 2.896-.014 3.293 0 .322.192.696.8.578C20.565 21.796 24 17.3 24 12 24 5.373 18.627 0 12 0Z"
@@ -116,7 +159,7 @@ export default function LoginForm({
                   </svg>
                   <span className="sr-only">Login with Google</span>
                 </Button>
-                
+
               </div>
               <div className="text-center text-sm">
                 Don&apos;t have an account?{" "}
@@ -137,6 +180,6 @@ export default function LoginForm({
         </CardContent>
       </Card>
 
-    </div>  
+    </div>
   )
 }

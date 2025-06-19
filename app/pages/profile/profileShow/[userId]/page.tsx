@@ -74,10 +74,10 @@ export default function ProfileFunction() {
 
 
     return (
-        <div className="bg-gray-100 h-screen w-full">
+        <div className="bg-gray-100 dark:bg-gray-300 h-screen w-full">
             <div className="h-full w-full p-4">
-                <div className="bg-white h-auto w-auto outline-1 p-4 space-y-4">
-                    <div className="flex flex-row p-5 gap-6 bg-white   rounded-4xl outline-1 ">
+                <div className="bg-white dark:bg-gray-300 h-auto w-auto outline-2 p-4 space-y-4">
+                    <div className="flex flex-row p-5 gap-6 bg-white dark:bg-gray-500 rounded-4xl outline-1 ">
                         <div className="flex flex-col justify-center text-center">
                             <div>
                                 <span className="">your profile</span>
@@ -99,7 +99,7 @@ export default function ProfileFunction() {
                             <h1 className="text-xl ">contact details</h1>
                             <div className="flex gap-x-2 sm:flex">
                                 <span>email =</span>
-                                <p className="text-sm text-gray-700">{user.email}</p>
+                                <p className="text-sm text-gray-700 dark:text-white">{user.email}</p>
                             </div>
                             <div className="flex gap-x-2">
                                 <span>phone no =</span>
@@ -122,7 +122,7 @@ export default function ProfileFunction() {
                             </div>
                         </div>
                     </div>
-                    <div className=" p-5  bg-white rounded-4xl  outline-1 ">
+                    <div className=" bg-white dark:bg-gray-300 rounded-4xl  outline-1 ">
                         <div>
                             <ProfileDetailInfo />
                         </div>

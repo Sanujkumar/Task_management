@@ -127,57 +127,61 @@ export default function ProfileDetailInfo() {
   if (loading) return <p className="text-center">Loading...</p>;
 
   return (
-    <div className="h-screen w-screen">
-    <div className="space-y-4 grid md:grid-cols-2 md:gap-4 h-full w-full ">
-      <div className="w-full">
-        <Label>skills</Label>
-        <Textarea
-          defaultValue={initialData?.skills}
+    <div className="h-screen w-full p-4 md:p-8 overflow-x-hidden dark:bg-gray-500 rounded-4xl outline-2">
+      <div className="max-w-5xl mx-auto">     
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 ">
+      <div className="w-full">   
+        <Label className="text-black">skills</Label>
+        <Textarea   
+          defaultValue={initialData?.skills}    
           ref={skillsRef}
           placeholder="skills"
-          className="w-full"
+          className={`border p-2 dark-gray-500 dark:border-white ${!isEditable ? "text-black " : "text-gray-400"}`}
           disabled={!isEditable} />
       </div>
       <div>
-        <Label>About</Label>
+        <Label className="text-black">About</Label>
         <Textarea
           ref={aboutRef}
           defaultValue={initialData?.about}
           placeholder="About"
           disabled={!isEditable}
-          className={` ${!isEditable ? "text-black " : "text-gray-400"}`}
+          className={`border p-2 dark-gray-500 dark:border-white ${!isEditable ? "text-black " : "text-gray-400"}`}
         />
       </div>
       <div>
-        <Label>Github Url</Label>
+        <Label className="text-black">Github Url</Label>
         <Input
           defaultValue={initialData?.githubUrl}
           ref={githubRef}
           placeholder="GitHub URL"
+          className="border p-2  border-gray-500 dark:border-white"
           disabled={!isEditable}
         />
       </div>
       <div>
-        <Label>linkdin Url</Label>
+        <Label className="text-black">linkdin Url</Label>
         <Input
           defaultValue={initialData?.linkdinUrl}
           ref={linkedinRef}
           placeholder="LinkedIn URL"
+          className="border p-2 border-gray-500 dark:border-white "
           disabled={!isEditable}
         />
       </div>
       <div>
-        <Label>highestDegree</Label>
+        <Label className="text-black">highestDegree</Label>
         <Select
+         
           value={degree}
           onValueChange={setDegree}
           disabled={!isEditable}
         >
 
-          <SelectTrigger className="w-full">
+          <SelectTrigger className="w-full border p-2 border-gray-500 dark:border-white ">
             <SelectValue placeholder="Select degree" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="bg-gray-300 dark:text-black">
             <SelectItem value="Btech">Btech</SelectItem>
             <SelectItem value="diploma">Diploma</SelectItem>
             <SelectItem value="12th">12th</SelectItem>
@@ -185,13 +189,13 @@ export default function ProfileDetailInfo() {
         </Select>
       </div>
       <div>
-        <Label>resume upload</Label>
+        <Label >resume upload</Label>
         <Input
-
           type="file"
           accept=".pdf"
           ref={resumeRef}
           placeholder="Resume URL"
+          className="border p-2 border-gray-500 dark:border-white "  
           disabled={!isEditable}
         />
 
@@ -204,15 +208,14 @@ export default function ProfileDetailInfo() {
       <div className="h-80 w-150">
       {initialData?.resume && (
         <div className="mt-4 ">
-          <p className="font-semibold">PDF Preview:</p>
+          <p className="font-semibold text-black">PDF Preview:</p>
           <iframe
-            // src={`https://docs.google.com/gview?url=${data.pdfUrl}&embedded=true`}
             src={`https://docs.google.com/gview?url=${initialData.resume}&embedded=true`}
             style={{
-              width: "250px",
+              width: "350px",
               height: "300px",
-              border: 'none',
-              borderRadius: '12px'
+              padding: "2px",
+             
             }}
           ></iframe>
 
@@ -230,6 +233,7 @@ export default function ProfileDetailInfo() {
         </div>
       )}
       </div>
+    </div>
     </div>
     </div>
 

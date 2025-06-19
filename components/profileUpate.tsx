@@ -85,15 +85,21 @@ export default function ProfileUpdateForm({ className, userId, ...props }: Props
                             </div>
                             <div className="grid gap-2">
                                 <Label htmlFor="name">Name</Label>
-                                <Input id="name" ref={nameRef} />
+                                <Input id="name"
+                                className="border p-2 border-gray-500"
+                                 ref={nameRef} />
                             </div>
                             <div className="grid gap-2">
                                 <Label htmlFor="phone">Phone</Label>
-                                <Input id="phone" type="tel" ref={phoneRef} />
+                                <Input id="phone"
+                                className="border p-2 border-gray-500"
+                                 type="tel" ref={phoneRef} />
                             </div>  
                             <div className="grid gap-2">
                                 <Label htmlFor="profile-img">Profile Img</Label>
-                                <Input id="profile-img" type="file" accept="image/*" ref={profielImgRef} />
+                                <Input id="profile-img"
+                                className="border p-2 border-gray-500"
+                                 type="file" accept="image/*" ref={profielImgRef} />
                             </div>
                             <Button type="submit" className="w-full">Update</Button>
                         </div>
