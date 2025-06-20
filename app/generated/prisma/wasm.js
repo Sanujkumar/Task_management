@@ -157,7 +157,7 @@ exports.Prisma.UserDetailInfoScalarFieldEnum = {
   about: 'about',
   resume: 'resume',
   experience: 'experience',
-  linkdinUrl: 'linkdinUrl',
+  linkedinUrl: 'linkedinUrl',
   githubUrl: 'githubUrl',
   highestDegree: 'highestDegree',
   userId: 'userId'

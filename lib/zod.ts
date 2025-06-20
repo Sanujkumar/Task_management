@@ -5,9 +5,14 @@ export const userSchema = z.object({
     password:   z.string().min(4, "Password must be at least 4 characters"),
     name:       z.string().max(30,"Max 30 characters").optional().nullable(),
     phone:      z.string().regex(/^\d{10}$/, "Phone must be 10 digits and must be number").optional().nullable(),
-    image:      z.string().url("invalid image url").optional().nullable()
 });   
-       
+      
+export const editProfileschema = z.object({
+    name:       z.string().max(30,"Max 30 characters").optional().nullable(),
+    phone:      z.string().regex(/^\d{10}$/, "Phone must be 10 digits and must be number").optional().nullable(),
+    imgUrl:         z.string().url("Invalid PDF URL").optional().nullable(),  
+});      
+
 
 export const taskSchema = z.object({
     title:          z.string().max(50,"Max 50 character"),
@@ -18,7 +23,7 @@ export const taskSchema = z.object({
     price:          z.coerce.number().int().min(1, "Price must be a positive number"),
     skills:         z.string().min(20,"min 20 characters").max(100,"Max 100 characters"),
     status:         z.boolean(),
-    videoUrl:       z.string().url("invalid image url").optional().nullable(),
+    videoUrl:       z.string().url("invalid video url").optional().nullable(),
     pdfUrl:         z.string().url("Invalid PDF URL").optional().nullable(),  
 });
   
@@ -29,13 +34,14 @@ export const notificationSchema = z.object({
 
 export const userDetailInfoSchema = z.object({
     skills:             z.string().max(200,"Max 200 characters").optional().nullable(),
-    about:              z.string().max(200,"Max 200 characters").optional().nullable(),
+    about:              z.string().max(300,"Max 300 characters").optional().nullable(),
     resume:             z.string().url().optional().nullable(),
-    experience:         z.string().max(200,"Max 200 characters").optional().nullable(),
-    linkdinUrl:         z.string().url().startsWith("https://www.linkedin.com/in/").optional().nullable(),
+    experience:         z.string().max(300,"Max 200 characters").optional().nullable(),
+    linkedinUrl:         z.string().url().startsWith("https://www.linkedin.com/in/").optional().nullable(),
     githubUrl:          z.string().url().startsWith("https://github.com/").optional().nullable(),
-    highestDegree:      z.string().optional().nullable()
-});  
+    highestDegree:      z.string().optional().nullable(),
+    resumeUrl:          z.string().url('Invalid PDF URL').optional().nullable()
+});      
 
 
 export const messageSchema = z.object({

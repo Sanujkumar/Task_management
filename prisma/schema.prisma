@@ -55,7 +55,7 @@ model UserDetailInfo {
   about          String?  
   resume         String?
   experience     String?
-  linkdinUrl     String?
+  linkedinUrl    String?
   githubUrl      String?
   highestDegree  String?
   userId         Int     @unique    

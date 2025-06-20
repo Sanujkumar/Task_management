@@ -122,7 +122,7 @@ export default function ProfileFunction() {
                             </div>
                         </div>
                     </div>
-                    <div className=" bg-white dark:bg-gray-300 rounded-4xl  outline-1 ">
+                    <div className=" bg-white dark:bg-gray-300 ">
                         <div>
                             <ProfileDetailInfo />
                         </div>

@@ -4884,7 +4884,7 @@ export namespace Prisma {
     about: string | null
     resume: string | null
     experience: string | null
-    linkdinUrl: string | null
+    linkedinUrl: string | null
     githubUrl: string | null
     highestDegree: string | null
     userId: number | null
@@ -4896,7 +4896,7 @@ export namespace Prisma {
     about: string | null
     resume: string | null
     experience: string | null
-    linkdinUrl: string | null
+    linkedinUrl: string | null
     githubUrl: string | null
     highestDegree: string | null
     userId: number | null
@@ -4908,7 +4908,7 @@ export namespace Prisma {
     about: number
     resume: number
     experience: number
-    linkdinUrl: number
+    linkedinUrl: number
     githubUrl: number
     highestDegree: number
     userId: number
@@ -4932,7 +4932,7 @@ export namespace Prisma {
     about?: true
     resume?: true
     experience?: true
-    linkdinUrl?: true
+    linkedinUrl?: true
     githubUrl?: true
     highestDegree?: true
     userId?: true
@@ -4944,7 +4944,7 @@ export namespace Prisma {
     about?: true
     resume?: true
     experience?: true
-    linkdinUrl?: true
+    linkedinUrl?: true
     githubUrl?: true
     highestDegree?: true
     userId?: true
@@ -4956,7 +4956,7 @@ export namespace Prisma {
     about?: true
     resume?: true
     experience?: true
-    linkdinUrl?: true
+    linkedinUrl?: true
     githubUrl?: true
     highestDegree?: true
     userId?: true
@@ -5055,7 +5055,7 @@ export namespace Prisma {
     about: string | null
     resume: string | null
     experience: string | null
-    linkdinUrl: string | null
+    linkedinUrl: string | null
     githubUrl: string | null
     highestDegree: string | null
     userId: number
@@ -5086,7 +5086,7 @@ export namespace Prisma {
     about?: boolean
     resume?: boolean
     experience?: boolean
-    linkdinUrl?: boolean
+    linkedinUrl?: boolean
     githubUrl?: boolean
     highestDegree?: boolean
     userId?: boolean
@@ -5099,7 +5099,7 @@ export namespace Prisma {
     about?: boolean
     resume?: boolean
     experience?: boolean
-    linkdinUrl?: boolean
+    linkedinUrl?: boolean
     githubUrl?: boolean
     highestDegree?: boolean
     userId?: boolean
@@ -5112,7 +5112,7 @@ export namespace Prisma {
     about?: boolean
     resume?: boolean
     experience?: boolean
-    linkdinUrl?: boolean
+    linkedinUrl?: boolean
     githubUrl?: boolean
     highestDegree?: boolean
     userId?: boolean
@@ -5125,13 +5125,13 @@ export namespace Prisma {
     about?: boolean
     resume?: boolean
     experience?: boolean
-    linkdinUrl?: boolean
+    linkedinUrl?: boolean
     githubUrl?: boolean
     highestDegree?: boolean
     userId?: boolean
   }
 
-  export type UserDetailInfoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "skills" | "about" | "resume" | "experience" | "linkdinUrl" | "githubUrl" | "highestDegree" | "userId", ExtArgs["result"]["userDetailInfo"]>
+  export type UserDetailInfoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "skills" | "about" | "resume" | "experience" | "linkedinUrl" | "githubUrl" | "highestDegree" | "userId", ExtArgs["result"]["userDetailInfo"]>
   export type UserDetailInfoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -5153,7 +5153,7 @@ export namespace Prisma {
       about: string | null
       resume: string | null
       experience: string | null
-      linkdinUrl: string | null
+      linkedinUrl: string | null
       githubUrl: string | null
       highestDegree: string | null
       userId: number
@@ -5586,7 +5586,7 @@ export namespace Prisma {
     readonly about: FieldRef<"UserDetailInfo", 'String'>
     readonly resume: FieldRef<"UserDetailInfo", 'String'>
     readonly experience: FieldRef<"UserDetailInfo", 'String'>
-    readonly linkdinUrl: FieldRef<"UserDetailInfo", 'String'>
+    readonly linkedinUrl: FieldRef<"UserDetailInfo", 'String'>
     readonly githubUrl: FieldRef<"UserDetailInfo", 'String'>
     readonly highestDegree: FieldRef<"UserDetailInfo", 'String'>
     readonly userId: FieldRef<"UserDetailInfo", 'Int'>
@@ -7185,7 +7185,7 @@ export namespace Prisma {
     about: 'about',
     resume: 'resume',
     experience: 'experience',
-    linkdinUrl: 'linkdinUrl',
+    linkedinUrl: 'linkedinUrl',
     githubUrl: 'githubUrl',
     highestDegree: 'highestDegree',
     userId: 'userId'
@@ -7534,7 +7534,7 @@ export namespace Prisma {
     about?: StringNullableFilter<"UserDetailInfo"> | string | null
     resume?: StringNullableFilter<"UserDetailInfo"> | string | null
     experience?: StringNullableFilter<"UserDetailInfo"> | string | null
-    linkdinUrl?: StringNullableFilter<"UserDetailInfo"> | string | null
+    linkedinUrl?: StringNullableFilter<"UserDetailInfo"> | string | null
     githubUrl?: StringNullableFilter<"UserDetailInfo"> | string | null
     highestDegree?: StringNullableFilter<"UserDetailInfo"> | string | null
     userId?: IntFilter<"UserDetailInfo"> | number
@@ -7547,7 +7547,7 @@ export namespace Prisma {
     about?: SortOrderInput | SortOrder
     resume?: SortOrderInput | SortOrder
     experience?: SortOrderInput | SortOrder
-    linkdinUrl?: SortOrderInput | SortOrder
+    linkedinUrl?: SortOrderInput | SortOrder
     githubUrl?: SortOrderInput | SortOrder
     highestDegree?: SortOrderInput | SortOrder
     userId?: SortOrder
@@ -7564,7 +7564,7 @@ export namespace Prisma {
     about?: StringNullableFilter<"UserDetailInfo"> | string | null
     resume?: StringNullableFilter<"UserDetailInfo"> | string | null
     experience?: StringNullableFilter<"UserDetailInfo"> | string | null
-    linkdinUrl?: StringNullableFilter<"UserDetailInfo"> | string | null
+    linkedinUrl?: StringNullableFilter<"UserDetailInfo"> | string | null
     githubUrl?: StringNullableFilter<"UserDetailInfo"> | string | null
     highestDegree?: StringNullableFilter<"UserDetailInfo"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -7576,7 +7576,7 @@ export namespace Prisma {
     about?: SortOrderInput | SortOrder
     resume?: SortOrderInput | SortOrder
     experience?: SortOrderInput | SortOrder
-    linkdinUrl?: SortOrderInput | SortOrder
+    linkedinUrl?: SortOrderInput | SortOrder
     githubUrl?: SortOrderInput | SortOrder
     highestDegree?: SortOrderInput | SortOrder
     userId?: SortOrder
@@ -7596,7 +7596,7 @@ export namespace Prisma {
     about?: StringNullableWithAggregatesFilter<"UserDetailInfo"> | string | null
     resume?: StringNullableWithAggregatesFilter<"UserDetailInfo"> | string | null
     experience?: StringNullableWithAggregatesFilter<"UserDetailInfo"> | string | null
-    linkdinUrl?: StringNullableWithAggregatesFilter<"UserDetailInfo"> | string | null
+    linkedinUrl?: StringNullableWithAggregatesFilter<"UserDetailInfo"> | string | null
     githubUrl?: StringNullableWithAggregatesFilter<"UserDetailInfo"> | string | null
     highestDegree?: StringNullableWithAggregatesFilter<"UserDetailInfo"> | string | null
     userId?: IntWithAggregatesFilter<"UserDetailInfo"> | number
@@ -7901,7 +7901,7 @@ export namespace Prisma {
     about?: string | null
     resume?: string | null
     experience?: string | null
-    linkdinUrl?: string | null
+    linkedinUrl?: string | null
     githubUrl?: string | null
     highestDegree?: string | null
     user: UserCreateNestedOneWithoutUserDetailInfoInput
@@ -7913,7 +7913,7 @@ export namespace Prisma {
     about?: string | null
     resume?: string | null
     experience?: string | null
-    linkdinUrl?: string | null
+    linkedinUrl?: string | null
     githubUrl?: string | null
     highestDegree?: string | null
     userId: number
@@ -7924,7 +7924,7 @@ export namespace Prisma {
     about?: NullableStringFieldUpdateOperationsInput | string | null
     resume?: NullableStringFieldUpdateOperationsInput | string | null
     experience?: NullableStringFieldUpdateOperationsInput | string | null
-    linkdinUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedinUrl?: NullableStringFieldUpdateOperationsInput | string | null
     githubUrl?: NullableStringFieldUpdateOperationsInput | string | null
     highestDegree?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutUserDetailInfoNestedInput
@@ -7936,7 +7936,7 @@ export namespace Prisma {
     about?: NullableStringFieldUpdateOperationsInput | string | null
     resume?: NullableStringFieldUpdateOperationsInput | string | null
     experience?: NullableStringFieldUpdateOperationsInput | string | null
-    linkdinUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedinUrl?: NullableStringFieldUpdateOperationsInput | string | null
     githubUrl?: NullableStringFieldUpdateOperationsInput | string | null
     highestDegree?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: IntFieldUpdateOperationsInput | number
@@ -7948,7 +7948,7 @@ export namespace Prisma {
     about?: string | null
     resume?: string | null
     experience?: string | null
-    linkdinUrl?: string | null
+    linkedinUrl?: string | null
     githubUrl?: string | null
     highestDegree?: string | null
     userId: number
@@ -7959,7 +7959,7 @@ export namespace Prisma {
     about?: NullableStringFieldUpdateOperationsInput | string | null
     resume?: NullableStringFieldUpdateOperationsInput | string | null
     experience?: NullableStringFieldUpdateOperationsInput | string | null
-    linkdinUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedinUrl?: NullableStringFieldUpdateOperationsInput | string | null
     githubUrl?: NullableStringFieldUpdateOperationsInput | string | null
     highestDegree?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -7970,7 +7970,7 @@ export namespace Prisma {
     about?: NullableStringFieldUpdateOperationsInput | string | null
     resume?: NullableStringFieldUpdateOperationsInput | string | null
     experience?: NullableStringFieldUpdateOperationsInput | string | null
-    linkdinUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedinUrl?: NullableStringFieldUpdateOperationsInput | string | null
     githubUrl?: NullableStringFieldUpdateOperationsInput | string | null
     highestDegree?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: IntFieldUpdateOperationsInput | number
@@ -8373,7 +8373,7 @@ export namespace Prisma {
     about?: SortOrder
     resume?: SortOrder
     experience?: SortOrder
-    linkdinUrl?: SortOrder
+    linkedinUrl?: SortOrder
     githubUrl?: SortOrder
     highestDegree?: SortOrder
     userId?: SortOrder
@@ -8390,7 +8390,7 @@ export namespace Prisma {
     about?: SortOrder
     resume?: SortOrder
     experience?: SortOrder
-    linkdinUrl?: SortOrder
+    linkedinUrl?: SortOrder
     githubUrl?: SortOrder
     highestDegree?: SortOrder
     userId?: SortOrder
@@ -8402,7 +8402,7 @@ export namespace Prisma {
     about?: SortOrder
     resume?: SortOrder
     experience?: SortOrder
-    linkdinUrl?: SortOrder
+    linkedinUrl?: SortOrder
     githubUrl?: SortOrder
     highestDegree?: SortOrder
     userId?: SortOrder
@@ -9090,7 +9090,7 @@ export namespace Prisma {
     about?: string | null
     resume?: string | null
     experience?: string | null
-    linkdinUrl?: string | null
+    linkedinUrl?: string | null
     githubUrl?: string | null
     highestDegree?: string | null
   }
@@ -9101,7 +9101,7 @@ export namespace Prisma {
     about?: string | null
     resume?: string | null
     experience?: string | null
-    linkdinUrl?: string | null
+    linkedinUrl?: string | null
     githubUrl?: string | null
     highestDegree?: string | null
   }
@@ -9253,7 +9253,7 @@ export namespace Prisma {
     about?: NullableStringFieldUpdateOperationsInput | string | null
     resume?: NullableStringFieldUpdateOperationsInput | string | null
     experience?: NullableStringFieldUpdateOperationsInput | string | null
-    linkdinUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedinUrl?: NullableStringFieldUpdateOperationsInput | string | null
     githubUrl?: NullableStringFieldUpdateOperationsInput | string | null
     highestDegree?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -9264,7 +9264,7 @@ export namespace Prisma {
     about?: NullableStringFieldUpdateOperationsInput | string | null
     resume?: NullableStringFieldUpdateOperationsInput | string | null
     experience?: NullableStringFieldUpdateOperationsInput | string | null
-    linkdinUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedinUrl?: NullableStringFieldUpdateOperationsInput | string | null
     githubUrl?: NullableStringFieldUpdateOperationsInput | string | null
     highestDegree?: NullableStringFieldUpdateOperationsInput | string | null
   }
