@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "../../../generated/prisma";
 import { getToken } from "next-auth/jwt";
 import { uploadBase64 } from "../../../../lib/cloudinary";
-import { userDetailInfoSchema } from "../../../../lib/zod";  
+import { userDetailInfoSchema } from "../../../../lib/zod";
 
 const prisma = new PrismaClient();
 
