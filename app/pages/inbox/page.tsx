@@ -106,9 +106,9 @@ interface dataTypes {
 }
 
 interface selectUserType{
-    name: string | "",
+    name: string 
     image: string,
-}
+}   
 
 export default function InboxProfile() {
     const [datas, setDatas] = useState<dataTypes[]>([]);
