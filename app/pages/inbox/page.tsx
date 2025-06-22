@@ -16,16 +16,17 @@ interface dataTypes {
     image: string
 }
 
-interface selectUserType{
-    name: string 
+interface selectUserType {
+    name: string
     image: string,
-}   
+}
 
 export default function InboxProfile() {
     const [datas, setDatas] = useState<dataTypes[]>([]);
     const [receiverId, setReceiverId] = useState<number | null>(null);
     const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
-    const [selectUser,setSelectUser] = useState<selectUserType>();
+    const [selectUser, setSelectUser] = useState<selectUserType>();
+    const [redDot,setRedDot] = useState(true);  
     const { data: session } = useSession();
 
     const userId = Number(session?.user.id);
@@ -44,6 +45,10 @@ export default function InboxProfile() {
         getData();
     }, [])
 
+    const handlefocus = () => {
+        setRedDot(false);
+    }
+
     return (
         <div className="h-screen w-full">
             <div className="h-full w-full bg-white flex outline-2">
@@ -60,7 +65,9 @@ export default function InboxProfile() {
                                                 setReceiverId(data.id);
                                                 setSelectedUserId(data.id);
                                                 setSelectUser(data);
+                                                onfocus =(handlefocus);
                                             }}
+
                                             className={`flex items-center gap-2 p-2 rounded cursor-pointer transition-colors 
                                                ${selectedUserId === data.id ? "bg-gray-200" : "hover:bg-gray-100"}`}
                                         >
@@ -69,10 +76,15 @@ export default function InboxProfile() {
                                                 {data.image ? (
                                                     <AvatarImage src={data.image} alt={data.name} />
                                                 ) : (
-                                                   <AvatarFallback>{data.name.charAt(0).toUpperCase()}</AvatarFallback>
+                                                    <AvatarFallback>{data.name.charAt(0).toUpperCase()}</AvatarFallback>
                                                 )}
                                             </Avatar>
+                                          
                                             <p>{data.name}</p>
+                                            {/* {redDot && (
+                                                <p className="w-10 h-10 bg-red-500 rounded-full border border-white "></p>  
+                                            )}  
+                                             */}
                                         </div>
                                     </div>
                                 ))}
@@ -82,12 +94,12 @@ export default function InboxProfile() {
                 </div>
 
 
-                <div className="inbox w-1/2 h-auto p-2 outline-2 ">
+                <div className=" w-1/2 h-auto p-1 ">
                     {receiverId && userId && selectUser && (
-                        <Chatsection userId={userId} receiverId={receiverId} user={selectUser} />
+                        <Chatsection userId={userId} receiverId={receiverId} user={selectUser} setRedDot={setRedDot} />
                     )}
                 </div>
             </div>
-        </div>
+        </div>    
     )
 }
