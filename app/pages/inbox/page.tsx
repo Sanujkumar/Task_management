@@ -8,7 +8,9 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import toast from "react-hot-toast"
 import { useSession } from "next-auth/react"
-import Chatsection from "../../../components/chatSection" // adjust import path if needed
+import Chatsection from "../../../components/chatSection"
+import { useRouter } from "next/navigation"
+
 
 interface dataTypes {
     id: number,
@@ -26,8 +28,18 @@ export default function InboxProfile() {
     const [receiverId, setReceiverId] = useState<number | null>(null);
     const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
     const [selectUser, setSelectUser] = useState<selectUserType>();
-    const [redDot,setRedDot] = useState(true);  
-    const { data: session } = useSession();
+    const [redDot, setRedDot] = useState(true);
+    const { data: session, status } = useSession();
+
+    const router = useRouter();
+   
+    useEffect(() => {
+        if (status === "unauthenticated") {
+            toast.error("your are not login");
+            router.push(`${Url}`);
+        }     
+    }, []);  
+      
 
     const userId = Number(session?.user.id);
 
@@ -37,7 +49,7 @@ export default function InboxProfile() {
             setDatas(res.data.data);
         } catch (err) {
             console.log(err);
-            toast.error(`${err}`);
+           
         }
     }
 
@@ -65,7 +77,7 @@ export default function InboxProfile() {
                                                 setReceiverId(data.id);
                                                 setSelectedUserId(data.id);
                                                 setSelectUser(data);
-                                                onfocus =(handlefocus);
+                                                onfocus = (handlefocus);
                                             }}
 
                                             className={`flex items-center gap-2 p-2 rounded cursor-pointer transition-colors 
@@ -79,7 +91,7 @@ export default function InboxProfile() {
                                                     <AvatarFallback>{data.name.charAt(0).toUpperCase()}</AvatarFallback>
                                                 )}
                                             </Avatar>
-                                          
+
                                             <p>{data.name}</p>
                                             {/* {redDot && (
                                                 <p className="w-10 h-10 bg-red-500 rounded-full border border-white "></p>  
@@ -100,6 +112,6 @@ export default function InboxProfile() {
                     )}
                 </div>
             </div>
-        </div>    
+        </div>
     )
 }

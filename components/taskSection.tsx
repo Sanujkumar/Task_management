@@ -1,7 +1,7 @@
-'use client'; // Only for Next.js 13+ app directory
+'use client'; 
 
 import { useState } from 'react';
-import Image from 'next/image';
+
 import { RiArrowDownSLine } from "react-icons/ri";
 import { Button } from '../components/ui/button';
 import { useRouter } from 'next/navigation';

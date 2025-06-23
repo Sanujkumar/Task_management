@@ -4,6 +4,7 @@ import { pusherClient } from "@/lib/pusher-client";
 import axios from "axios";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
+
 interface Props {
   userId: number;
   receiverId: number;
@@ -64,7 +65,7 @@ export default function ChatBox({ userId, receiverId, user, setRedDot }: Props) 
 
   const sendMessage = async () => {
     if (!input.trim()) return;
-    await axios.post("/api/function/send", { senderId: userId, receiverId, content: input });
+    await axios.post("/api/function/send", { senderId: userId, receiverId, content: input },{withCredentials: true});
     setInput("");
   };
 
