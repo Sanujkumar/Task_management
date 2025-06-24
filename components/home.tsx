@@ -84,31 +84,31 @@ export default function Home() {
 
     const features = [
         {
-            title: "Built for developers",
+            title: "Programming and Tech",
             description:
-                "Built for engineers, developers, dreamers, thinkers and doers.",
+                "Built for engineers, developers,Problem solver, thinkers and doers.",
             icon: <IconTerminal2 />,
         },
         {
-            title: "Ease of use",
+            title: "Graphics and Design ",
             description:
-                "It's as easy as using an Apple, and as expensive as buying one.",
+                " the art of composing visual elements — such as typography, images, colors, and shapes — to communicate information or convey a message effectively.",
             icon: <IconEaseInOut />,
         },
         {
-            title: "Pricing like no other",
+            title: "Video & Animation",
             description:
-                "Our prices are best in the market. No cap, no lock, no credit card required.",
+                "videos created with original designs, drawings, illustrations or computer-generated effects that have been made to move in an eye-catching way using any number of artistic styles",
             icon: <IconCurrencyDollar />,
         },
         {
-            title: "100% Uptime guarantee",
-            description: "We just cannot be taken down by anyone.",
+            title: "Photgraphy",
+            description: "the art, application, and practice of creating images by recording light, either electronically via an image sensor or chemically on light-sensitive material.",
             icon: <IconCloud />,
         },
         {
-            title: "Multi-tenant Architecture",
-            description: "You can simply share passwords instead of buying new seats",
+            title: "Digital Marketing",
+            description: "he promotion of brands to connect with potential customers using the internet and other forms of digital communication",
             icon: <IconRouteAltLeft />,
         },
         {
@@ -251,8 +251,8 @@ export default function Home() {
 
             </div>
 
-            <h1 className="text-white text-3xl text-center py-4 font-extrabold">Feature Section</h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  relative z-10 py-10 max-w-7xl mx-auto">
+            <h1 className="text-black text-3xl text-center py-4 font-extrabold">Feature Section</h1>
+            <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  relative z-10 py-10 max-w-7xl mx-auto gap-4 sm:space-y-4">
                 {features.map((feature, index) => (
                     <Feature key={feature.title} {...feature} index={index} />
                 ))}
@@ -265,15 +265,13 @@ export default function Home() {
 
 
             <div className="mt-10">
-                <footer className='bg-black text-gray-400 py-12'>
+                <footer className='bg-gray-800 text-gray-400 py-12'>
                     <div className='max-w-6xl grid grid-cols-1
         sm:grid-cols-2 lg:grid-cols-4 gap-8 px-4 sm:px-6 lg:px-8 ml-32 lg:mx-auto'>
                         <div>
                             <h2 className="text-white text-lg font-semibold mb-4">About Us</h2>
                             <p className="mb-4">
-                                Music School is a premier institution dedicated to teaching the art
-                                and science of music. We nurture talent from the ground up,
-                                fostering a vibrant community of musicians.
+                                task_management.com a global online marketplace designed to connect employers with freelancers for various projects and tasks, operating as a platform for both hiring and finding work
                             </p>
                         </div>
                         <div>
@@ -281,7 +279,7 @@ export default function Home() {
                             <ul>
                                 <li>
                                     <a
-                                        href="#"
+                                        href="/"
                                         className="hover:text-white transition-colors duration-300"
                                     >
                                         Home
@@ -289,7 +287,7 @@ export default function Home() {
                                 </li>
                                 <li>
                                     <a
-                                        href="#"
+                                        href="/pages/about"
                                         className="hover:text-white transition-colors duration-300"
                                     >
                                         About
@@ -297,18 +295,26 @@ export default function Home() {
                                 </li>
                                 <li>
                                     <a
-                                        href="#"
+                                        href="/pages/AllProjects"
                                         className="hover:text-white transition-colors duration-300"
                                     >
-                                        Courses
+                                        Projects
                                     </a>
                                 </li>
                                 <li>
                                     <a
-                                        href="#"
+                                        href="/pages/inbox"
                                         className="hover:text-white transition-colors duration-300"
                                     >
-                                        Contact
+                                        Message
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="/pages/person"
+                                        className="hover:text-white transition-colors duration-300"
+                                    >
+                                        Conect with someone
                                     </a>
                                 </li>
                             </ul>
@@ -317,25 +323,25 @@ export default function Home() {
                             <h2 className="text-white text-lg font-semibold mb-4">Follow Us</h2>
                             <div className="flex space-x-4">
                                 <a
-                                    href="#"
+                                    href="https://github.com/Sanujkumar"
                                     className="hover:text-white transition-colors duration-300"
                                 >
-                                    Facebook
+                                    Github
                                 </a>
                                 <a
-                                    href="#"
+                                    href="https://x.com/sanujkumar67943"
                                     className="hover:text-white transition-colors duration-300"
                                 >
                                     Twitter
                                 </a>
                                 <a
-                                    href="#"
+                                    href="https://www.linkedin.com/in/sanuj-kumar-a27362254/"
                                     className="hover:text-white transition-colors duration-300"
                                 >
-                                    Instagram
+                                    Linkedin
                                 </a>
                             </div>
-                        </div>
+                        </div>  
                         <div>
                             <h2 className="text-white text-lg font-semibold mb-4">Contact Us</h2>
                             <p>Bihar patna, India</p>
@@ -344,7 +350,7 @@ export default function Home() {
                             <p>Phone: 620148394</p>
                         </div>
                     </div>
-                    <p className="text-center text-xs pt-8">© 2024 Music School. All rights reserved.</p>
+                    <p className="text-center text-xs pt-8">© 2025 Task_management. All rights reserved.</p>
 
                 </footer>
             </div>
