@@ -27,7 +27,19 @@ const VideoCarousel = () => {
           playsInline
           style={{ width: "100%", height: "auto", objectFit: "cover" }}
         >
-          <source src="/videos/video1.mp4" type="video/mp4" />
+          <source src="/videos/video2.mp4" type="video/mp4" />
+        </video>
+      </SwiperSlide>
+  
+      <SwiperSlide>
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          style={{ width: "100%", height: "auto", objectFit: "cover" }}
+        >
+          <source src="/videos/video3.mp4" type="video/mp4" />
         </video>
       </SwiperSlide>
 
@@ -39,19 +51,7 @@ const VideoCarousel = () => {
           playsInline
           style={{ width: "100%", height: "auto", objectFit: "cover" }}
         >
-          <source src="/videos/video1.mp4" type="video/mp4" />
-        </video>
-      </SwiperSlide>
-
-      <SwiperSlide>
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          style={{ width: "100%", height: "auto", objectFit: "cover" }}
-        >
-          <source src="/videos/video1.mp4" type="video/mp4" />
+          <source src="/videos/video4.mp4" type="video/mp4" />
         </video>
       </SwiperSlide>
     </Swiper>
