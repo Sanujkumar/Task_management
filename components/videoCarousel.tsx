@@ -9,8 +9,7 @@ import "swiper/css/pagination"
 const VideoCarousel = () => {
   return (
     <Swiper
-      modules={[Navigation, Pagination, Autoplay]}
-      navigation
+      modules={[Navigation, Pagination, Autoplay]}  
       pagination={{ clickable: true }}
       loop={true}
       autoplay={{
