@@ -3,32 +3,75 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "../../../../app/generated/prisma";
 import { getToken } from "next-auth/jwt";
+import { any } from "zod";
 const prisma = new PrismaClient();
 
 const secret = process.env.AUTH_SECRET;
 
-export async function GET(req:NextRequest){
-    const token = await getToken({req,secret});
-    if(!token || !token.id){
+export async function GET(req: NextRequest) {
+    const token = await getToken({ req, secret });
+    if (!token || !token.id) {
         return NextResponse.json({
             message: "user not login"
-        },{status:400});  
+        }, { status: 400 });
     }
-    try{  
+
+    const searchParams = req.nextUrl.searchParams;
+    const name = searchParams.get('name')!;
+    console.log(name);
+
+    // if (!name) {
+    //     return NextResponse.json(
+    //         { message: "name parameter is required" },
+    //         { status: 400 }
+    //     );
+    // }
+
+
+    // const whereClause =
+    //     name ? {
+    //         name: {
+    //             contains: name.trim(),
+    //             mode: "insensitive" as const,
+    //         },
+
+    //     } : {};/
+
+    let whereClause = {}
+
+    if (name!=='null') {
+        whereClause = {name: {
+            contains: name.trim(),
+            mode: "insensitive" as const,
+            }}  
+    } else {
+        whereClause = {};  
+    }
+  
+
+    try {
         const data = await prisma.user.findMany({
-            select: {  
-                id: true,  
+            where: whereClause,   
+            select: {
+                id: true,
                 name: true,
-                image: true  
-            }  
-        })
+                image: true,  
+               UserDetailInfo: {
+                select: {
+                    skills: true,
+                    about: true
+                }
+               }
+            }
+        });  
+
         return NextResponse.json({
             data
         });
-    }catch(err){
+    } catch (err) {
         return NextResponse.json({
             message: "internal server err"
-        },{status:500})
+        }, { status: 500 })
     }
-}   
+}
 

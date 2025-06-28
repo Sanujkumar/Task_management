@@ -1,11 +1,11 @@
-import VideoCarousel from "@/components/videoCarousel";
+import FriendReq from "@/components/friendReq";
 
 
 
 export default function(){
     return(
         <div>
-            <VideoCarousel/>  
+            <FriendReq/>  
         </div>
     )
 }

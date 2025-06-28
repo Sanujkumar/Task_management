@@ -21,6 +21,11 @@ model User {
   UserDetailInfo   UserDetailInfo?
   sentMessages     Message[]       @relation("SentMessages")
   receivedMessages Message[]       @relation("ReceivedMessages")
+
+  sentFriendRequests     FriendReq[]    @relation("SentFriendRequests")
+  receivedFriendRequests FriendReq[]    @relation("ReceivedFriendRequests")
+  myFriends              AcceptFriend[] @relation("UserFriends")
+  friendOf               AcceptFriend[] @relation("FriendUsers")
 }
 
 model Task {
@@ -37,15 +42,15 @@ model Task {
   assigneeId  Int?
   videoUrl    String?
   pdfUrl      String?
-  assignee    User?    @relation("AssignedTasks", fields: [assigneeId], references: [id])
-  user        User     @relation("CreatedTasks", fields: [userId], references: [id])
+  assignee    User?    @relation("AssignedTasks", fields: [assigneeId], references: [id], onDelete: Cascade)
+  user        User     @relation("CreatedTasks", fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Notification {
   id      Int    @id @default(autoincrement())
   message String
   userId  Int
-  user    User   @relation(fields: [userId], references: [id])
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model UserDetailInfo {
@@ -58,7 +63,7 @@ model UserDetailInfo {
   githubUrl     String?
   highestDegree String?
   userId        Int     @unique
-  user          User    @relation(fields: [userId], references: [id])
+  user          User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Message {
@@ -68,6 +73,26 @@ model Message {
   senderId   Int
   receiverId Int
   roomId     String   @default("")
-  sender     User     @relation("SentMessages", fields: [senderId], references: [id])
-  receiver   User     @relation("ReceivedMessages", fields: [receiverId], references: [id])
+  sender     User     @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+  receiver   User     @relation("ReceivedMessages", fields: [receiverId], references: [id], onDelete: Cascade)
+}
+
+model FriendReq {
+  id         Int      @id @default(autoincrement())
+  senderId   Int
+  receiverId Int
+  createdAt  DateTime @default(now())
+
+  sender   User @relation("SentFriendRequests", fields: [senderId], references: [id], onDelete: Cascade)
+  receiver User @relation("ReceivedFriendRequests", fields: [receiverId], references: [id], onDelete: Cascade)
+}
+
+model AcceptFriend {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  friendId  Int
+  createdAt DateTime @default(now())
+
+  user   User @relation("UserFriends", fields: [userId], references: [id], onDelete: Cascade)
+  friend User @relation("FriendUsers", fields: [friendId], references: [id], onDelete: Cascade)
 }

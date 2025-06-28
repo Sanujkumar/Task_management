@@ -172,6 +172,20 @@ exports.Prisma.MessageScalarFieldEnum = {
   roomId: 'roomId'
 };
 
+exports.Prisma.FriendReqScalarFieldEnum = {
+  id: 'id',
+  senderId: 'senderId',
+  receiverId: 'receiverId',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.AcceptFriendScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  friendId: 'friendId',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -193,7 +207,9 @@ exports.Prisma.ModelName = {
   Task: 'Task',
   Notification: 'Notification',
   UserDetailInfo: 'UserDetailInfo',
-  Message: 'Message'
+  Message: 'Message',
+  FriendReq: 'FriendReq',
+  AcceptFriend: 'AcceptFriend'
 };
 
 /**
