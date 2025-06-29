@@ -1,11 +1,11 @@
-import FriendReq from "@/components/friendReq";
+import AllFriends from "@/components/AllFriends";
 
 
 
 export default function(){
     return(
         <div>
-            <FriendReq/>  
+            <AllFriends/>  
         </div>
     )
 }

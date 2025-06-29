@@ -11,7 +11,7 @@ import ProfileSkeleton from "../../../../../skeltons/profileSkeleton";
 import { Url } from "../../../../../lib/config";
 import axios from "axios";
 import { useEffect, useState } from "react";
-
+import AllFriends from "@/components/AllFriends";
 
 
 import toast from "react-hot-toast";
@@ -54,6 +54,8 @@ export default function ProfileFunction() {
         if (userId) profileData();
     }, [userId]);
 
+
+
     const ShowAllTasks = () => {
         router.push(`${Url}/pages/allTasks`);
     };
@@ -77,7 +79,7 @@ export default function ProfileFunction() {
         <div className="bg-gray-100 dark:bg-gray-300 h-screen w-full">
             <div className="h-full w-full p-4">
                 <div className="bg-white dark:bg-gray-300 h-auto w-auto outline-2 p-4 space-y-4">
-                    <div className="flex flex-row p-5 gap-6 bg-white dark:bg-gray-500 rounded-4xl outline-1 ">
+                    <div className="flex flex-row p-5 gap-6 bg-white dark:bg-gray-500 rounded-4xl outline-1 relative overflow-x-auto">
                         <div className="flex flex-col justify-center text-center">
                             <div>
                                 <span className="">your profile</span>
@@ -119,8 +121,13 @@ export default function ProfileFunction() {
                                         Update
                                     </Button>
                                 </div>
+
                             </div>
+
                         </div>
+                         <div className="">  
+                            <AllFriends />  
+                        </div>    
                     </div>
                     <div className=" bg-white dark:bg-gray-300 ">
                         <div>

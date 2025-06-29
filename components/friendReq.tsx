@@ -5,21 +5,23 @@ import axios from "axios";
 import { Url } from "@/lib/config";
 import { Button } from "./ui/button";
 import { Card, CardDescription, CardFooter, CardTitle } from "./ui/card";
+import toast from "react-hot-toast";
+
 
 interface DataType {
     id: number,
     receiverId: number,
     sender: {
-        id: Number,
+        id: string,
         name: string,
         image: string
     }
 }
 export default function FriendReq() {
     const [datas, setDatas] = useState<DataType[]>([]);
-    const [receiverId,setreceiverId] = useState();
+    const [accepted, setAccepted] = useState<{ [key: string]: boolean }>({});
 
-    const getData = async () => {
+    const getData = async () => {  
         const res = await axios.get(`${Url}/api/function/friendReq`, { withCredentials: true });
         setDatas(res.data.data);
         console.log(res.data);
@@ -29,11 +31,14 @@ export default function FriendReq() {
         getData();
     }, []);
 
-    // const handleAccept = async () => {
-    //     try{
-    //         const res = await axios.delete(`${Url}/api/function/`)
-    //     }   
-    // }
+    const handleAccept = async (senderId: string) => {
+        try {
+            const res = await axios.post(`${Url}/api/function/friendsAccept/${senderId}`, { withCredentials: true });
+            toast.success("Friend request accepted");
+        } catch (error) {
+
+        }
+    }
 
     return (
         <div className="max-h-80 w-auto  p-4 flex flex-col overflow-y-scroll">
@@ -56,13 +61,26 @@ export default function FriendReq() {
                             </CardTitle>
 
                             <CardFooter>
-                                <Button size="sm" className="bg-white border p-2 border-green-400 text-green-500 hover:bg-gray-700">Accept</Button>
+                                <Button
+                                    onClick={() => {
+                                        handleAccept(data.sender.id); 
+                                        setAccepted((prev) => ({
+                                            ...prev,
+                                            [data.sender.id]: true, 
+                                        }));
+                                    }}
+                                    size="sm"
+                                    className="bg-white border p-2 border-green-400 text-green-500 hover:bg-gray-700">
+                                    {accepted[data.sender.id] ? "Accepted" : "Accept"}
+                                </Button>
                             </CardFooter>
                         </Card>
-   
+
                     </div>
                 ))}
             </div>
         </div>
     )
 }
+
+
