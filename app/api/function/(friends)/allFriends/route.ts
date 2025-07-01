@@ -2,6 +2,7 @@ import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@/app/generated/prisma";
 
+
 const prisma = new PrismaClient();
 const secret = process.env.AUTH_SECRET;
 
@@ -15,11 +16,11 @@ export async function GET(req: NextRequest) {
     }
 
     const userId = token.id;
-    console.log(userId);  
+    console.log(userId);
     try {
         const data = await prisma.acceptFriend.findMany({
             where: {
-                userId  
+                userId
             },
             include: {
                 friend: {
@@ -42,3 +43,34 @@ export async function GET(req: NextRequest) {
     }
 
 }
+
+
+export async function DELETE(req: NextRequest) {
+    const token = await getToken({ req, secret });
+    if (!token || !token.id) {       
+        return NextResponse.json({
+            message: "user not login"
+        }, { status: 400 });
+    }
+
+    const body = await req.json();    
+
+    const userId = token.id;
+    const {friendId} = body ;  
+
+    console.log("userId",userId);
+    console.log("friendId",friendId);  
+
+    try {
+        await prisma.acceptFriend.deleteMany({
+            where: {
+                userId,
+                friendId: Number(friendId),  
+            },
+        });
+        return NextResponse.json({ message: "Friend request cancelled" }, { status: 200 });
+    } catch (error) {
+        console.error(error);
+        return NextResponse.json({ message: "Error cancelling friend request" }, { status: 500 });
+    }
+}   

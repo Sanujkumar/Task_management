@@ -20,22 +20,7 @@ export async function GET(req: NextRequest) {
     const name = searchParams.get('name')!;
     console.log(name);
 
-    // if (!name) {
-    //     return NextResponse.json(
-    //         { message: "name parameter is required" },
-    //         { status: 400 }
-    //     );
-    // }
-
-
-    // const whereClause =
-    //     name ? {
-    //         name: {
-    //             contains: name.trim(),
-    //             mode: "insensitive" as const,
-    //         },
-
-    //     } : {};/
+       
 
     let whereClause = {}
 

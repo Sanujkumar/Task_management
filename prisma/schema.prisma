@@ -83,7 +83,6 @@ model FriendReq {
   senderId    Int
   receiverId  Int
   createdAt   DateTime @default(now())
-
   sender      User @relation("SentFriendRequests", fields: [senderId], references: [id],onDelete: Cascade)
   receiver    User @relation("ReceivedFriendRequests", fields: [receiverId], references: [id],onDelete: Cascade)
 }
@@ -94,7 +93,6 @@ model AcceptFriend {
   userId      Int
   friendId    Int
   createdAt   DateTime @default(now())
-
   user        User @relation("UserFriends", fields: [userId], references: [id],onDelete: Cascade)
   friend      User @relation("FriendUsers", fields: [friendId], references: [id], onDelete: Cascade)
 }

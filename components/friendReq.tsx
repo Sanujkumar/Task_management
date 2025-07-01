@@ -41,7 +41,7 @@ export default function FriendReq() {
     }
 
     return (
-        <div className="max-h-80 w-auto  p-4 flex flex-col overflow-y-scroll">
+        <div className="max-h-80 w-auto  p-4 flex flex-col overflow-y-auto">
             <div className="space-y-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 
                 {datas.map((data) => (

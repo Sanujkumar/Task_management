@@ -24,7 +24,7 @@ export default function Connection() {
 
     const getData = async () => {
         try {
-            const res = await axios.get(`${Url}/api/function/messageProfile?name=${null}`, { withCredentials: true });
+            const res = await axios.get(`${Url}/api/function/showConnection`, { withCredentials: true });
             setDatas(res.data.data);
             console.log("datas", res.data.data);
             setLoading(false);
@@ -32,7 +32,7 @@ export default function Connection() {
             console.log(err);
         }
     }
-
+  
     useEffect(() => {
         getData();
     }, []);
