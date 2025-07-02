@@ -7,6 +7,7 @@ import { useEffect, useState } from "react"
 import toast from "react-hot-toast";
 import { Button } from "@/components/ui/button";
 import FriendReq from "@/components/friendReq";
+import { setRequestMeta } from "next/dist/server/request-meta";
 
 interface DataTypes {
     id: number,
@@ -20,24 +21,37 @@ interface DataTypes {
 export default function Connection() {
     const [datas, setDatas] = useState<DataTypes[]>([]);
     const [loading, setLoading] = useState(true);
-    const [friendStatus, setFriendStatus] = useState<{ [key: number]: boolean }>({});
+    const [sentRequests, setSentRequests] = useState<{ [key: number]: boolean }>({});
 
     const getData = async () => {
         try {
             const res = await axios.get(`${Url}/api/function/showConnection`, { withCredentials: true });
+            const sent = await axios.get(`${Url}/api/function/sentReq`, {
+                withCredentials: true,
+            });
             setDatas(res.data.data);
+            console.log("sentApi",sent.data.data);    
+            const sentIds = sent?.data?.data?.map((item: any) => item.receiverId) ?? [];
+            const sentMap: { [key: number]: boolean } = {};
+            sentIds.forEach((id: number) => {
+                sentMap[id] = true;   
+                console.log("id", id);
+            });
+            console.log("sentMap",sentMap);
+            setSentRequests(sentMap);
+            console.log("sentreq",sentRequests)  
             console.log("datas", res.data.data);
             setLoading(false);
         } catch (err) {
             console.log(err);
         }
     }
-  
+
     useEffect(() => {
         getData();
     }, []);
 
-     
+
 
     if (loading) {
         return <div className="text-center">Loading......</div>
@@ -45,10 +59,10 @@ export default function Connection() {
     return (
         <div className="h-screen w-full">
             <div className="p-5">
-                    <FriendReq/>
+                <FriendReq />
             </div>
             <div className="w-full h-full p-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 space-y-4 sm:space-x-4">
-                
+
                 {datas?.map((data) => (
                     <div className="" key={data.id}>
                         <Card className="w-[280px] h-[320px] flex flex-col justify-between overflow-hidden shadow-md">
@@ -77,11 +91,15 @@ export default function Connection() {
                                 <Button
                                     onClick={async () => {
                                         try {
-                                            if (!friendStatus[data.id]) { 
+                                            if (!sentRequests[data.id]) {
                                                 await axios.post(`${Url}/api/function/connection/${data.id}`, { withCredentials: true });
                                                 toast.success("Friend request sent");
+                                                setSentRequests((prev) => ({
+                                                    ...prev,
+                                                    [data.id]: true
+                                                }));
                                             } else {
-                                               
+
                                                 await axios.delete(`${Url}/api/function/connection/${data.id}`, {
                                                     withCredentials: true
                                                 });
@@ -89,10 +107,10 @@ export default function Connection() {
                                                 toast.success("Friend request cancelled");
                                             }
 
-                                            
-                                            setFriendStatus((prev) => ({
+
+                                            setSentRequests((prev) => ({
                                                 ...prev,
-                                                [data.id]: !prev[data.id],
+                                                [data.id]: false
                                             }));
                                         } catch (err) {
                                             console.error(err);
@@ -101,7 +119,7 @@ export default function Connection() {
                                     }}
                                     className="w-full rounded-full hover:cursor-pointer bg-white text-black border p-2 border-black hover:bg-gray-400"
                                 >
-                                    {friendStatus[data.id] ? "Request" : "Friends"}
+                                    {sentRequests[data.id] ? "Request" : "Friends"}
                                 </Button>
 
 
@@ -115,4 +133,4 @@ export default function Connection() {
         </div>
 
     )
-}   
+}       
