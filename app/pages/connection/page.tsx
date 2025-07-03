@@ -7,7 +7,6 @@ import { useEffect, useState } from "react"
 import toast from "react-hot-toast";
 import { Button } from "@/components/ui/button";
 import FriendReq from "@/components/friendReq";
-import { setRequestMeta } from "next/dist/server/request-meta";
 
 interface DataTypes {
     id: number,
@@ -26,20 +25,22 @@ export default function Connection() {
     const getData = async () => {
         try {
             const res = await axios.get(`${Url}/api/function/showConnection`, { withCredentials: true });
+
             const sent = await axios.get(`${Url}/api/function/sentReq`, {
                 withCredentials: true,
             });
-            setDatas(res.data.data);
-            console.log("sentApi",sent.data.data);    
+            console.log("sentApi", sent.data.data);
             const sentIds = sent?.data?.data?.map((item: any) => item.receiverId) ?? [];
             const sentMap: { [key: number]: boolean } = {};
             sentIds.forEach((id: number) => {
-                sentMap[id] = true;   
+                sentMap[id] = true;
                 console.log("id", id);
             });
-            console.log("sentMap",sentMap);
+
+            console.log("sentMap", sentMap);   
             setSentRequests(sentMap);
-            console.log("sentreq",sentRequests)  
+            console.log("sentreq", sentRequests)
+            setDatas(res.data.data);
             console.log("datas", res.data.data);
             setLoading(false);
         } catch (err) {
@@ -50,6 +51,22 @@ export default function Connection() {
     useEffect(() => {
         getData();
     }, []);
+
+    // const handleReq = async () => {
+    //     const sent = await axios.get(`${Url}/api/function/sentReq`, {
+    //         withCredentials: true,
+    //     });
+    //     console.log("sentApi", sent.data.data);
+    //     const sentIds = sent?.data?.data?.map((item: any) => item.receiverId) ?? [];
+    //     const sentMap: { [key: number]: boolean } = {};
+    //     sentIds.forEach((id: number) => {
+    //         sentMap[id] = true;
+    //         console.log("id", id);
+    //     });
+    //     console.log("sentMap", sentMap);
+    //     setSentRequests(sentMap);
+    //     console.log("sentreq", sentRequests)
+    // }
 
 
 
@@ -103,15 +120,15 @@ export default function Connection() {
                                                 await axios.delete(`${Url}/api/function/connection/${data.id}`, {
                                                     withCredentials: true
                                                 });
-
+                                                setSentRequests((prev) => ({
+                                                    ...prev,
+                                                    [data.id]: false
+                                                }));
                                                 toast.success("Friend request cancelled");
                                             }
 
 
-                                            setSentRequests((prev) => ({
-                                                ...prev,
-                                                [data.id]: false
-                                            }));
+
                                         } catch (err) {
                                             console.error(err);
                                             toast.error("Something went wrong");
@@ -121,8 +138,6 @@ export default function Connection() {
                                 >
                                     {sentRequests[data.id] ? "Request" : "Friends"}
                                 </Button>
-
-
                             </CardFooter>
                         </Card>
 

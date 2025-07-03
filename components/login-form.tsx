@@ -74,6 +74,8 @@ export default function LoginForm({
       toast.success("login successfully");
       const session = await getSession();
       router.push(`${Url}`);
+    }else{
+      toast.error("your email is not valid ");  
     }
 
   }
