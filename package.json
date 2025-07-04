@@ -2,13 +2,16 @@
   "name": "task_mangment",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
+  "scripts": {      
     "dev": "next dev",
     "build": "npx prisma generate && next build",
     "postinstall": "npx prisma generate",
     "start": "next start -H 0.0.0.0 -p $PORT",
     "lint": "next lint"
   },
+  "prisma": {
+    "schema": "prisma/schema.prisma"
+  },  
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",
     "@prisma/client": "^6.7.0",

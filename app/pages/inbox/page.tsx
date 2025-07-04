@@ -1,5 +1,5 @@
-
-"use client"
+"use client";
+export const dynamic = 'force-dynamic';   
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Input } from "@/components/ui/input"
@@ -49,16 +49,12 @@ function InboxProfile() {
     const filterName = searchParams.get('name');
     console.log("fileterName", filterName);
 
-    useEffect(() => {
-        if (status === "unauthenticated") {
-            toast.error("your are not login");
-            router.push(`${Url}`);
-        }
-    }, []);
+    
 
 
     let debounceTimer: NodeJS.Timeout;
     const userId = Number(session?.user.id);
+
     const getData = async () => {
         try {
             const res = await axios.get(`${Url}/api/function/messageProfile?name=${filterName}`, { withCredentials: true });
@@ -94,7 +90,13 @@ function InboxProfile() {
 
      
 
-
+    useEffect(() => {
+        if (status === "unauthenticated") {
+            toast.error("your are not login");
+            router.push(`${Url}`);
+        }
+    }, []);  
+       
     return (
         <div className="h-screen w-full">
             <div className="flex h-full w-full bg-white text-black">
@@ -169,3 +171,7 @@ function InboxProfile() {
         </div>
     );
 }
+
+   
+
+     

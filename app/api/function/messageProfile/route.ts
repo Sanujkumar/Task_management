@@ -1,10 +1,10 @@
 
 
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "../../../../app/generated/prisma";
+import { PrismaClient } from "@/app/generated/prisma";
 import { getToken } from "next-auth/jwt";
-import { any } from "zod";
-const prisma = new PrismaClient();
+
+const prisma = new PrismaClient()  
 
 const secret = process.env.AUTH_SECRET;
 
@@ -60,3 +60,5 @@ export async function GET(req: NextRequest) {
     }
 }
 
+
+    

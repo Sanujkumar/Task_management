@@ -1,0 +1,19 @@
+# Ignore OS & IDE
+.DS_Store
+.vscode
+*.log
+
+# Ignore Node
+node_modules
+npm-debug.log
+
+# Ignore build output
+.next
+out
+dist
+.turbo
+
+# Ignore env files (optional, unless you use --env-file)
+.env
+.env.local
+  
