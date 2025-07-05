@@ -2,7 +2,7 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "../../../../../app/generated/prisma";
-import { pusherServer } from "../../../../../lib/pusher-server";
+import { pusherServer } from "../../../../../lib/pusher-server"; //c
 
 
 const prisma = new PrismaClient();
@@ -22,12 +22,12 @@ export async function POST(req: NextRequest) {
         },
         include: { sender: true },
     });
-     
+  
     await pusherServer.trigger(`chat-${roomId}`, "new-message", message);
     console.log(message);
     return NextResponse.json({ success: true, message });
-}
-
+}   
+  
    
 
   

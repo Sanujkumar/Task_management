@@ -16,4 +16,4 @@ dist
 # Ignore env files (optional, unless you use --env-file)
 .env
 .env.local
-  
+ node_modules

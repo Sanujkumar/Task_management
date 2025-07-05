@@ -146,5 +146,3 @@ This project is licensed under the [MIT License](LICENSE).
 
 
 
-<!-- docker run -d --name postgres-container -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=mydb -p 5432:5432 postgres:15
-     -->

@@ -1,5 +1,4 @@
 "use client";
-export const dynamic = 'force-dynamic';   
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Input } from "@/components/ui/input"
@@ -56,11 +55,11 @@ function InboxProfile() {
     const userId = Number(session?.user.id);
 
     const getData = async () => {
-        try {
-            const res = await axios.get(`${Url}/api/function/messageProfile?name=${filterName}`, { withCredentials: true });
+        try {   
+            const res = await axios.get(`${Url}/api/function/messageProfile?name=${filterName}`,{withCredentials: true});
             setDatas(res.data.data);
             console.log("datas",res.data.data);  
-        } catch (err) {
+        } catch (err) {  
             console.log(err);
         }
     }
@@ -172,6 +171,6 @@ function InboxProfile() {
     );
 }
 
-   
+       
 
      
