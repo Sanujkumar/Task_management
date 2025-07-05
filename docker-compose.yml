@@ -6,14 +6,7 @@ services:
     container_name: nextjs-app
     ports:
       - "3000:3000"
-    environment:
-      PUSHER_APP_ID: ${PUSHER_APP_ID}
-      PUSHER_KEY: ${PUSHER_KEY}
-      PUSHER_SECRET: ${PUSHER_SECRET}
-      PUSHER_CLUSTER: ${PUSHER_CLUSTER}
-      NEXT_PUBLIC_PUSHER_KEY: ${NEXT_PUBLIC_PUSHER_KEY}
-      NEXT_PUBLIC_PUSHER_CLUSTER: ${NEXT_PUBLIC_PUSHER_CLUSTER}
-      DATABASE_URL: ${DATABASE_URL}
+    env_file: .env 
     depends_on:
       - db
 
@@ -22,13 +15,9 @@ services:
     container_name: postgres-db
     ports:
       - "5432:5432"
-    environment:
-     POSTGRES_USER: ${POSTGRES_USER}
-     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-     POSTGRES_DB: ${POSTGRES_DB}
+    env_file: .env
     volumes:
       - pgdata:/var/lib/postgresql/data
 
 volumes:
-  pgdata:
-   
+  pgdata:  

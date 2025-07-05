@@ -2,9 +2,9 @@
 import { v2 as cloudinary } from "cloudinary";
 
 cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME,
-  api_key: process.env.API_KEY,
-  api_secret: process.env.API_SECRET,
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,  
 });
        
 export const uploadBase64 = async (
@@ -19,6 +19,6 @@ export const uploadBase64 = async (
     public_id: `filename-${Date.now()}`   
   });
 };    
-
+    
    
 export default cloudinary;

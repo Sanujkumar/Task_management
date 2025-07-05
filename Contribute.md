@@ -7,8 +7,10 @@ Clone the repo
 Install dependencies (npm install)
 Start the DB locally
 docker run -e POSTGRES_PASSWORD=mysecretpassword -d -p 5432:5432 postgres
+
 Go to neon.tech and get yourself a new DB
 Change the .env file and update your DB credentials
+
 npx prisma migrate
 npx prisma generate
 npm run build
@@ -32,4 +34,19 @@ docker run --network user_project --name postgres --env-file .env -d -p 5432:543
 
 docker build --network=host -t user_project .   
 
-docker run --network user_project --env-file .env -p 3000:3000 user_project
+docker run --network user_project --env-file .env -p 3000:3000 user_project   
+   
+npx prisma generate
+docker exec -it angry_feistel npx prisma migrate dev --name init
+
+
+DOCKER-COMPOSE SETUP, IT IS EASY BIT
+<!-- ----------------------------------------------------- -->
+
+setup .env 
+        DATABASE_URL=postgresql://postgres:postgres@postgres-        db:5432/mydb
+
+docker-compose up --build -d  
+docker-compose exec web npx prisma generate
+docker-compose exec web npx prisma migrate dev --name init      
+

@@ -1,6 +1,4 @@
-
 FROM node:18-alpine
-
 
 WORKDIR /app
 
@@ -11,14 +9,11 @@ COPY tsconfig.json ./
 COPY prisma ./prisma
 RUN npm install
 
-
 COPY . .
 
-
-
+# build time env vars from .env will be used now
 RUN npx prisma generate
 RUN npm run build  
 
 EXPOSE 3000
-CMD ["npm", "start"]  
-  
+CMD ["npm", "start"]
