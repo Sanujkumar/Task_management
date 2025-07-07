@@ -69,7 +69,7 @@ export default function AllFriends() {
                 </SheetHeader>
 
                 {showFriends && (
-                    <div className="p-2 space-y-4 max-h-100  overflow-y-auto">
+                    <div className="p-2 space-y-4 max-h-140  overflow-y-auto">
                         {datas?.length > 0 ? (
                             datas.map((data) => (
                                 <div
