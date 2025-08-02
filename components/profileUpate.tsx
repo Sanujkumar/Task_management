@@ -8,12 +8,13 @@ import { Button } from "../components/ui/button"
 import { Card, CardContent } from "../components/ui/card"
 import { Input } from "../components/ui/input"
 import { Label } from "../components/ui/label"
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import axios from "axios";
 import { useRouter } from 'next/navigation';
 import { Url } from "../lib/config"
 import { useSession } from "next-auth/react"
 import toast from "react-hot-toast"
+import { Loader2Icon } from "lucide-react"
 
 type Props = {
     userId: string | string[];
@@ -26,6 +27,7 @@ export default function ProfileUpdateForm({ className, userId, ...props }: Props
     const skiilsRef = useRef<HTMLInputElement | null>(null);
     const aboutRef = useRef<HTMLInputElement | null>(null);
     const profielImgRef = useRef<HTMLInputElement | null>(null);
+    const [loader, setLoader] = useState(false);
 
     const { data: session, update } = useSession();
 
@@ -43,27 +45,25 @@ export default function ProfileUpdateForm({ className, userId, ...props }: Props
         e.preventDefault();
         const name = nameRef.current?.value;
         const phone = phoneRef.current?.value;
-        
-
         const image = profielImgRef.current?.files?.[0];
         const imageBase64 = image ? await fileToBase64(image) : null;
         const extension = image?.name.split('.').pop();
-        console.log("frontend",image,imageBase64,extension);
+        console.log("frontend", image, imageBase64, extension);
 
 
 
         try {
-
+            setLoader(true);
             const res = await axios.put(`${Url}/api/function/profileEdit/${userId}`, {
                 name,
                 phone,
                 imageBase64,
                 extension
             }, { withCredentials: true });
-
+            setLoader(false);
             if (res.status === 200) {
                 toast.success("successfuly update your profile");
-                profielImgRef.current!.value = "";  
+                profielImgRef.current!.value = "";
                 router.push(`${Url}/pages/profile/profileShow/${userId}`);
             } else {
                 toast.error("something went wrong");
@@ -86,22 +86,36 @@ export default function ProfileUpdateForm({ className, userId, ...props }: Props
                             <div className="grid gap-2">
                                 <Label htmlFor="name">Name</Label>
                                 <Input id="name"
-                                className="border p-2 border-gray-500"
-                                 ref={nameRef} />
+                                    className="border p-2 border-gray-500"
+                                    ref={nameRef} />
                             </div>
                             <div className="grid gap-2">
                                 <Label htmlFor="phone">Phone</Label>
                                 <Input id="phone"
-                                className="border p-2 border-gray-500"
-                                 type="tel" ref={phoneRef} />
-                            </div>  
+                                    className="border p-2 border-gray-500"
+                                    type="tel" ref={phoneRef} />
+                            </div>
                             <div className="grid gap-2">
                                 <Label htmlFor="profile-img">Profile Img</Label>
                                 <Input id="profile-img"
-                                className="border p-2 border-gray-500"
-                                 type="file" accept="image/*" ref={profielImgRef} />
+                                    className="border p-2 border-gray-500"
+                                    type="file" accept="image/*" ref={profielImgRef} />
                             </div>
-                            <Button type="submit" className="w-full">Update</Button>
+                            <Button
+                                disabled={loader}
+                                type="submit"
+                                className="w-full"
+                            >
+                                {loader ? (
+                                    <>
+                                    <Loader2Icon className="animate-spin"/>
+                                    </>
+                                ): (
+                                    <>
+                                Update
+                                </>
+                                )}
+                            </Button>
                         </div>
                     </form>
                 </CardContent>

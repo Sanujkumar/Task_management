@@ -21,6 +21,7 @@ export default function Connection() {
     const [datas, setDatas] = useState<DataTypes[]>([]);
     const [loading, setLoading] = useState(true);
     const [sentRequests, setSentRequests] = useState<{ [key: number]: boolean }>({});
+    const [loader,setLoader] = useState(false);
 
     const getData = async () => {
         try {
@@ -78,11 +79,11 @@ export default function Connection() {
             <div className="p-5">
                 <FriendReq />
             </div>
-            <div className="w-full h-full p-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 space-y-4 sm:space-x-4">
+            <div className="w-full min-h-screen p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 space-y-4 sm:space-x-4 ">
 
                 {datas?.map((data) => (
                     <div className="" key={data.id}>
-                        <Card className="w-[280px] h-[320px] flex flex-col justify-between overflow-hidden shadow-md">
+                        <Card className="w-[250px] h-[280px] flex flex-col justify-between overflow-hidden shadow-md">
                             <CardHeader className="flex flex-col items-center text-center space-y-2">
                                 <CardTitle>
                                     <Avatar className="w-20 h-20 border-2 border-black hover:cursor-pointer">

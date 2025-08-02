@@ -31,6 +31,7 @@ export default function ProfileFunction() {
     const { data: session, status } = useSession();
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState<dataTypes>();
+    const [loader,setLoader] = useState(false);
     const router = useRouter();
 
 
@@ -100,19 +101,22 @@ export default function ProfileFunction() {
                         <div>
                             <h1 className="text-xl ">contact details</h1>
                             <div className="flex gap-x-2 sm:flex">
-                                <span>email =</span>
+                                <span>email:</span>
                                 <p className="text-sm text-gray-700 dark:text-white">{user.email}</p>
                             </div>
                             <div className="flex gap-x-2">
-                                <span>phone no =</span>
+                                <span>phone_no:</span>
                                 <div>{data?.phone}</div>
                             </div>
                             <div className="flex space-x-2">
-                                <div className="pt-8">
-                                    <Button onClick={ShowAllTasks}>AllTasks</Button>
+                                <div className="">
+                                    <Button 
+                                    className="mt-8" size='lg' variant='outline'
+                                    onClick={ShowAllTasks}>AllTasks</Button>
                                 </div>
-                                <div className="pt-8">
+                                <div className=" ">
                                     <Button
+                                        className="mt-8" size='lg' variant='outline'
                                         onClick={() =>
                                             router.push(`${Url}/pages/profile/profileUpdateForm/${userId}`)
                                         }

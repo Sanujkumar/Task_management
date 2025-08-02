@@ -8,9 +8,11 @@ import { useRef, useState } from "react";
 import axios from "axios";
 import { useRouter } from 'next/navigation';
 import { Url } from "../lib/config"
-import toast from "react-hot-toast"
+import toast, { useToaster } from "react-hot-toast"
 import Image from "next/image"
 import { userSchema } from "../lib/zod";
+import { Lato } from "next/font/google"
+import { Loader2Icon } from "lucide-react"
 
 export default function Signup({
     className,
@@ -26,6 +28,7 @@ export default function Signup({
     const [password, setPassword] = useState("");
     const [phone, setPhone] = useState("");
     const [name, setName] = useState("");
+    const [loader,setLoader] = useState(false);
 
     const [formErrors, setFormErrors] = useState<Record<string, string>>({});
 
@@ -81,13 +84,14 @@ export default function Signup({
         }
 
         try {
+            setLoader(true)
             const res = await axios.post(`${Url}/api/register`, {
                 email,
                 password,
                 phone,
                 name
             });
-
+            setLoader(false);
             if (res.status == 201) {
                 toast.success("your are successfully signup");
                 router.push(`${Url}/auth/login`);
@@ -99,9 +103,6 @@ export default function Signup({
             console.log("something went wrong", error);
         }
     }
-
-
-   
 
 
     return (
@@ -195,8 +196,14 @@ export default function Signup({
                                 </p>     
                                 {formErrors.name && <p className="text-sm text-red-500">{formErrors.name}</p>}
                             </div>  
-                            <Button type="submit" className="w-full">
-                                Signup
+                            <Button 
+                             disabled={loader}
+                             type="submit" className="w-full">
+                                {loader ? (
+                                    <><Loader2Icon className="animate-spin"/></>
+                                ): (
+                                    <>Signup</>
+                                )}  
                             </Button>
 
                             <div className="text-center text-sm">

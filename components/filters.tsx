@@ -34,7 +34,7 @@ export default function Filter() {
       <Input
         className="rounded-4xl h-10 md:w-1/2 "
         ref={inputRef}
-        placeholder="Search project..."
+        placeholder="Title , Tech-stack "
         onChange={handleChange}
       />
 

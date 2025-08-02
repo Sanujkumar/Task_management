@@ -7,7 +7,7 @@
 
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Card, CardContent, CardTitle } from "./ui/card";
+import { Card, CardContent, CardDescription, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
 import {useRouter, useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
@@ -87,15 +87,14 @@ export default function Home() {
     }
 
     return (
-        <div className="p-4">
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="p-2">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 ">
                 {currentTasks.map((task) => (
-                    <div key={task.id} className="pl-8 sm:p-4">
-                        <Card onClick={() => showdetails(task.id)} className="overflow-hidden  h-auto w-auto   hover:bg-gray-100 cursor-pointer ">
-                            <CardContent>
-
+                    <div key={task.id} className="p-2">  
+                        <Card onClick={() => showdetails(task.id)} className="overflow-hidden w-full sm:w-[380px] h-[280px]  hover:bg-gray-100 cursor-pointer ">
+                            <CardContent className="space-y-2  ">  
                                 <CardTitle>{task.title}</CardTitle>
-                                <CardTitle>{task.description}</CardTitle>
+                                <CardDescription>{task.description}</CardDescription>
                                 <p>Date: {new Date(task.date).toLocaleDateString()}</p>
                                 <p>price: {task.price}</p>
                                 <p>Priority: {task.priority}</p>

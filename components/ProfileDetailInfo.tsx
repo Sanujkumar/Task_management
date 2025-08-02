@@ -10,6 +10,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Label } from "@radix-ui/react-dropdown-menu";
 import { Textarea } from "@/components/ui/textarea";
+import { Loader, Loader2Icon } from "lucide-react"
 import {
   Select,
   SelectContent,
@@ -42,7 +43,7 @@ export default function ProfileDetailInfo() {
   const [about, setAbout] = useState('');
   const [githubUrl, setGithubUrl] = useState('');
   const [linkedinUrl, setLinkedinUrl] = useState('');
-  const [highestDegree, setHighestDegree] = useState('');
+
 
   //validation err code
   const validateField = (field: string, value: any) => {
@@ -58,7 +59,7 @@ export default function ProfileDetailInfo() {
         delete updated[field];
       }
       return updated;
-    });   
+    });
   };
 
   const [initialData, setInitialData] = useState<initialDataType>();
@@ -66,7 +67,8 @@ export default function ProfileDetailInfo() {
 
   const [dataExists, setDataExists] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [isEditable, setIsEditable] = useState(true);  
+  const [loader, setLoader] = useState(false);
+  const [isEditable, setIsEditable] = useState(false);
 
   const { data: session, status } = useSession();
   const router = useRouter();
@@ -91,7 +93,7 @@ export default function ProfileDetailInfo() {
           setInitialData({
             skills: data.skills || "",
             about: data.about || "",
-            githubUrl: data.githubUrl || "",   
+            githubUrl: data.githubUrl || "",
             linkdinUrl: data.linkdinUrl || "",
             resume: data.resume || "",
           })
@@ -140,22 +142,27 @@ export default function ProfileDetailInfo() {
     }
 
 
+
     try {
       if (dataExists) {
         if (!isEditable) {
           setIsEditable(true);
         } else {
+          setLoader(true);
           await axios.put(`${Url}/api/function/profileDetailInfo`, payload, {
             withCredentials: true,
           });
+          setLoader(false);
           console.log("payload", payload);
           toast.success("Profile updated successfully!");
           setIsEditable(false);
         }
       } else {
+        setLoader(true);
         await axios.post(`${Url}/api/function/profileDetailInfo`, payload, {
           withCredentials: true,
         });
+        setLoader(false);
         toast.success("Profile created successfully!");
         setDataExists(true);
       }
@@ -169,7 +176,7 @@ export default function ProfileDetailInfo() {
 
   return (
     <div className="h-screen w-full p-4 md:p-8 overflow-x-hidden dark:bg-gray-500 rounded-3xl outline-2">
-      <div className="w-full h-full">
+      <div className="w-full h-full space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 ">
           <div className="w-full">
             <Label className="text-black">skills</Label>
@@ -211,12 +218,12 @@ export default function ProfileDetailInfo() {
               placeholder="GitHub URL"
               className="border p-2  border-gray-500 dark:border-white"
               disabled={!isEditable}
-              onChange={(e) => {  
-                setGithubUrl(e.target.value);      
+              onChange={(e) => {
+                setGithubUrl(e.target.value);
                 validateField("githubUrl", githubUrl);
               }}
-            />  
-            
+            />
+
             {formErrors.githubUrl && <p className="text-sm text-red-500">{formErrors.githubUrl}</p>}
           </div>
           <div>
@@ -227,15 +234,15 @@ export default function ProfileDetailInfo() {
               placeholder="LinkedIn URL"
               className="border p-2 border-gray-500 dark:border-white "
               disabled={!isEditable}
-              onChange={(e) => {  
-                setLinkedinUrl(e.target.value);      
+              onChange={(e) => {
+                setLinkedinUrl(e.target.value);
                 validateField("linkedinUrl", linkedinUrl);
               }}
-            />  
-            
+            />
+
             {formErrors.linkedinUrl && <p className="text-sm text-red-500">{formErrors.linkedinUrl}</p>}
           </div>
-          <div>  
+          <div>
             <Label className="text-black">highestDegree</Label>
             <Select
 
@@ -247,14 +254,14 @@ export default function ProfileDetailInfo() {
               <SelectTrigger className="w-full border p-2 border-gray-500 dark:border-white ">
                 <SelectValue placeholder="Select degree" />
               </SelectTrigger>
-              <SelectContent className="bg-gray-300 dark:text-black">
+              <SelectContent className="bg-gray-600 dark:text-black">
                 <SelectItem value="Btech">Btech</SelectItem>
                 <SelectItem value="diploma">Diploma</SelectItem>
                 <SelectItem value="12th">12th</SelectItem>
               </SelectContent>
             </Select>
           </div>
-          <div>   
+          <div>
             <Label >resume upload</Label>
             <Input
               type="file"
@@ -266,20 +273,31 @@ export default function ProfileDetailInfo() {
             />
 
           </div>
-          <div className="">
-            <Button className="" onClick={handleSubmit}>
-              {!dataExists ? "Submit Info" : isEditable ? "Save" : "Update Info"}
-            </Button>
           </div>
-          <div className="h-80 w-150">
+          <div className=" ">
+            <Button size="lg" variant='outline' className="rounded-3xl w-full border-2  bg-white" onClick={handleSubmit} disabled={loader}>
+              {loader ? (
+                <>
+                  <Loader2Icon className="animate-spin" />
+                  Please wait
+                </>
+              ) : (
+                !dataExists ? "Submit" : isEditable ? "Save" : "Edit"
+              )}
+            </Button>
+
+          </div>
+        
+
+          <div className="h-80 w-full ">
             {initialData?.resume && (
               <div className="mt-4 ">
                 <p className="font-semibold text-black">PDF Preview:</p>
                 <iframe
                   src={`https://docs.google.com/gview?url=${initialData.resume}&embedded=true`}
                   style={{
-                    width: "350px",
-                    height: "300px",
+                    width: "100%",
+                    height: "400px",
                     padding: "2px",
 
                   }}
@@ -301,7 +319,7 @@ export default function ProfileDetailInfo() {
           </div>
         </div>
       </div>
-    </div>
+    
 
   );
 }

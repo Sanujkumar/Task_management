@@ -11,6 +11,7 @@ import { Url } from "../lib/config"
 import toast from "react-hot-toast"
 import Image from "next/image"
 import { userSchema } from "../lib/zod";
+import { Loader2Icon  } from "lucide-react"
 
 export default function LoginForm({
   className,
@@ -21,6 +22,7 @@ export default function LoginForm({
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
   const [email, setEmail] = useState('');
+  const [loader,setLoader] = useState(false);
   const router = useRouter();
 
 
@@ -62,7 +64,7 @@ export default function LoginForm({
     } else {
       setFormErrors({});
     }
-
+    setLoader(true);
     console.log("dataf", email, password);
     const res = await signIn("credentials", {
       email,
@@ -70,6 +72,7 @@ export default function LoginForm({
       redirect: false,
     });
     console.log("res", res);
+    setLoader(false);
     if (res?.ok) {
       toast.success("login successfully");
       const session = await getSession();
@@ -127,8 +130,15 @@ export default function LoginForm({
                   ref={passwordRef}
                 />
               </div>
-              <Button type="submit" className="w-full">
-                Login
+              <Button type="submit" className="w-full" disabled={loader}>
+                {loader ? (
+                  <>
+                  <Loader2Icon className="animate-spin"/>
+                  </>
+                ):(
+                   <>Login</>
+                )}
+               
               </Button>
               <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
                 <span className="bg-card text-muted-foreground relative z-10 px-2">

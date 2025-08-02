@@ -12,12 +12,14 @@ import { Label } from "../components/ui/label";
 import toast from "react-hot-toast";
 import { taskSchema } from "../lib/zod";
 
+
 import { any, date, z } from "zod";
 import { Textarea } from "./ui/textarea";
+import { Loader2Icon } from "lucide-react";
 
 
 
-export default function TaskCreate({ topTitle, buttonName, onSubmit, task, className,
+export default function TaskCreate({ topTitle, buttonName, onSubmit, task, className, loader,
     ...props }: any) {
 
 
@@ -41,6 +43,7 @@ export default function TaskCreate({ topTitle, buttonName, onSubmit, task, class
     const [inDetails, setInDetails] = useState("");
     const [price, setPrice] = useState("");
     const [skills, setSkills] = useState("");
+
 
     const router = useRouter();
 
@@ -123,7 +126,6 @@ export default function TaskCreate({ topTitle, buttonName, onSubmit, task, class
         }
 
         try {
-
             await onSubmit(taskData);
             toast.success(`successfully task is ${topTitle}`);;
             router.push(`${Url}/pages/allTasks`);
@@ -213,17 +215,17 @@ export default function TaskCreate({ topTitle, buttonName, onSubmit, task, class
                                 <Input id="price" type="number" ref={priceRef}
                                     onChange={(e) => {
                                         setPrice(e.target.value);
-                                        validateField("price", e.target.value);  
+                                        validateField("price", e.target.value);
                                     }}
                                     className={`border p-2  ${formErrors.price ? "border-red-500" : "border-gray-500"}`}
-                                />  
+                                />
                                 {formErrors.price && <p className="text-sm text-red-500">{formErrors.price}</p>}
                             </div>
-                               
-                        <div className="grid gap-2">    
-                            <Label htmlFor="skills">skills</Label>
-                            <Textarea  ref={skillsRef} 
-                            onChange={(e) => {
+
+                            <div className="grid gap-2">
+                                <Label htmlFor="skills">skills</Label>
+                                <Textarea ref={skillsRef}
+                                    onChange={(e) => {
                                         setSkills(e.target.value);
                                         validateField("skills", e.target.value);
                                     }}
@@ -234,38 +236,50 @@ export default function TaskCreate({ topTitle, buttonName, onSubmit, task, class
                                 </p>
                                 {formErrors.skills && <p className="text-sm text-red-500">{formErrors.skills}</p>}
                             </div>
-                           
-                        <div className="grid gap-2">
-                            <Label htmlFor="priority">priority</Label>
-                            <Input id="priority" type="text" ref={priorityRef} 
-                            className="p-2 border border-gray-500"
-                            />
+
+                            <div className="grid gap-2">
+                                <Label htmlFor="priority">priority</Label>
+                                <Input id="priority" type="text" ref={priorityRef}
+                                    className="p-2 border border-gray-500"
+                                />
+                            </div>
+                            <div className="flex space-x-2 ">
+                                <span>Status</span>
+                                <span className="">
+                                    <Input id="status" type="checkbox" className=" h-6 w-4" ref={StatusRef}
+
+                                    />
+                                </span>
+                            </div>
+                            <div className="grid gap-2">
+                                <Label htmlFor="video">Upload Video</Label>
+                                <Input id="video" type="file" accept="video/*" ref={videoRef} />
+                            </div>
+
+                            <div className="grid gap-2">
+                                <Label htmlFor="pdf">Upload PDF</Label>
+                                <Input id="pdf" type="file" accept=".pdf" ref={pdfRef} />
+                            </div>
+
+
+
+                            <Button disabled={loader}
+                                type="submit"
+                                className="w-full"
+                            >
+                                {loader ?
+                                (
+                                    <><Loader2Icon className="animate-spin"/></>
+                                ):(
+                                    <>
+                                {buttonName}
+                                </>  
+                                )}
+                            </Button>
                         </div>
-                        <div className="flex space-x-2 ">
-                            <span>Status</span>
-                            <span className="">
-                                <Input id="status" type="checkbox" className=" h-6 w-4" ref={StatusRef}
-
-                                 />
-                            </span>
-                        </div>
-                        <div className="grid gap-2">
-                            <Label htmlFor="video">Upload Video</Label>
-                            <Input id="video" type="file" accept="video/*" ref={videoRef} />
-                        </div>
-
-                        <div className="grid gap-2">
-                            <Label htmlFor="pdf">Upload PDF</Label>
-                            <Input id="pdf" type="file" accept=".pdf" ref={pdfRef} />
-                        </div>
-
-
-
-                        <Button type="submit" className="w-full">{buttonName}</Button>
-                    </div>
-                </form>
-            </CardContent>
-        </Card>
+                    </form>
+                </CardContent>
+            </Card>
         </div >
     )
 }
