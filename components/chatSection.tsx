@@ -4,6 +4,7 @@ import { pusherClient } from "@/lib/pusher-client";
 import axios from "axios";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
+import { Loader2Icon } from "lucide-react";
 
 
 interface Props {
@@ -20,11 +21,13 @@ export default function ChatBox({ userId, receiverId, user, setRedDot }: Props) 
   const [messages, setMessages] = useState<any[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  
+  const [loader, setLoader] = useState(false);
+
   const roomId = [userId, receiverId].sort((a, b) => a - b).join("-");
 
   const getMessage = async () => {
     try {
+
       const res = await axios.get(`/api/function/history/${userId}/${receiverId}`);
       console.log(res.data);
       setMessages(res.data);
@@ -66,7 +69,9 @@ export default function ChatBox({ userId, receiverId, user, setRedDot }: Props) 
 
   const sendMessage = async () => {
     if (!input.trim()) return;
-    await axios.post("/api/function/send", { senderId: userId, receiverId, content: input },{withCredentials: true});
+    setLoader(true);
+    await axios.post("/api/function/send", { senderId: userId, receiverId, content: input }, { withCredentials: true });
+    setLoader(false);
     setInput("");
   };
 
@@ -74,8 +79,8 @@ export default function ChatBox({ userId, receiverId, user, setRedDot }: Props) 
 
   return (
     <div className="p-1 mx-auto space-y-2 ">
-      <div className="flex space-x-4 bg-blue-200 rounded-4xl ">
-        <Avatar className="w-12 h-12 border-2 border-black">
+      <div className="flex space-x-4 bg-white boder-2  rounded-4xl ">
+        <Avatar className="w-12 h-12 border-2 border-green-400">
           {user.image ? (
             <AvatarImage src={user.image} alt={user.name} />
           ) : (
@@ -114,15 +119,28 @@ export default function ChatBox({ userId, receiverId, user, setRedDot }: Props) 
       <div className="flex gap-2 ">
         <input
           value={input}
-          onChange={(e) => 
+          onChange={(e) =>
             setInput(e.target.value)
-            
+
           }
           className="flex-1 p-2 border rounded-4xl outline"
           placeholder="Type a message..."
         />
-        <Button onClick={sendMessage} size="lg" className="">
-          Send
+        <Button
+          disabled={loader}
+          onClick={sendMessage}  
+          variant="secondary"
+          className="bg-white border-2 border-green-400 rounded-3xl cursor-pointer w-24"
+        >
+          {loader ? (
+            <>
+              <Loader2Icon className="animate-spin" />
+            </>
+          ) : (
+            <>    
+              Send
+            </>
+          )}
         </Button>
       </div>
     </div>

@@ -15,7 +15,6 @@ import { useState, FormEvent } from "react";
 import { useRouter } from 'next/navigation';
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import { useSession } from "next-auth/react";
-import { Session } from "inspector/promises";
 import VideoCarousel from "./videoCarousel";
 
 
@@ -189,7 +188,7 @@ export default function Home() {
                 <div className="px-4 py-10 md:py-20">
 
                     <h1 className="relative z-10 mx-auto max-w-4xl text-center text-2xl font-bold text-slate-700 md:text-4xl lg:text-7xl dark:text-slate-300">
-                        {"Find skills full work related to own skills and earn money"
+                        {"Find SkillsFull work related to own skills and earn money"
                             .split(" ")
                             .map((word, index) => (
                                 <motion.span
