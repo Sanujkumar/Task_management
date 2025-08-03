@@ -8,6 +8,7 @@ const secret = process.env.NEXTAUTH_SECRET;
 const prisma = new PrismaClient();
 
 
+// Create Projects
 export const POST = (async (req: NextRequest) => {
   const token = await getToken({ req, secret });
   console.log("tokenTask", token);
@@ -111,6 +112,7 @@ export const POST = (async (req: NextRequest) => {
 });
 
 
+// show all task , which is created by you
 export async function GET(req: NextRequest) {
   const token = await getToken({ req, secret });
   console.log("tokenTask", token);

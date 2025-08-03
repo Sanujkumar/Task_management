@@ -16,6 +16,7 @@ type User = {
   email?: string | null;
   image?: string | null;
 }
+
 export const authOptions = {
 
   providers: [

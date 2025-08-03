@@ -5,6 +5,7 @@ import { PrismaClient } from "@/app/generated/prisma";
 const prisma = new PrismaClient();
 const secret = process.env.AUTH_SECRET;
 
+// find how may request came in you
 export async function GET(req:NextRequest){
     const token = await getToken({req,secret});
     if(!token || !token.id){

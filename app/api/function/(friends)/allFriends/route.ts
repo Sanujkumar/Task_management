@@ -2,10 +2,10 @@ import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@/app/generated/prisma";
 
-
 const prisma = new PrismaClient();
 const secret = process.env.AUTH_SECRET;
 
+// find your all accepted friends data
 export async function GET(req: NextRequest) {
     const token = await getToken({ req, secret });
 
@@ -18,6 +18,7 @@ export async function GET(req: NextRequest) {
     const userId = token.id;
     console.log(userId);
     try {
+        // find your accepted friends
         const data = await prisma.acceptFriend.findMany({
             where: {
                 userId
@@ -31,6 +32,7 @@ export async function GET(req: NextRequest) {
 
         const length = data.length;
         console.log("lenght", length);
+        // send response , how mandy friend you have 
         return NextResponse.json({
             data,
             length

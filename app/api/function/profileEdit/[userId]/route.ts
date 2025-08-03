@@ -10,6 +10,7 @@ const prisma = new PrismaClient();
 
 const secret = process.env.NEXTAUTH_SECRET;
 
+// upper profile data edit
 export async function PUT(req: NextRequest, context: { params: Promise<{ userId: string }> }) {
     const token = await getToken({ req, secret });
 

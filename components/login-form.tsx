@@ -5,7 +5,7 @@ import { Card, CardContent } from "../components/ui/card"
 import { Input } from "../components/ui/input"
 import { Label } from "../components/ui/label"
 import { getSession, signIn } from "next-auth/react";
-import { useEffect, useRef, useState } from "react";
+import {useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Url } from "../lib/config"
 import toast from "react-hot-toast"
@@ -47,8 +47,8 @@ export default function LoginForm({
 
     const email = emailRef.current?.value;
     const password = passwordRef.current?.value;
-
     const result = userSchema.safeParse({ email, password });
+
 
     if (!result.success) {
       const errorMap: Record<string, string> = {};
@@ -106,7 +106,6 @@ export default function LoginForm({
                     validateField("email", e.target.value)
                   }}
                   className={`border p-2  ${formErrors.email ? "border-red-500" : "border-gray-500"}`}
-
                 />
                 <p className="text-sm text-gray-500">
                   {email.length || 0}/50 characters
@@ -137,8 +136,7 @@ export default function LoginForm({
                   </>
                 ):(
                    <>Login</>
-                )}
-               
+                )}              
               </Button>
               <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
                 <span className="bg-card text-muted-foreground relative z-10 px-2">
@@ -191,7 +189,6 @@ export default function LoginForm({
           </div>
         </CardContent>
       </Card>
-
     </div>
   )
 }

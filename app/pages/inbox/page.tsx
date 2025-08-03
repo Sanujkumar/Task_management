@@ -55,6 +55,7 @@ function InboxProfile() {
     const userId = Number(session?.user.id);
 
     const getData = async () => {
+
         try {   
             const res = await axios.get(`${Url}/api/function/messageProfile?name=${filterName}`,{withCredentials: true});
             setDatas(res.data.data);

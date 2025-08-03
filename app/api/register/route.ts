@@ -6,6 +6,7 @@ import { userSchema } from "../../../lib/zod";
 
 const prisma = new PrismaClient();
 
+// Register end poinnt
 export async function POST(req: NextRequest) {
 
 

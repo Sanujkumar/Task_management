@@ -6,6 +6,7 @@ import { getToken } from "next-auth/jwt";
 const secret = process.env.AUTH_SECRET;
 const prisma = new PrismaClient();
 
+// Project view in details
 export async function GET(req: NextRequest, context: { params: Promise<{ taskId: string }> }) {
     const token = await getToken({ req, secret });
     if (!token || !token.id) {
@@ -15,9 +16,9 @@ export async function GET(req: NextRequest, context: { params: Promise<{ taskId:
         );
     }
 
-
     try {
         const {taskId} = await context.params;  
+        
         console.log(taskId);  
         const data = await prisma.task.findUnique({
             where: { id: Number(taskId) },

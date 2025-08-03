@@ -6,9 +6,9 @@ import { uploadBase64 } from "../../../../lib/cloudinary";
 import { userDetailInfoSchema } from "../../../../lib/zod";
 
 const prisma = new PrismaClient();
-
 const secret = process.env.AUTH_SECRET;
 
+// store more details about you 
 export async function POST(req: NextRequest) {
     const token = await getToken({ req, secret });
 
@@ -67,6 +67,8 @@ export async function POST(req: NextRequest) {
 
 }
 
+
+// get all details information about you
 export async function GET(req: NextRequest) {
     const token = await getToken({ req, secret });
 
@@ -106,6 +108,7 @@ type UpdateDataTypes = {
     resume?: string;
 }
 
+// update all details 
 export async function PUT(req: NextRequest) {
     const token = await getToken({ req, secret });
     if (!token || !token.id) {

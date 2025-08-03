@@ -5,9 +5,9 @@ import { PrismaClient } from "@/app/generated/prisma";
 import { getToken } from "next-auth/jwt";
 
 const prisma = new PrismaClient()  
-
 const secret = process.env.AUTH_SECRET;
 
+// to find user for send message
 export async function GET(req: NextRequest) {
     const token = await getToken({ req, secret });
     if (!token || !token.id) {
@@ -20,15 +20,21 @@ export async function GET(req: NextRequest) {
     const name = searchParams.get('name')!;
     console.log(name);
 
-       
+    const userId = token.id
+    
 
     let whereClause = {}
 
     if (name!=='null') {
-        whereClause = {name: {
+        whereClause = {
+            name: {
             contains: name.trim(),
             mode: "insensitive" as const,
-            }}  
+            } ,
+            id: {
+                not: userId
+            }
+        }  
     } else {
         whereClause = {};  
     }
@@ -36,7 +42,7 @@ export async function GET(req: NextRequest) {
 
     try {
         const data = await prisma.user.findMany({
-            where: whereClause,   
+            where:  whereClause ,     
             select: {
                 id: true,
                 name: true,

@@ -6,6 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
 const secret = process.env.AUTH_SECRET;
 const prisma = new PrismaClient();
 
+// find how many friends request have been came with you
 export async function GET(req:NextRequest) {
     const token = await getToken({req,secret});
 

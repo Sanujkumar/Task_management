@@ -9,6 +9,7 @@ import { taskSchema } from "../../../../../../lib/zod";
 const secret = process.env.AUTH_SECRET;
 const prisma = new PrismaClient();
 
+// update Projects 
 export async function PUT(
   req: NextRequest,
   context: { params: Promise<{ taskId: string }> }

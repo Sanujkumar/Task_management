@@ -5,15 +5,16 @@ const secret = process.env.AUTH_SECRET;
 
 const prisma = new PrismaClient();
 
+// Get a project all project data
 export async function GET(req: NextRequest) {
-     
-    const token = await getToken({req,secret});
-    
-        if(!token || !token.id){
-            return NextResponse.json({
-                message: "you are not login"
-            },{status:401});  
-        }
+
+    const token = await getToken({ req, secret });
+
+    if (!token || !token.id) {
+        return NextResponse.json({
+            message: "you are not login"
+        }, { status: 401 });
+    }
 
 
     const searchParams = req.nextUrl.searchParams;
@@ -21,13 +22,26 @@ export async function GET(req: NextRequest) {
     const price = searchParams.get("price");
 
     try {
-        
+
         const filters: any = {};
 
-        if (search) {
+        if (search ) {
             filters.OR = [
-                { title: { contains: search.trim(), mode: "insensitive" } },
-                { description: { contains: search.trim(), mode: "insensitive" } },
+                {
+                    title:
+                    {
+                        contains:
+                            search.trim(),
+                            mode: "insensitive"
+                    }
+                },
+                {
+                    description:
+                    {
+                        contains: search.trim(),
+                        mode: "insensitive"
+                    }
+                },
             ];
         }
 

@@ -5,6 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 const secret = process.env.AUTH_SECRET;
 const prisma = new PrismaClient();
 
+// freinds accepted end point 
 export async function POST(
   req: NextRequest,
   context: { params: Promise<{ senderId: string }> }
@@ -19,6 +20,7 @@ export async function POST(
   const {senderId} = await context.params;
 
   try {
+    // people delete from in your requested db
    const res =  await prisma.friendReq.deleteMany({
       where: {
         senderId: Number(senderId),
@@ -27,7 +29,7 @@ export async function POST(
     });
     console.log('res',res);  
 
-    
+    // people added in your acceptedFriend db
     await prisma.acceptFriend.createMany({
       data: [
         { userId: receiverId, friendId: Number(senderId) },

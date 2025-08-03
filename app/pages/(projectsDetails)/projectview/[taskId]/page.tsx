@@ -12,7 +12,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import ChatSection from "../../../../../components/chatSection"
 
 interface dataTypes {
-    id: number;  
+    id: number;
     title: string;
     description: string;
     date: string;
@@ -74,8 +74,9 @@ export default function projectview() {
             <div><ProjectVDSkeleton /></div>
         )
     }
-    const userId = Number(session?.user.id);
-    const receiverId = data?.user.id;  
+    // const userId = Number(session?.user.id);
+    // const receiverId = data?.user.id;  
+
     const name = data?.user.name
     const firstLetter = name.charAt(0).toUpperCase();
     const image = data.user.image;
@@ -89,7 +90,7 @@ export default function projectview() {
                     <CardContent className="rounded-3xl h-auto  space-y-4 bg-white hover:bg-gray-100 outline-1 p-4">
                         <div className="flex gap-6  ">
                             <span className="">
-                                <Avatar className="w-18 h-18 sm:w-26 sm:h-26 border-2 border-black">
+                                <Avatar className="w-18 h-18 sm:w-26 sm:h-26 border-2 border-black hover:cursor-pointer">
                                     {image ? (
                                         <AvatarImage src={image} alt={image} />
                                     ) : (
@@ -97,10 +98,10 @@ export default function projectview() {
                                     )}
                                 </Avatar>
                             </span>
-
                             <CardTitle className="text-center pt-6">{data.title}</CardTitle>
                         </div>
-                        <CardDescription>{data.description}</CardDescription>
+                        <CardDescription className="text-gray-400">{data.description}</CardDescription>
+
                         <div className="space-y-4">
                             <p className="">aboutTasks: {data.inDetails}</p>
                             <p>requirement Skills: {data.skills}</p>
@@ -111,50 +112,49 @@ export default function projectview() {
                             <p>completedDate: {new Date(data.date).toLocaleDateString()}</p>
                             <div className="space-x-4  flex-block md:flex ">
                                 <div className=" w-full md:w-1/2">
-                                {data.videoUrl && (
-                                    <div className="mt-4">
-                                        <p className="font-semibold">See video:</p>
-                                        <video
-                                            src={data.videoUrl}
-                                            controls
-                                            width="full"
-                                            height="200px"
-                                            className="rounded-2xl ouline-1"
-                                        >
-                                            Your browser does not support the video tag.
-                                        </video>
-                                    </div>
-                                )
-                                }
-                                </div>
-                                <div className=" w-full md:w-1/2">
-
-                                {data.pdfUrl && (
-                                    <div className="mt-4 ">
-                                        <p className="font-semibold">PDF Preview:</p>
-                                        <iframe
-                                            src={`https://docs.google.com/gview?url=${data.pdfUrl}&embedded=true`}
-                                            style={{
-                                                width: "250px",
-                                                height: "300px",
-                                                border: 'none',
-                                                borderRadius: '12px'
-                                            }}
-                                        ></iframe>
-
-                                        <p className="text-sm text-gray-600 mt-1">
-                                            Or{" "}
-                                            <a
-                                                href={data.pdfUrl}
-                                                download
-                                                className="text-gray-400 hover:text-blue-600 underline"
+                                    {data.videoUrl && (
+                                        <div className="mt-4">
+                                            <p className="font-semibold">See video:</p>
+                                            <video
+                                                src={data.videoUrl}
+                                                controls
+                                                width="full"
+                                                height="200px"
+                                                className="rounded-2xl ouline-1"
                                             >
-                                                Click here to download
+                                            </video>
+                                        </div>
+                                    )
+                                    }
+                                </div>
+                                <div className=" w-full md:w-1/2 ">
 
-                                            </a>.
-                                        </p>
-                                    </div>
-                                )}
+                                    {data.pdfUrl && (
+                                        <div className="mt-4 ">
+                                            <p className="font-semibold">PDF Preview:</p>
+                                            <iframe
+                                                src={`https://docs.google.com/gview?url=${data.pdfUrl}&embedded=true`}
+                                                style={{
+                                                    width: "100%",
+                                                    height: "320px",
+                                                    border: 'none',
+                                                    borderRadius: '12px'
+                                                }}
+                                            ></iframe>
+
+                                            <p className="text-sm text-gray-600 mt-1">
+                                                Or{" "}
+                                                <a
+                                                    href={data.pdfUrl}
+                                                    download
+                                                    className="text-gray-400 hover:text-blue-600 underline"
+                                                >
+                                                    Click here to download
+
+                                                </a>.
+                                            </p>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
 
@@ -173,9 +173,9 @@ export default function projectview() {
                     {/* <div className="outline-1 p-2 relative h-40 ">
                         <h1>Chat</h1>
                         <ChatSection userId={userId} receiverId={receiverId}/>
-                    </div> */}   
+                    </div> */}
 
-                </div>   
+                </div>
             </div>
         </div>
     )

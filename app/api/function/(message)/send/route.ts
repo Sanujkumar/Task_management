@@ -7,6 +7,7 @@ import { pusherServer } from "../../../../../lib/pusher-server"; //c
 
 const prisma = new PrismaClient();
 
+// to send message and alos recieve with use pusher
 export async function POST(req: NextRequest) {
     const body = await req.json();
 

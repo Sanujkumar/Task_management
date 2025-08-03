@@ -7,6 +7,7 @@ const prisma = new PrismaClient();
 const secret = process.env.AUTH_SECRET;
 
 
+// send friend request 
 export async function POST(req: NextRequest, context: { params: Promise <{ receiverId: string }> }) {
   const token = await getToken({ req, secret });
 
@@ -20,6 +21,7 @@ export async function POST(req: NextRequest, context: { params: Promise <{ recei
   console.log("receiverId",receiverId);   
 
   try {
+    //send friends request data
     await prisma.friendReq.create({
       data: {
         senderId,
@@ -33,7 +35,7 @@ export async function POST(req: NextRequest, context: { params: Promise <{ recei
   }
 }
 
-
+// friend requested rejected
 export async function DELETE(req: NextRequest, context: { params: Promise <{ receiverId: string }> }) {
   const token = await getToken({ req, secret });
 
