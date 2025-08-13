@@ -185,7 +185,7 @@ export default function ProfileDetailInfo() {
               ref={skillsRef}
               placeholder="skills"
               className={`border p-2 border-gray-500 dark:border-white ${!isEditable ? "text-black " : "text-gray-400"}`}
-              disabled={!isEditable}
+              disabled={dataExists && !isEditable}
               onChange={(e) => {
                 setSkills(e.target.value);
                 validateField("skills", skills);
@@ -200,7 +200,7 @@ export default function ProfileDetailInfo() {
               ref={aboutRef}
               defaultValue={initialData?.about}
               placeholder="About"
-              disabled={!isEditable}
+              disabled={dataExists && !isEditable}
               className={`border p-2 border-gray-500 dark:border-white ${!isEditable ? "text-black " : "text-gray-400"}`}
               onChange={(e) => {
                 setAbout(e.target.value);
@@ -217,7 +217,7 @@ export default function ProfileDetailInfo() {
               ref={githubRef}
               placeholder="GitHub URL"
               className="border p-2  border-gray-500 dark:border-white"
-              disabled={!isEditable}
+              disabled={dataExists && !isEditable}
               onChange={(e) => {
                 setGithubUrl(e.target.value);
                 validateField("githubUrl", githubUrl);
@@ -233,7 +233,7 @@ export default function ProfileDetailInfo() {
               ref={linkedinRef}
               placeholder="LinkedIn URL"
               className="border p-2 border-gray-500 dark:border-white "
-              disabled={!isEditable}
+              disabled={dataExists && !isEditable}
               onChange={(e) => {
                 setLinkedinUrl(e.target.value);
                 validateField("linkedinUrl", linkedinUrl);
@@ -248,7 +248,7 @@ export default function ProfileDetailInfo() {
 
               value={degree}
               onValueChange={setDegree}
-              disabled={!isEditable}
+              disabled={dataExists && !isEditable}
             >
 
               <SelectTrigger className="w-full border p-2 border-gray-500 dark:border-white ">
@@ -269,57 +269,58 @@ export default function ProfileDetailInfo() {
               ref={resumeRef}
               placeholder="Resume URL"
               className="border p-2 border-gray-500 dark:border-white "
-              disabled={!isEditable}
+              disabled={dataExists && !isEditable}
             />
 
           </div>
-          </div>
-          <div className=" ">
-            <Button size="lg" variant='outline' className="rounded-3xl w-full border-2  bg-white" onClick={handleSubmit} disabled={loader}>
-              {loader ? (
-                <>
-                  <Loader2Icon className="animate-spin" />
-                  Please wait
-                </>
-              ) : (
-                !dataExists ? "Submit" : isEditable ? "Save" : "Edit"
-              )}
-            </Button>
+        </div>
+        <div className=" ">
+          <Button size="lg" variant='outline' className="rounded-3xl w-full border-2  bg-white" onClick={handleSubmit} disabled={loader}>
+            {loader ? (
+              <>
+                <Loader2Icon className="animate-spin" />
+                Please wait
+              </>
+            ) : (   
+              !dataExists ? "Submit" : isEditable ? "Save" : "Edit"
+            )
+            }
+          </Button>
 
-          </div>
-        
+        </div>
 
-          <div className="h-80 w-full ">
-            {initialData?.resume && (
-              <div className="mt-4 ">
-                <p className="font-semibold text-black">PDF Preview:</p>
-                <iframe
-                  src={`https://docs.google.com/gview?url=${initialData.resume}&embedded=true`}
-                  style={{
-                    width: "100%",
-                    height: "400px",
-                    padding: "2px",
 
-                  }}
-                ></iframe>
+        <div className="h-80 w-full ">
+          {initialData?.resume && (
+            <div className="mt-4 ">
+              <p className="font-semibold text-black">PDF Preview:</p>
+              <iframe
+                src={`https://docs.google.com/gview?url=${initialData.resume}&embedded=true`}
+                style={{
+                  width: "100%",
+                  height: "400px",
+                  padding: "2px",
 
-                <p className="text-sm text-gray-600 mt-1">
-                  Or{" "}
-                  <a
-                    href={initialData.resume}
-                    download
-                    className="text-gray-400 hover:text-blue-600 underline"
-                  >
-                    Click here to download
+                }}
+              ></iframe>
 
-                  </a>.
-                </p>
-              </div>
-            )}
-          </div>
+              <p className="text-sm text-gray-600 mt-1">
+                Or{" "}
+                <a
+                  href={initialData.resume}
+                  download
+                  className="text-gray-400 hover:text-blue-600 underline"
+                >
+                  Click here to download
+
+                </a>.
+              </p>
+            </div>
+          )}
         </div>
       </div>
-    
+    </div>
+
 
   );
 }

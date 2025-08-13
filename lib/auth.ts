@@ -27,11 +27,11 @@ export const authOptions = {
         password: { label: "Password", type: "password" },
       },
    
-
       async authorize(credentials: Record<"email" | "password", string> | undefined): Promise<User | null> {
         if (!credentials) return null;
         const { email, password } = credentials;
-        console.log("data",email,password)
+        console.log("data",email,password);
+
         const user = await prisma.user.findUnique({
           where: {
             email   
@@ -43,6 +43,7 @@ export const authOptions = {
             password: true
           }
         });
+        
         console.log("firt", user);
 
         if (!user) {
@@ -113,6 +114,7 @@ export const authOptions = {
         if (!existingUser) {
           return false;
         }
+
         user.id = existingUser.id;
         user.name = existingUser.name;
       }
