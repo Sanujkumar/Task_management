@@ -60,16 +60,18 @@ export default function Notification() {
 
   const messageRead = async (id: number) => {
     try {
-      await axios.patch(`${Url}/api/function/notification/${id}`, {}, { withCredentials: true });
+      await axios.patch(`${Url}/api/function/notificationRead/${id}`, {}, { withCredentials: true });    
+       
       setDatas((prev) =>
         prev.map((n) =>
           n.id === id ? { ...n, read: true } : n
         )
       );
+
     } catch (err) {
       console.log(err);
     }   
-  }
+  }   
   return (
     <div className="bg-gray-100 min-h-screen p-4 ">
       <h2 className="text-xl font-bold mb-4">Notifications</h2>
