@@ -25,6 +25,27 @@ export async function POST(req: NextRequest) {
     });
   
     await pusherServer.trigger(`chat-${roomId}`, "new-message", message);
+
+    const existingNotification = await prisma.notification.findFirst({
+    where: {
+      senderId: Number(senderId),
+      userId: Number(receiverId),
+      message: "sent a new message",
+      read: false, 
+    },
+  });
+    
+  if (!existingNotification) {
+    await prisma.notification.create({
+      data: {
+        message: "sent a new message",
+        senderId: Number(senderId),
+        userId: Number(receiverId),
+      },   
+    });
+  }
+
+   
     console.log(message);
     return NextResponse.json({ success: true, message });
 }   

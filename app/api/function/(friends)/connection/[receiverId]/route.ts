@@ -28,6 +28,15 @@ export async function POST(req: NextRequest, context: { params: Promise <{ recei
         receiverId: Number(receiverId),
       },
     });
+
+    await prisma.notification.create({
+      data: {
+        message: "send friend requested",
+        senderId: senderId,
+        userId: Number(receiverId)
+      }
+    });
+       
     return NextResponse.json({ message: "Friend request sent" }, { status: 200 });
   } catch (error) {
     console.error(error);
@@ -54,6 +63,15 @@ export async function DELETE(req: NextRequest, context: { params: Promise <{ rec
         senderId,
         receiverId: Number(receiverId),
       },  
+    });
+
+    await prisma.notification.create({
+      data: {
+        message: "friend request rejected",
+        senderId: senderId,
+        userId: Number(receiverId),
+        read: false
+      }
     });
     return NextResponse.json({ message: "Friend request cancelled" }, { status: 200 });
   } catch (error) {

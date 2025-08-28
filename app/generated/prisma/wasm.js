@@ -148,7 +148,10 @@ exports.Prisma.TaskScalarFieldEnum = {
 exports.Prisma.NotificationScalarFieldEnum = {
   id: 'id',
   message: 'message',
-  userId: 'userId'
+  senderId: 'senderId',
+  userId: 'userId',
+  CreatedAt: 'CreatedAt',
+  read: 'read'
 };
 
 exports.Prisma.UserDetailInfoScalarFieldEnum = {

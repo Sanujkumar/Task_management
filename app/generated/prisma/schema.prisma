@@ -9,18 +9,19 @@ datasource db {
 }
 
 model User {
-  id               Int             @id @default(autoincrement())
-  email            String          @unique
-  password         String
-  name             String?
-  phone            String?
-  image            String?
-  notificaion      Notification[]
-  assignedTasks    Task[]          @relation("AssignedTasks")
-  tasks            Task[]          @relation("CreatedTasks")
-  UserDetailInfo   UserDetailInfo?
-  sentMessages     Message[]       @relation("SentMessages")
-  receivedMessages Message[]       @relation("ReceivedMessages")
+  id                   Int             @id @default(autoincrement())
+  email                String          @unique
+  password             String
+  name                 String?
+  phone                String?
+  image                String?
+  receiverNotification Notification[]  @relation("receiver")
+  senderNotification   Notification[]  @relation("sender")
+  assignedTasks        Task[]          @relation("AssignedTasks")
+  tasks                Task[]          @relation("CreatedTasks")
+  UserDetailInfo       UserDetailInfo?
+  sentMessages         Message[]       @relation("SentMessages")
+  receivedMessages     Message[]       @relation("ReceivedMessages")
 
   sentFriendRequests     FriendReq[]    @relation("SentFriendRequests")
   receivedFriendRequests FriendReq[]    @relation("ReceivedFriendRequests")
@@ -47,10 +48,14 @@ model Task {
 }
 
 model Notification {
-  id      Int    @id @default(autoincrement())
-  message String
-  userId  Int
-  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id        Int      @id @default(autoincrement())
+  message   String
+  senderId  Int      @default(1)
+  sender    User     @relation("sender", fields: [senderId], references: [id], onDelete: Cascade)
+  userId    Int
+  user      User     @relation("receiver", fields: [userId], references: [id], onDelete: Cascade)
+  CreatedAt DateTime @default(now())
+  read      Boolean  @default(false)
 }
 
 model UserDetailInfo {

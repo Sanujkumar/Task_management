@@ -46,30 +46,42 @@ export async function GET(req: NextRequest) {
 
 }
 
-
+// make unfriend
 export async function DELETE(req: NextRequest) {
     const token = await getToken({ req, secret });
-    if (!token || !token.id) {       
+    if (!token || !token.id) {
         return NextResponse.json({
             message: "user not login"
         }, { status: 400 });
     }
 
-    const body = await req.json();    
+    const body = await req.json();
 
     const userId = token.id;
-    const {friendId} = body ;  
+    const { friendId } = body;
 
-    console.log("userId",userId);
-    console.log("friendId",friendId);  
+    console.log("userId", userId);
+    console.log("friendId", friendId);
 
     try {
-        await prisma.acceptFriend.deleteMany({
+        const data = await prisma.acceptFriend.deleteMany({
             where: {
-                userId,
-                friendId: Number(friendId),  
+                 OR: [
+                    { userId: userId, friendId: Number(friendId) },
+                    { userId: Number(friendId), friendId: userId },
+                ],
             },
+        });  
+
+        await prisma.notification.create({
+            data:{
+                message: "deleted you from the friend",
+                senderId: Number(userId), 
+                userId: friendId  ,
+                read: false
+            }
         });
+        console.log("delterfriend", data);
         return NextResponse.json({ message: "Friend request cancelled" }, { status: 200 });
     } catch (error) {
         console.error(error);

@@ -5,7 +5,9 @@ import { PrismaClient } from "@/app/generated/prisma";
 const prisma = new PrismaClient();
 const secret = process.env.AUTH_SECRET;
 
-// find how may request came in you
+// find how many request came in you
+//don't any need for this endPoint , just take for ex
+
 export async function GET(req:NextRequest){
     const token = await getToken({req,secret});
     if(!token || !token.id){

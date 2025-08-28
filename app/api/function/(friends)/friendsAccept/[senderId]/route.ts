@@ -35,7 +35,16 @@ export async function POST(
         { userId: receiverId, friendId: Number(senderId) },
         { userId: Number(senderId), friendId: receiverId },
       ],
-    });     
+    }); 
+    
+    await prisma.notification.create({
+      data: {
+        message: "friend request accepted",
+        senderId: receiverId,
+        userId: Number(senderId),
+        read: false
+      }
+    });
 
     return NextResponse.json({ message: "Friend request accepted" }, { status: 200 });
   } catch (error) {
