@@ -51,7 +51,7 @@ export default function AllFriends() {
 
     const handleRemove = async (friendId: number) => {
         await axios.delete(`${Url}/api/function/allFriends`, {
-            data: { friendId },
+            data: { friendId  },
             withCredentials: true
         });   
         setRemove(true);  

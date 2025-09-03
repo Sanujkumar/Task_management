@@ -1,10 +1,10 @@
 
-import { PrismaClient } from "../../../../../generated/prisma";
+import { PrismaClient } from "@/app/generated/prisma";
 
 import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
-import { uploadBase64 } from "../../../../../../lib/cloudinary";
-import { taskSchema } from "../../../../../../lib/zod";
+import { uploadBase64 } from "@/lib/cloudinary";
+import { taskSchema } from "@/lib/zod";  
 
 const secret = process.env.AUTH_SECRET;
 const prisma = new PrismaClient();
@@ -12,7 +12,7 @@ const prisma = new PrismaClient();
 // update Projects 
 export async function PUT(
   req: NextRequest,
-  context: { params: Promise<{ taskId: string }> }
+  context: { params: Promise<{ taskId: string, userId: string }> }
 ) {
   const token = await getToken({ req, secret });
   if (!token || !token.id) {
@@ -36,8 +36,14 @@ export async function PUT(
   };
 
   try {
-    const { taskId } = await context.params;
+    const { taskId,userId } = await context.params;
     const body = await req.json();
+
+    if(Number(userId)!== Number(token.id)){
+      return NextResponse.json({
+        message: "user are not authorized"
+      },{status:403});
+    }
 
     const taskUpdatedData: taskUpdatedDataTypes = {};
     const { title, description, date, inDetails, price, skills, priority, status, pdfBase64, videoBase64 } = body;
@@ -90,3 +96,4 @@ export async function PUT(
     );
   }
 }
+  

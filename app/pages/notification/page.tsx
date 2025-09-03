@@ -16,7 +16,7 @@ interface DataTypes {
   message: string,
   read: boolean,
   length: number,
-
+  userId: number,
   sender: {
     id: number,
     name: string,
@@ -58,9 +58,9 @@ export default function Notification() {
 
   if (loading) return <div><NotificationSkeleton /></div>;
 
-  const messageRead = async (id: number) => {
+  const messageRead = async (id: number,userId:number) => {
     try {
-      await axios.patch(`${Url}/api/function/notificationRead/${id}`, {}, { withCredentials: true });    
+      await axios.patch(`${Url}/api/function/notificationRead/${id}/${userId}`, {}, { withCredentials: true });    
        
       setDatas((prev) =>
         prev.map((n) =>
@@ -80,7 +80,7 @@ export default function Notification() {
       ) : (
         <div className=" space-y-4">
           {datas.map((data) => (
-            <div onClick={() => messageRead(data.id)} key={data.id} className={`flex pl-4 cursor-pointer 
+            <div onClick={() => messageRead(data.id,data.userId)} key={data.id} className={`flex pl-4 cursor-pointer 
       ${data.read ? "bg-white" : "bg-blue-100"} 
       `}>
               <div className="flex items-center space-x-2">

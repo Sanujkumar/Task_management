@@ -10,6 +10,7 @@ const secret = process.env.AUTH_SECRET;
 
 export async function GET(req:NextRequest){
     const token = await getToken({req,secret});
+    
     if(!token || !token.id){
         return NextResponse.json({
             messsage: "user not login "

@@ -3,6 +3,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@/app/generated/prisma";
 import { getToken } from "next-auth/jwt";
+import { number } from "zod";
 const prisma = new PrismaClient();
 
 const secret = process.env.AUTH_SECRET;
@@ -20,9 +21,16 @@ export async function GET(
     }, { status: 400 });
   }
 
+  console.log("curr", token.id);
   try {
     const { userId, receiverId } = await context.params;
-
+    console.log("userId", userId, "receiverId",receiverId);
+    if (Number(token.id) !== Number(userId) && Number(token.id) !== Number(receiverId)) {
+      return NextResponse.json(
+        { message: "user not authorized" },
+        { status: 403 }
+      );
+    }  
     const senderId = parseInt(userId);
     const recId = parseInt(receiverId);
     const roomId = [Number(userId), Number(receiverId)].sort((a, b) => a - b).join("-");
@@ -36,7 +44,7 @@ export async function GET(
 
     const messages = await prisma.message.findMany({
       where: { roomId },
-      orderBy: { createdAt: "asc" },  
+      orderBy: { createdAt: "asc" },
     });
 
     console.log(messages);

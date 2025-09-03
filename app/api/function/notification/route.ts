@@ -14,7 +14,7 @@ export const GET = async (req: NextRequest) => {
             message: "user not authorized"
         }, { status: 401 });
     }
-
+    
     const userId = Number(token.id);
     console.log(userId);
     const notification = await prisma.notification.findMany({

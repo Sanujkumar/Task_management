@@ -24,24 +24,24 @@ interface TaskType {
 export default function Home() {
   const [datas, setData] = useState<TaskType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const {data: session,status} = useSession();  
-  const [currentPage,setCurrentPage] = useState<number>(1);
+  const { data: session, status } = useSession();
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   const tasksPerPage = 4;
-  
-  useEffect(() =>{
-    if(status==="unauthenticated"){
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
       alert("your are not login");
-      router.push(`${Url}/auth/login`);  
+      router.push(`${Url}/auth/login`);
     }
-  },[]);  
+  }, []);
 
   const AllTasShowkData = async () => {
     try {
       const res = await axios.get(`${Url}/api/function/task`, {
         withCredentials: true,
       });
-      console.log(res.data.tasks);  
+      console.log(res.data.tasks);
       setData(res.data.tasks);
     } catch (err) {
       console.error("Error fetching tasks:", err);
@@ -55,15 +55,15 @@ export default function Home() {
   }, []);
 
   const router = useRouter();
-  const Update = (taskId:Number) => {
-    router.push(`${Url}/pages/updateTask/${taskId}`);  
+  const Update = (taskId: Number,userId:number) => {
+    router.push(`${Url}/pages/updateTask/${taskId}/${userId}`);
   }
 
-  const DeleteTask = async (taskId: number) => {
+  const DeleteTask = async (taskId: number, userId: number) => {
     try {
-      const res = await axios.post(`${Url}/api/function/task/delete`, { id: taskId }, {
+      const res = await axios.post(`${Url}/api/function/task/delete`, { id: taskId, userId: userId }, {
         withCredentials: true,
-      });  
+      });
       if (res.status === 200) {
         toast.success("your task is deleted succesful")
         AllTasShowkData();
@@ -74,27 +74,27 @@ export default function Home() {
     }
   };
 
-  if (loading){
-    return(
-    <AllTasksSkelaton/>
+  if (loading) {
+    return (
+      <AllTasksSkelaton />
     )
-  }  
+  }
 
   const indexOfLastTask = currentPage * tasksPerPage;
   const indexOfFirstTask = indexOfLastTask - tasksPerPage;
-  const currentTasks = datas.slice(indexOfFirstTask,indexOfLastTask);
-  const totalPages = Math.ceil(datas.length/tasksPerPage);  
+  const currentTasks = datas.slice(indexOfFirstTask, indexOfLastTask);
+  const totalPages = Math.ceil(datas.length / tasksPerPage);
 
 
 
-  return (   
+  return (
     <div>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 ">
         {currentTasks.map((task) => (
           <div
             key={task.id}
-            className="p-5"      
-          >   
+            className="p-5"
+          >
             <Card className="overflow-hidden w-auto h-auto  cursor-pointer">
               <CardContent className="">
 
@@ -116,14 +116,14 @@ export default function Home() {
                     <Button
                       size="sm"
                       variant="outline"
-                      onClick={() => Update(task.id)}
+                      onClick={() => Update(task.id, task.userId)}
                     >update</Button>
                   </div>
                   <div>
                     <Button
                       size="sm"
                       variant="outline"
-                      onClick={() => DeleteTask(task.id)}
+                      onClick={() => DeleteTask(task.id, task.userId)}
                     >Delete</Button>
                   </div>
                   <div>
@@ -138,24 +138,24 @@ export default function Home() {
           </div>
         ))}
       </div>
-      
+
       <div className="flex justify-center mt-6 space-x-2">
-                <Button
-                    disabled={currentPage === 1}
-                    onClick={() => setCurrentPage((prev) => prev - 1)}
-                >
-                    Previous
-                </Button>
-                <span className="px-3 py-1 border rounded">
-                    Page {currentPage} of {totalPages}
-                </span>
-                <Button
-                    disabled={currentPage === totalPages}
-                    onClick={() => setCurrentPage((prev) => prev + 1)}
-                >
-                    Next
-                </Button>  
-            </div>
+        <Button
+          disabled={currentPage === 1}
+          onClick={() => setCurrentPage((prev) => prev - 1)}
+        >
+          Previous
+        </Button>
+        <span className="px-3 py-1 border rounded">
+          Page {currentPage} of {totalPages}
+        </span>
+        <Button
+          disabled={currentPage === totalPages}
+          onClick={() => setCurrentPage((prev) => prev + 1)}
+        >
+          Next
+        </Button>
+      </div>
     </div>
   );
 }

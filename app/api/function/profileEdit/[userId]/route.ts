@@ -18,10 +18,19 @@ export async function PUT(req: NextRequest, context: { params: Promise<{ userId:
         return NextResponse.json({
             message: "user has not authorized"
         }, { status: 400 });
+
     }
+
+    console.log(token.id);
+
 
     try {
         const { userId } = await context.params;
+        if (Number(token.id) !== Number(userId)) {
+            return NextResponse.json({ message: "user not authorized" }, { status: 403 });
+        }
+
+        console.log("userId", userId);
         const body = await req.json();
 
         const { name, phone, imageBase64, extension } = body;
@@ -39,13 +48,14 @@ export async function PUT(req: NextRequest, context: { params: Promise<{ userId:
 
         const zodValidation = editProfileschema.safeParse(updateData);
 
-        if (!zodValidation.success) {   
+        if (!zodValidation.success) {
             return NextResponse.json({
                 message: "validation failed",
                 errors: zodValidation.error.flatten().fieldErrors,
             }, { status: 401 });
         }
-     
+
+
 
         const res = await prisma.user.update({
             where: { id: Number(userId) },

@@ -2,6 +2,7 @@ import { PrismaClient } from "../../../../generated/prisma";
 
 import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
+import { number } from "zod";
 
 const secret = process.env.NEXTAUTH_SECRET;
 const prisma = new PrismaClient();
@@ -19,12 +20,15 @@ export async function POST(req: NextRequest) {
 
   const userId = Number(token.id);
   const body = await req.json();
-  const { id } = body;
-
+  const { id, currentUserId } = body;
   const taskId = Number(id);
 
-
   try {
+    if (userId !== Number(currentUserId)) {
+      return NextResponse.json({
+        message: "user are not authorized"
+      }, { status: 403 });
+    }
     const deleted = await prisma.task.deleteMany({
       where: {
         id: taskId,

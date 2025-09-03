@@ -32,11 +32,15 @@ export async function GET(req: NextRequest) {
             mode: "insensitive" as const,
             } ,
             id: {
-                not: userId
+                not: Number(userId)
             }
         }  
     } else {
-        whereClause = {};  
+        whereClause = {
+            id:{
+                not: Number(userId)  
+            }
+        };  
     }
   
 
